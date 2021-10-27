@@ -3,6 +3,7 @@
 
 public class Account 
 {
+   
    private int accountNumber; // account number
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
