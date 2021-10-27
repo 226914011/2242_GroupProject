@@ -21,10 +21,7 @@ public class Account
    // determines whether a user-specified PIN matches PIN in Account
    public boolean validatePIN( int userPIN )
    {
-      if ( userPIN == pin )
-         return true;
-      else
-         return false;
+      return userPIN == pin;
    } // end method validatePIN
    
    // returns available balance
