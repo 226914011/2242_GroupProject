@@ -8,14 +8,12 @@ public class ATM
    private Screen screen; // ATM's screen
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
-   private DepositSlot depositSlot; // ATM's deposit slot
    private BankDatabase bankDatabase; // account information database
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
    private static final int WITHDRAWAL = 2;
-   private static final int DEPOSIT = 3;
-   private static final int EXIT = 4;
+   private static final int EXIT = 3;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() 
@@ -25,7 +23,6 @@ public class ATM
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
-      depositSlot = new DepositSlot(); // create deposit slot
       bankDatabase = new BankDatabase(); // create acct info database
    } // end no-argument ATM constructor
 
@@ -91,8 +88,6 @@ public class ATM
             // user chose to perform one of three transaction types
             case BALANCE_INQUIRY: 
             case WITHDRAWAL: 
-            case DEPOSIT:
-
                // initialize as new object of chosen type
                currentTransaction = 
                   createTransaction( mainMenuSelection );
@@ -117,8 +112,7 @@ public class ATM
       screen.displayMessageLine( "\nMain menu:" );
       screen.displayMessageLine( "1 - View my balance" );
       screen.displayMessageLine( "2 - Withdraw cash" );
-      screen.displayMessageLine( "3 - Deposit funds" );
-      screen.displayMessageLine( "4 - Exit\n" );
+      screen.displayMessageLine( "3 - Exit\n" );
       screen.displayMessage( "Enter a choice: " );
       return keypad.getInput(); // return user's selection
    } // end method displayMainMenu
@@ -138,10 +132,6 @@ public class ATM
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen, 
                bankDatabase, keypad, cashDispenser );
-            break; 
-         case DEPOSIT: // create new Deposit transaction
-            temp = new Deposit( currentAccountNumber, screen, 
-               bankDatabase, keypad, depositSlot );
             break;
       } // end switch
 
