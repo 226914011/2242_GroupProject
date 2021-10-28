@@ -6,7 +6,7 @@ import java.util.*;
 public class BankDatabase
 {
    //Function - Store data
-   private void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
+   public void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
       //declare variable
       boolean empty = true;
 
@@ -45,7 +45,7 @@ public class BankDatabase
       
    }
    //Function - Read Data
-   private Vector<String> ReadData(){
+   public Vector<String> ReadData(){
       //declare variable
       Vector<String> data = new Vector<String>();
 
