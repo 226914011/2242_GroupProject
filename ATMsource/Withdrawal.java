@@ -91,7 +91,7 @@ public class Withdrawal extends Transaction
       Screen screen = getScreen(); // get screen reference
       
       // array of amounts to correspond to menu numbers
-      int amounts[] = { 0, 100, 200, 400, 500, 1000 };
+      int amounts[] = { 0, 100, 200, 500, 1000 };
 
       // loop while no valid choice has been made
       while ( userChoice == 0 )
