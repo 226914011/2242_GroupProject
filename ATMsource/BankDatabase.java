@@ -64,6 +64,10 @@ public class BankDatabase
    {
       getAccount( userAccountNumber ).debit( amount );
    } // end method debit
+
+   public boolean checkAccountExist(int inAccNum){
+      return getAccount(inAccNum) != null;
+   }
 } // end class BankDatabase
 
 
