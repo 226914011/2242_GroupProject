@@ -1,16 +1,92 @@
 // BankDatabase.java
 // Represents the bank account information database 
+import java.io.*;
+import java.util.*;
 
 public class BankDatabase
 {
+   //Function - Store data
+   private void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
+      //declare variable
+      boolean empty = true;
+
+      //declare variable of file pathname
+      File f = new File("data.txt");
+
+      //Check if file exists
+      try{
+          //Create Output Stream
+          Scanner Reader = new Scanner(f);
+          //Check if there is any content
+          if(Reader.hasNextLine()){
+              empty = false;
+          }
+          //Ending Output Stream
+          Reader.close();
+      //Exception for file not exists
+      } catch (FileNotFoundException e) {}
+
+      //Write data to file
+      try{
+          //Create File Input Stream
+          FileWriter Wf = new FileWriter(f,true);
+          //If content exists, create newline
+          if(!empty){
+              Wf.write("\n");
+          }
+          //Write data to file by parameter declared
+          Wf.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
+          //Ending Input Stream
+          Wf.close();
+      //Exception for IO
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+      
+   }
+   //Function - Read Data
+   private Vector<String> ReadData(){
+      //declare variable
+      Vector<String> data = new Vector<String>();
+
+      //Read Data
+      try {
+          //declare variable of file pathname
+          File f = new File("data.txt");
+          //Create Output Stream
+          Scanner Reader = new Scanner(f);
+          //Append data to array line by line
+          while (Reader.hasNextLine()) {
+              //Get line for file
+              String buffer = Reader.nextLine();
+              //Append buffer to array
+              data.add(buffer);
+          }
+          //Ending Output Stream 
+          Reader.close();
+      //Exception for file not exists
+      } catch (FileNotFoundException e) {}
+      return data;
+   }
+
    private Account accounts[]; // array of Accounts
-   
+
    // no-argument BankDatabase constructor initializes accounts
    public BankDatabase()
-   {
-      accounts = new Account[ 2 ]; // just 2 accounts for testing
-      accounts[ 0 ] = new Account( 12345, 54321, 1000.0, 1200.0 );
-      accounts[ 1 ] = new Account( 98765, 56789, 200.0, 200.0 );  
+   {  //declare and initialize counter
+      int counter = 0;
+      
+      //2 account for test case
+      StoreData(12345, 54321, 1000.0, 1200.0);
+      StoreData(98765, 56789, 200.0, 200.0);
+      
+      //Get account data from File
+      accounts = new Account[ReadData().size()];
+      for(String data: ReadData()){
+         String buffer[] = data.split("/");
+         accounts[counter] = new Account(Integer.parseInt(buffer[0]),Integer.parseInt(buffer[1]),Double.parseDouble(buffer[2]),Double.parseDouble(buffer[3]));
+         counter++;
+      }
    } // end no-argument BankDatabase constructor
    
    // retrieve Account object containing specified account number
