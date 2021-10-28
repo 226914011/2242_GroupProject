@@ -4,70 +4,90 @@ import java.io.*;
 import java.util.*;
 
 public class BankDatabase
-{
-   //Function - Store data
-   public void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
-      //declare variable
-      boolean empty = true;
-
-      //declare variable of file pathname
-      File f = new File("data.txt");
-
-      //Check if file exists
-      try{
-          //Create Output Stream
-          Scanner Reader = new Scanner(f);
-          //Check if there is any content
-          if(Reader.hasNextLine()){
-              empty = false;
-          }
-          //Ending Output Stream
-          Reader.close();
-      //Exception for file not exists
-      } catch (FileNotFoundException e) {}
-
-      //Write data to file
-      try{
-          //Create File Input Stream
-          FileWriter Wf = new FileWriter(f,true);
-          //If content exists, create newline
-          if(!empty){
-              Wf.write("\n");
-          }
-          //Write data to file by parameter declared
-          Wf.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
-          //Ending Input Stream
-          Wf.close();
-      //Exception for IO
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-      
-   }
+{  
    //Function - Read Data
    public Vector<String> ReadData(){
       //declare variable
       Vector<String> data = new Vector<String>();
 
       //Read Data
-      try {
-          //declare variable of file pathname
-          File f = new File("data.txt");
-          //Create Output Stream
-          Scanner Reader = new Scanner(f);
-          //Append data to array line by line
-          while (Reader.hasNextLine()) {
-              //Get line for file
-              String buffer = Reader.nextLine();
-              //Append buffer to array
-              data.add(buffer);
-          }
-          //Ending Output Stream 
-          Reader.close();
+      try{
+         //declare variable of file pathname
+         File f = new File("data.txt");
+         //Create Output Stream
+         Scanner Reader = new Scanner(f);
+         //Append data to array line by line
+         while (Reader.hasNextLine()) {
+            //Get line for file
+            String buffer = Reader.nextLine();
+            //Append buffer to array
+            data.add(buffer);
+         }
+         //Ending Output Stream 
+         Reader.close();
       //Exception for file not exists
       } catch (FileNotFoundException e) {}
       return data;
    }
+
+   //Function - Store data
+   public void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
+
+      //declare variable of file pathname
+      File f = new File("data.txt");
+
+      //Write data to file
+      try{
+         //Create File Input Stream
+         FileWriter Wf = new FileWriter(f,true);
+         //If content exists, create newline
+         if(!ReadData().isEmpty()){
+            Wf.write("\n");
+         }
+         //Write data to file by parameter declared
+         Wf.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
+         //Ending Input Stream
+         Wf.close();
+      //Exception for IO
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+   }
+   //Function - Store data
+   public void UpdateData(int userAccountNumber,int PIN,double availableBalance,double totalBalance){
+      //Check is data file exists
+      if(ReadData().isEmpty()){
+         return;
+      }
+      //declare variable of file pathname
+      File t = new File("temp.txt");
+      File f = new File("data.txt");
+
+      //Write data to file
+      try{
+         t.createNewFile();
+         //Create File Input Stream
+         FileWriter Wt = new FileWriter(t,true);
+         //If content exists, create newline
+         
+         //Write data to file by parameter declared
+         for(String str:ReadData()){
+            if(str.split("/")[0] == String.valueOf(userAccountNumber)){
+               Wt.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
+            }else{
+               Wt.write(str);
+            }
+         }
+         //Ending Input Stream
+         Wt.close();
+         f.delete();
+         t.renameTo(f);
+      //Exception for IO
+      }catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+   
 
    private Account accounts[]; // array of Accounts
 

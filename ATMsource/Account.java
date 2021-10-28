@@ -42,7 +42,7 @@ public class Account
    public void credit( double amount )
    {
       totalBalance += amount; // add to total balance
-      BD.StoreData(accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method credit
 
    // debits an amount from the account
@@ -50,7 +50,7 @@ public class Account
    {
       availableBalance -= amount; // subtract from available balance
       totalBalance -= amount; // subtract from total balance
-      BD.StoreData(accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method debit
 
    // returns account number
