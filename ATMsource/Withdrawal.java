@@ -54,8 +54,7 @@ public class Withdrawal extends Transaction
                {
                   // update the account involved to reflect withdrawal
                   bankDatabase.debit( getAccountNumber(), amount );
-                  
-                  cashDispenser.dispenseCash( amount ); // dispense cash
+                 
                   cashDispensed = true; // cash was dispensed
 
                   // instruct user to take cash
@@ -92,20 +91,20 @@ public class Withdrawal extends Transaction
       Screen screen = getScreen(); // get screen reference
       
       // array of amounts to correspond to menu numbers
-      int amounts[] = { 0, 20, 40, 60, 100, 200 };
+      int amounts[] = { 0, 100, 200, 400, 500, 1000 };
 
       // loop while no valid choice has been made
       while ( userChoice == 0 )
       {
          // display the menu
          screen.displayMessageLine( "\nWithdrawal Menu:" );
-         screen.displayMessageLine( "1 - $20" );
-         screen.displayMessageLine( "2 - $40" );
-         screen.displayMessageLine( "3 - $60" );
-         screen.displayMessageLine( "4 - $100" );
-         screen.displayMessageLine( "5 - $200" );
+         screen.displayMessageLine( "1 - $100" );
+         screen.displayMessageLine( "2 - $200" );
+         screen.displayMessageLine( "3 - $500" );
+         screen.displayMessageLine( "4 - $1000" );
+         screen.displayMessageLine( "5 - Custom Amount" );
          screen.displayMessageLine( "6 - Cancel transaction" );
-         screen.displayMessage( "\nChoose a withdrawal amount: " );
+         screen.displayMessage( "\nChoose a withdrawal option: " );
 
          int input = keypad.getInput(); // get user input through keypad
 
@@ -116,15 +115,18 @@ public class Withdrawal extends Transaction
             case 2: // (i.e., chose option 1, 2, 3, 4 or 5), return the
             case 3: // corresponding amount from amounts array
             case 4:
-            case 5:
                userChoice = amounts[ input ]; // save user's choice
+               break;       
+            case 5:
+               screen.displayMessage( "\nPlease input your custom amount: " );
+               int userinput=keypad.getInput();
+               userChoice = userinput ; // save user's choice
                break;       
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
                break;
             default: // the user did not enter a value from 1-6
-               screen.displayMessageLine( 
-                  "\nIvalid selection. Try again." );
+               screen.displayMessageLine( "\nInvalid selection. Try again." );
          } // end switch
       } // end while
 
