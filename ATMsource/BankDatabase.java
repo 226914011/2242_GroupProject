@@ -6,23 +6,21 @@ import java.util.*;
 public class BankDatabase
 {  
    private Account accounts[]; // array of Accounts
+   private Vector <String> readData;
 
    // no-argument BankDatabase constructor initializes accounts
    public BankDatabase()
    {  //declare and initialize counter
       int counter = 0;
-      
-      //2 account for test case
-      StoreData(12345, 54321, 1000.0, 1200.0,"data.txt");
-      StoreData(98765, 56789, 200.0, 200.0,"data.txt");
-      
+      readData = ReadData();
       //Get account data from File
-      accounts = new Account[ReadData().size()];
+      accounts = new Account[readData.size()];
       for(String data: ReadData()){
-         String buffer[] = data.split("/");
-         accounts[counter] = new Account(Integer.parseInt(buffer[0]),Integer.parseInt(buffer[1]),Double.parseDouble(buffer[2]),Double.parseDouble(buffer[3]));
+         String  buffer [] = data.split("/");
+         accounts[counter] = new Account(Integer.parseInt(buffer[0]) , Integer.parseInt(buffer[1]) ,Double.parseDouble(buffer[2]),Double.parseDouble(buffer[3]), this);
          counter++;
       }
+
    } // end no-argument BankDatabase constructor
 
    //Function - Read Data
