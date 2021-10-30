@@ -12,13 +12,13 @@ public class Account
 
    // Account constructor initializes attributes
    public Account( int theAccountNumber, int thePIN, 
-      double theAvailableBalance, double theTotalBalance, BankDatabase thisBD)
+      double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
    {
       accountNumber = theAccountNumber;
       pin = thePIN;
       availableBalance = theAvailableBalance;
       totalBalance = theTotalBalance;
-      BD = thisBD;
+      BD = theBD;
    } // end Account constructor
 
 

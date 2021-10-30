@@ -53,15 +53,22 @@ public class BankDatabase
 
       //declare variable of file pathname
       File f = new File(path);
+      FileWriter Wf;
 
       //Write data to file
       try{
-         //Create File Input Stream
-         FileWriter Wf = new FileWriter(f,true);
+
+
          //If content exists, create newline
-         if(!ReadData().isEmpty()){
+         if(f.exists()){
+            //Create File Input Stream
+            Wf = new FileWriter(f,true);
+            System.out.println("check null object");
             Wf.write("\n");
          }
+         else
+            Wf = new FileWriter(f,true);   //Create File Input Stream
+
          //Write data to file by parameter declared
          Wf.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
          //Ending Input Stream
@@ -86,9 +93,12 @@ public class BankDatabase
       //Write data to file by parameter declared
       for(String str:ReadData()){
          buffer = str.split("/");
-         if(buffer[0] == String.valueOf(userAccountNumber)){
+
+         if(buffer[0].equals(String.valueOf(userAccountNumber))){
+            System.out.println("hi, we have update la hihi");
             StoreData(userAccountNumber, PIN ,availableBalance, totalBalance, "temp.txt");
          }else{
+            System.out.println(Arrays.toString(buffer));
             StoreData(Integer.parseInt(buffer[0]), Integer.parseInt(buffer[1]), Double.parseDouble(buffer[2]), Double.parseDouble(buffer[3]), "temp.txt");
          }
       }

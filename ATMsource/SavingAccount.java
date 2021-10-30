@@ -6,9 +6,9 @@ public class SavingAccount extends Account {
     
         // SavingAccount constructor initializing attributes using superclass constructor
         public SavingAccount ( int theAccountNumber, int thePIN, 
-        double theAvailableBalance, double theTotalBalance)
+        double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
         {
-           super(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance); 
+           super(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, theBD); 
         }
         
         // set method for instance variable interestRate
