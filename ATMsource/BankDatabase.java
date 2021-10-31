@@ -85,7 +85,7 @@ public class BankDatabase
       //Write data to file by parameter declared
       for(String str:ReadData()){
          buffer = str.split("/");
-
+         //Check if AccoutNumber match record
          if(buffer[1].equals(String.valueOf(userAccountNumber))){
             StoreData(type,userAccountNumber, PIN ,availableBalance, totalBalance, "temp.txt");
          }else{

@@ -14,7 +14,7 @@ public class Account
    public Account(boolean thetype, int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
    {
-      tpye = thetype;
+      type = thetype;
       accountNumber = theAccountNumber;
       pin = thePIN;
       availableBalance = theAvailableBalance;
@@ -46,7 +46,7 @@ public class Account
    public void credit( double amount )
    {
       totalBalance += amount; // add to total balance
-      BD.UpdateData(tpye, accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(type, accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method credit
 
    // debits an amount from the account
@@ -54,7 +54,7 @@ public class Account
    {
       availableBalance -= amount; // subtract from available balance
       totalBalance -= amount; // subtract from total balance
-      BD.UpdateData(tpye, accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(type, accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method debit
 
    // returns account number
