@@ -10,6 +10,7 @@ public class CashDispenser
    private int count_hundred; // number of $20 bills remaining
    private int count_fivehundred; 
    private int count_thousand; 
+
    // no-argument CashDispenser constructor initializes count to default
    public CashDispenser()
    {  // set count attribute to default
@@ -28,7 +29,7 @@ public class CashDispenser
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
-   public boolean isSufficientCashAvailable( int amount )
+   public int isSufficientCashAvailable( int amount )
    {
       int hundred, fivehundred, thousand, remaining;
          thousand = amount / 1000; //how many 1000$ paper needed
@@ -47,11 +48,14 @@ public class CashDispenser
             fivehundred = count_fivehundred;
          }
          remaining = remaining % 100;
-         if (remaining != 0|| count_hundred < hundred){
-           return false;
+         if(remaining != 0){
+            return 1;
+         }
+         else if (count_hundred < hundred){
+           return 2;
          }else{
             dispenseCash(hundred, fivehundred, thousand);
-            return true ;
+            return 3 ;
          }
         
  // not enough bills available

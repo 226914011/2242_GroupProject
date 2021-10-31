@@ -50,21 +50,34 @@ public class Withdrawal extends Transaction
             if ( amount <= availableBalance )
             {   
                // check whether the cash dispenser has enough money
-               if ( cashDispenser.isSufficientCashAvailable( amount ) )
-               {
-                  // update the account involved to reflect withdrawal
-                  bankDatabase.debit( getAccountNumber(), amount );
-                 
-                  cashDispensed = true; // cash was dispensed
+               switch (cashDispenser.isSufficientCashAvailable( amount )) {
+                  case 1:
+                     screen.displayMessageLine( 
+                     "\nInsufficient cash available in the ATM." +
+                     "\n\nPlease input desired amount which is multiple of 100" );
+                     break;
 
-                  // instruct user to take cash
-                  screen.displayMessageLine( 
-                     "\nPlease take your cash now." );
-               } // end if
-               else // cash dispenser does not have enough cash
-                  screen.displayMessageLine( 
+                  case 2:
+                     screen.displayMessageLine( 
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
+                     break;
+
+                  case 3:
+                     // update the account involved to reflect withdrawal
+                     bankDatabase.debit( getAccountNumber(), amount );
+                 
+                     cashDispensed = true; // cash was dispensed
+
+                     // instruct user to take cash
+                     screen.displayMessageLine( 
+                     "\nPlease take your cash now." );
+                     break;
+
+                  default:
+
+                     break;
+               }
             } // end if
             else // not enough money available in user's account
             {
@@ -119,8 +132,17 @@ public class Withdrawal extends Transaction
                break;       
             case 5:
                screen.displayMessage( "\nPlease input your custom amount: " );
-               int userinput=keypad.getInput();
-               userChoice = userinput ; // save user's choice
+
+               /*while(!userinput.hasNextInt()) {
+                  System.out.println("Invalid input.Please input an integer!");
+                  userinput.next(); // next input is not an int, so consume it and move on
+                  
+               }
+                  int finalInput = userinput.nextInt();
+                  userinput.close(); //closing scanner
+                  System.out.println("finalInput: " + finalInput);*/
+               int userinput = keypad.getInput();
+               userChoice = userinput ;
                break;       
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
