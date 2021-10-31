@@ -50,35 +50,47 @@ public class Withdrawal extends Transaction
             if ( amount <= availableBalance )
             {   
                // check whether the cash dispenser has enough money
-               if ( cashDispenser.isSufficientCashAvailable( amount ) )
-               {
-                  // update the account involved to reflect withdrawal
-                  bankDatabase.debit( getAccountNumber(), amount );
-                 
-                  cashDispensed = true; // cash was dispensed
+               switch (cashDispenser.isSufficientCashAvailable( amount )) {
+                  case 1:
+                     screen.displayMessageLine( 
+                     "\nInsufficient cash available in the ATM." +
+                     "\n\nPlease input desired amount which is multiple of 100" );
+                     break;
 
-                  // instruct user to take cash
-                  screen.displayMessageLine( 
-                     "\nPlease take your cash now." );
-               } // end if
-               else // cash dispenser does not have enough cash
-                  screen.displayMessageLine( 
+                  case 2:
+                     screen.displayMessageLine( 
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
-            } // end if
-            else // not enough money available in user's account
-            {
+                     break;
+
+                  case 3:
+                     // update the account involved to reflect withdrawal
+                     bankDatabase.debit( getAccountNumber(), amount );
+                 
+                     cashDispensed = true; // cash was dispensed
+
+                     // instruct user to take cash
+                     screen.displayMessageLine( 
+                     "\nPlease take your cash now." );
+                     break;
+
+                  default:
+
+                     break;
+               }
+            } else{
                screen.displayMessageLine( 
-                  "\nInsufficient funds in your account." +
-                  "\n\nPlease choose a smaller amount." );
-            } // end else
-         } // end if
+                     "\nInsufficient balance in your bank account."+
+                     "\n\nPlease choose a smaller amount." );
+            }
+         }
          else // user chose cancel menu option 
          {
             screen.displayMessageLine( "\nCanceling transaction..." );
             return; // return to main menu because user canceled
          } // end else
       } while ( !cashDispensed );
+
 
    } // end method execute
 
