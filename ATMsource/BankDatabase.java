@@ -17,7 +17,7 @@ public class BankDatabase
       accounts = new Account[readData.size()];
       for(String data: readData){
          String  buffer [] = data.split("/");
-         if(buffer[0].equals("false")){
+         if(buffer[0].equals("1")){
             accounts[counter] = new SavingAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
          }else{
             accounts[counter] = new ChequeAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
