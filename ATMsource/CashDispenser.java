@@ -3,27 +3,27 @@
 
 public class CashDispenser 
 {
-   // the default initial number of bills in the cash dispenser
-   private final static int INITIAL_COUNT_HUNDRED = 10;
-   private final static int INITIAL_COUNT_FIVEHUNDRED = 10;
-   private final static int INITIAL_COUNT_THOUSAND = 1;
-   private int count_hundred; // number of $20 bills remaining
-   private int count_fivehundred; 
-   private int count_thousand; 
+   // the default initial number in the cash dispenser
+   private final static int INITIAL_COUNT_HUNDRED = 500;
+   private final static int INITIAL_COUNT_FIVEHUNDRED = 300;
+   private final static int INITIAL_COUNT_THOUSAND = 100;
+   private int count_hundred; // number of $100 remaining
+   private int count_fivehundred; // number of $500 remaining
+   private int count_thousand; // number of $1000 remaining
    // no-argument CashDispenser constructor initializes count to default
    public CashDispenser()
    {  // set count attribute to default
-      count_hundred = INITIAL_COUNT_HUNDRED; //10 * 100
-      count_fivehundred = INITIAL_COUNT_FIVEHUNDRED; // 10 * 500
-      count_thousand = INITIAL_COUNT_THOUSAND; // 1 * 1000
+      count_hundred = INITIAL_COUNT_HUNDRED; //500 * 100
+      count_fivehundred = INITIAL_COUNT_FIVEHUNDRED; // 300 * 500
+      count_thousand = INITIAL_COUNT_THOUSAND; // 100 * 1000
    } // end CashDispenser constructor
 
    // simulates dispensing of specified amount of cash
    public void dispenseCash( int hundred, int fivehundred, int thousand )
    {
-      count_hundred -= hundred; // update the count of bills
-      count_fivehundred -= fivehundred;
-      count_thousand -= thousand;
+      count_hundred -= hundred; // update the count of $100 
+      count_fivehundred -= fivehundred;// update the count of $500 
+      count_thousand -= thousand;// update the count of $1000 
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
