@@ -136,7 +136,7 @@ public class Withdrawal extends Transaction
             case 5:
                screen.displayMessage( "\nPlease input your custom amount: " );
                int userinput=validation.checkInt(keypad.getInput()) ;
-               if (userinput == -1)  continue;
+               if (userinput == INVAILD)  continue;
                userChoice = userinput ; // save user's choice
                break;       
             case CANCELED: // the user chose to cancel

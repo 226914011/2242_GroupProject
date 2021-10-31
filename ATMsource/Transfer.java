@@ -86,7 +86,6 @@ public class Transfer extends Transaction{
 
     //boolean method - conform the information
     private boolean conformUserInput(){
-        int userinput = 0;
         do{
             screen.displayMessageLine("\nThe account number for transfer: " + tarAccNum);
             screen.displayMessage("Your transfer amount: ");
@@ -97,7 +96,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
 
-            switch(userinput = validation.checkInt(keypad.getInput())){
+            switch(validation.checkInt(keypad.getInput())){
                 case 1: 
                     return true;
                 case 2: 
