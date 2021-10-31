@@ -10,6 +10,7 @@ public class Withdrawal extends Transaction
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
+   private final static int INVAILD = -1;
 
    // Withdrawal constructor
    public Withdrawal( int userAccountNumber, Screen atmScreen, 
@@ -121,7 +122,7 @@ public class Withdrawal extends Transaction
          screen.displayMessage( "\nChoose a withdrawal option: " );
 
          int input = validation.checkInt(keypad.getInput()); // get user input through keypad
-         if (input == -1)  continue;
+         if (input == INVAILD)  continue;
 
          // determine how to proceed based on the input value
          switch ( input )
