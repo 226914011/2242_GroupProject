@@ -1,4 +1,3 @@
-
 public class Transfer extends Transaction{
     private Keypad keypad; // reference to keypad
     private Screen screen;
@@ -6,16 +5,19 @@ public class Transfer extends Transaction{
     private int tarAccNum;
     private double amount;
     private boolean CANCELED;
+    private Validation validation;
+
+    private static final int INVALID = -1;
 
 
     //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         
         keypad = atmKeypad;
+        validation = atmValidation;
         bankDatabase = getBankDatabase();
         screen = getScreen();
-        
     }
 
     public void execute() {
@@ -26,12 +28,12 @@ public class Transfer extends Transaction{
         do{
             //ask user input account number
             screen.displayMessage("\nPlease enter the account number for transfer: ");
-            tarAccNum = keypad.getInput();
+            tarAccNum = validation.checkInt(keypad.getInput()) ;
             
             //ask user input amount
-            screen.displayMessage("Please enter the amount to transfer (Ignore digits after two decimal point): ");
+            screen.displayMessage("Please enter the amount to transfer (it will ignore digits after two decimal point): ");
             amount = Math.floor(keypad.getDoubleInput()*100)/100.0;
-        } while(!accNumValidity() || !amountValidity() || !conformUserInput()); //if user inter a invalid information, re-enter the imformation
+        } while(!accNumValidity() || !amountValidity() || !conformUserInput() || tarAccNum == INVALID); //if user inter a invalid information, re-enter the imformation
 
 
         if (!CANCELED){
@@ -81,6 +83,7 @@ public class Transfer extends Transaction{
 
     //boolean method - conform the information
     private boolean conformUserInput(){
+        int userinput = 0;
         do{
             screen.displayMessageLine("\nThe account number for transfer: " + tarAccNum);
             screen.displayMessage("Your transfer amount: ");
@@ -91,7 +94,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
 
-            switch(keypad.getInput()){
+            switch(userinput = validation.checkInt(keypad.getInput())){
                 case 1: 
                     return true;
                 case 2: 
@@ -100,8 +103,9 @@ public class Transfer extends Transaction{
                     CANCELED = true;
                     return true;
                 default:
-                screen.displayMessageLine( 
+                    screen.displayMessageLine( 
                     "\nInvalid selection. Try again." );
+                    break;
             }
         } while(true);
     }

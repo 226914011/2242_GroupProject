@@ -5,6 +5,7 @@ public class Withdrawal extends Transaction
 {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
+   private Validation validation;
    private CashDispenser cashDispenser; // reference to cash dispenser
 
    // constant corresponding to menu option to cancel
@@ -13,13 +14,14 @@ public class Withdrawal extends Transaction
    // Withdrawal constructor
    public Withdrawal( int userAccountNumber, Screen atmScreen, 
       BankDatabase atmBankDatabase, Keypad atmKeypad, 
-      CashDispenser atmCashDispenser )
+      CashDispenser atmCashDispenser, Validation atmValidation)
    {
       // initialize superclass variables
       super( userAccountNumber, atmScreen, atmBankDatabase );
       
       // initialize references to keypad and cash dispenser
       keypad = atmKeypad;
+      validation = atmValidation;
       cashDispenser = atmCashDispenser;
    } // end Withdrawal constructor
 
@@ -118,7 +120,8 @@ public class Withdrawal extends Transaction
          screen.displayMessageLine( "6 - Cancel transaction" );
          screen.displayMessage( "\nChoose a withdrawal option: " );
 
-         int input = keypad.getInput(); // get user input through keypad
+         int input = validation.checkInt(keypad.getInput()); // get user input through keypad
+         if (input == -1)  continue;
 
          // determine how to proceed based on the input value
          switch ( input )
@@ -131,7 +134,8 @@ public class Withdrawal extends Transaction
                break;       
             case 5:
                screen.displayMessage( "\nPlease input your custom amount: " );
-               int userinput=keypad.getInput();
+               int userinput=validation.checkInt(keypad.getInput()) ;
+               if (userinput == -1)  continue;
                userChoice = userinput ; // save user's choice
                break;       
             case CANCELED: // the user chose to cancel

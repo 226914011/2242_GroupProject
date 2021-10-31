@@ -13,9 +13,9 @@ public class Keypad
    } // end no-argument Keypad constructor
 
    // return an integer value entered by user 
-   public int getInput()
+   public String getInput()
    {
-      return input.nextInt(); // we assume that user enters an integer  
+      return input.nextLine(); // we assume that user enters an integer  
    } // end method getInput
 
    public double getDoubleInput(){

@@ -9,12 +9,14 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private BankDatabase bankDatabase; // account information database
+   private Validation validation;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
    private static final int WITHDRAWAL = 2;
    private static final int TRANSFER = 3;
    private static final int EXIT = 4;
+   private static final int INVALID = -1;
 
    // no-argument ATM constructor initializes instance variables
    public ATM() 
@@ -25,6 +27,7 @@ public class ATM
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
+      validation = new Validation(screen);
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -50,11 +53,18 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser() 
    {
-      screen.displayMessage( "\nPlease enter your account number: " );
-      int accountNumber = keypad.getInput(); // input account number
-      screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
-      int pin = keypad.getInput(); // input PIN
-      
+      int accountNumber = 0;
+      int pin = 0;
+
+      //need edit
+      do{
+         screen.displayMessage( "\nPlease enter your account number: " );
+         accountNumber = validation.checkInt(keypad.getInput()); // input account number
+         screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
+         pin = validation.checkInt(keypad.getInput()); // input PIN
+
+      } while (pin == INVALID || accountNumber == INVALID);
+
       // set userAuthenticated to boolean value returned by database
       userAuthenticated = 
          bankDatabase.authenticateUser( accountNumber, pin );
@@ -111,13 +121,18 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-      screen.displayMessageLine( "\nMain menu:" );
-      screen.displayMessageLine( "1 - View my balance" );
-      screen.displayMessageLine( "2 - Withdraw cash" );
-      screen.displayMessageLine( "3 - Transfer");
-      screen.displayMessageLine( "4 - Exit\n" );
-      screen.displayMessage( "Enter a choice: " );
-      return keypad.getInput(); // return user's selection
+      int buffer = 0;
+      do{
+         screen.displayMessageLine( "\nMain menu:" );
+         screen.displayMessageLine( "1 - View my balance" );
+         screen.displayMessageLine( "2 - Withdraw cash" );
+         screen.displayMessageLine( "3 - Transfer");
+         screen.displayMessageLine( "4 - Exit\n" );
+         screen.displayMessage( "Enter a choice: " );
+         buffer = validation.checkInt(keypad.getInput()) ; // return user's selection
+      } while (buffer == INVALID);
+
+      return buffer;
    } // end method displayMainMenu
          
    // return object of specified Transaction subclass
@@ -130,15 +145,15 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry( 
-               currentAccountNumber, screen, bankDatabase );
+               currentAccountNumber, screen, bankDatabase);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen, 
-               bankDatabase, keypad, cashDispenser );
+               bankDatabase, keypad, cashDispenser, validation);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen, 
-               bankDatabase, keypad);
+               bankDatabase, keypad, validation);
             break;
       } // end switch
 
