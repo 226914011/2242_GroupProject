@@ -15,20 +15,18 @@ public class BankDatabase
       readData = ReadData();
       //Get account data from File
       accounts = new Account[readData.size()];
-      for(String data: ReadData()){
+      for(String data: readData){
          String  buffer [] = data.split("/");
          accounts[counter] = new Account(Integer.parseInt(buffer[0]) , Integer.parseInt(buffer[1]) ,Double.parseDouble(buffer[2]),Double.parseDouble(buffer[3]), this);
          counter++;
       }
-
    } // end no-argument BankDatabase constructor
 
    //Function - Read Data
    public Vector<String> ReadData(){
       //declare variable
       Vector<String> data = new Vector<String>();
-
-      //Read Data 
+      //Read Data
       try{
          //declare variable of file pathname
          File f = new File("data.txt");
@@ -50,25 +48,16 @@ public class BankDatabase
 
    //Function - Store data
    public void StoreData(int userAccountNumber,int PIN,double availableBalance,double totalBalance,String path){
-
       //declare variable of file pathname
       File f = new File(path);
-      FileWriter Wf;
-
       //Write data to file
       try{
-
-
+         //Create File Input Stream;
+         FileWriter Wf = new FileWriter(f,true);
          //If content exists, create newline
-         if(f.exists()){
-            //Create File Input Stream
-            Wf = new FileWriter(f,true);
-            System.out.println("check null object");
+         if(!(f.length()==0)){
             Wf.write("\n");
          }
-         else
-            Wf = new FileWriter(f,true);   //Create File Input Stream
-
          //Write data to file by parameter declared
          Wf.write(userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
          //Ending Input Stream
@@ -89,20 +78,19 @@ public class BankDatabase
       File t = new File("temp.txt");
       File f = new File("data.txt");
       String[] buffer = new String[4];
-
       //Write data to file by parameter declared
       for(String str:ReadData()){
          buffer = str.split("/");
 
          if(buffer[0].equals(String.valueOf(userAccountNumber))){
-            System.out.println("hi, we have update la hihi");
             StoreData(userAccountNumber, PIN ,availableBalance, totalBalance, "temp.txt");
          }else{
-            System.out.println(Arrays.toString(buffer));
             StoreData(Integer.parseInt(buffer[0]), Integer.parseInt(buffer[1]), Double.parseDouble(buffer[2]), Double.parseDouble(buffer[3]), "temp.txt");
          }
       }
+      //Delete temporary file
       f.delete();
+      //Rename to "data.txt"
       t.renameTo(f);
    }
 
