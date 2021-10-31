@@ -1,3 +1,6 @@
+//  ChequeAccount.java
+//  This class represents the bank's cheque account
+
 public class ChequeAccount extends Account {
     private double limitCheque = 10000;
 

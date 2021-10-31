@@ -1,3 +1,6 @@
+//  Transfer.java
+//  This class represents the transfer function of an ATM
+
 public class Transfer extends Transaction{
     private Keypad keypad; // reference to keypad
     private Screen screen;

@@ -1,3 +1,6 @@
+//  Validation.java
+//  This class stores general validation method for the program
+
 public class Validation {
     Screen screen;
     public Validation(Screen thescreen){
