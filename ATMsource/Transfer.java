@@ -7,6 +7,7 @@ public class Transfer extends Transaction{
     private double amount;
     private boolean CANCELED;
 
+
     //Transfer constructor
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
@@ -14,9 +15,9 @@ public class Transfer extends Transaction{
         keypad = atmKeypad;
         bankDatabase = getBankDatabase();
         screen = getScreen();
+        
     }
 
-    @Override
     public void execute() {
         BankDatabase bankDatabase = getBankDatabase(); // get reference
         Screen screen = getScreen(); // get reference
@@ -28,8 +29,8 @@ public class Transfer extends Transaction{
             tarAccNum = keypad.getInput();
             
             //ask user input amount
-            screen.displayMessage("Please enter the amount to transfer: ");
-            amount = keypad.getDoubleInput();
+            screen.displayMessage("Please enter the amount to transfer (Ignore digits after two decimal point): ");
+            amount = Math.floor(keypad.getDoubleInput()*100)/100.0;
         } while(!accNumValidity() || !amountValidity() || !conformUserInput()); //if user inter a invalid information, re-enter the imformation
 
 
@@ -55,7 +56,7 @@ public class Transfer extends Transaction{
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
-        //output false when transfer account number equal to own account or account number does not exist
+        //return false when transfer account number equal to own account or account number does not exist
         if( getAccountNumber() == tarAccNum || !bankDatabase.checkAccountExist(tarAccNum)){
             screen.displayMessageLine("\tYou input a invalid user account, please re-enter the user account");
             screen.displayMessageLine("\tUser cannot input own account number \n\tPleasse comfirm your input is valid account number\n\n");
