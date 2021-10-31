@@ -3,17 +3,18 @@
 
 public class Account 
 {
-   
+   private boolean type;
    private int accountNumber; // account number
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
    private double totalBalance; // funds available + pending deposits
    private BankDatabase BD;
-
+    
    // Account constructor initializes attributes
-   public Account( int theAccountNumber, int thePIN, 
+   public Account(boolean thetype, int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
    {
+      tpye = thetype;
       accountNumber = theAccountNumber;
       pin = thePIN;
       availableBalance = theAvailableBalance;
@@ -45,7 +46,7 @@ public class Account
    public void credit( double amount )
    {
       totalBalance += amount; // add to total balance
-      BD.UpdateData(accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(tpye, accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method credit
 
    // debits an amount from the account
@@ -53,7 +54,7 @@ public class Account
    {
       availableBalance -= amount; // subtract from available balance
       totalBalance -= amount; // subtract from total balance
-      BD.UpdateData(accountNumber, pin, availableBalance, totalBalance); //update account info
+      BD.UpdateData(tpye, accountNumber, pin, availableBalance, totalBalance); //update account info
    } // end method debit
 
    // returns account number

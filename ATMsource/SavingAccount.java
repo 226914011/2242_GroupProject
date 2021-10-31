@@ -5,10 +5,10 @@ public class SavingAccount extends Account {
         private double interestRate = 0.001;  //Saving interest rate per annum
     
         // SavingAccount constructor initializing attributes using superclass constructor
-        public SavingAccount ( int theAccountNumber, int thePIN, 
+        public SavingAccount (int theAccountNumber, int thePIN, 
         double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
         {
-           super(theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, theBD); 
+           super(true, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, theBD); 
         }
         
         // set method for instance variable interestRate
