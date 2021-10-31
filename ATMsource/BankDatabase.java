@@ -72,7 +72,7 @@ public class BankDatabase
       }
    }
 
-   //Function - Store data
+   //Function - Update data
    public void UpdateData(Boolean type,int userAccountNumber,int PIN,double availableBalance,double totalBalance){
       //Check is data file exists
       if(ReadData().isEmpty()){
