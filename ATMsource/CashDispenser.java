@@ -6,7 +6,7 @@ public class CashDispenser
    // the default initial number in the cash dispenser
    private final static int INITIAL_COUNT_HUNDRED = 500;
    private final static int INITIAL_COUNT_FIVEHUNDRED = 300;
-   private final static int INITIAL_COUNT_THOUSAND = 100;
+   private final static int INITIAL_COUNT_THOUSAND = 1;
    private int count_hundred; // number of $100 remaining
    private int count_fivehundred; // number of $500 remaining
    private int count_thousand; // number of $1000 remaining
@@ -30,6 +30,8 @@ public class CashDispenser
    public int isSufficientCashAvailable( int amount )
    {
       int hundred, fivehundred, thousand, remaining;
+         if(amount % 100 != 0) return 1;
+         if (amount > count_hundred * 100 + count_fivehundred * 500 + count_thousand * 1000) return 2;//that means there has not enough paper
          thousand = amount / 1000; //how many 1000$ paper needed
          remaining = amount % 1000; //remain amount after withdraw 1000$ paper
          fivehundred = remaining / 500; // how many 500$ paper needed
@@ -38,6 +40,7 @@ public class CashDispenser
             fivehundred += (thousand - count_thousand) * 2;
             thousand = count_thousand;
          }
+         if(amount - thousand * 1000 > count_fivehundred * 500 + count_hundred * 100) return 3;//that means there has not enough 100$ paper or 500$ paper
          remaining = remaining % 500; // remain aount after withdraw 500$ paper
          hundred = remaining / 100; // how many 100$ paper needed
          // Check if 500$ enought for withdraw
@@ -45,16 +48,9 @@ public class CashDispenser
             hundred += (fivehundred - count_fivehundred) * 5;
             fivehundred = count_fivehundred;
          }
-         remaining = remaining % 100;
-         if(remaining != 0){
-            return 1;
-         }
-         else if (count_hundred < hundred){
-           return 2;
-         }else{
-            dispenseCash(hundred, fivehundred, thousand);
-            return 3 ;
-         }
+         if (amount - thousand * 1000 - fivehundred * 500 > count_hundred * 100) return 4;//that means there has not enough 100$ paper
+         dispenseCash(hundred, fivehundred, thousand);
+         return 5;
         
  // not enough bills available
    } // end method isSufficientCashAvailable

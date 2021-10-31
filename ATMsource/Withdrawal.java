@@ -65,21 +65,26 @@ public class Withdrawal extends Transaction
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
                      break;
-
                   case 3:
+                     screen.displayMessageLine( 
+                     "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 and HK$500 dollar notes." +
+                     "\n\nPlease choose another amount which is smaller or larger" );
+                     break;
+                  case 4:
+                     screen.displayMessageLine( 
+                     "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 dollar notes." +
+                     "\n\nPlease choose another amount which is smaller or larger" );
+                     break;
+                  case 5:
                      // update the account involved to reflect withdrawal
                      bankDatabase.debit( getAccountNumber(), amount );
-                 
                      cashDispensed = true; // cash was dispensed
-
                      // instruct user to take cash
                      screen.displayMessageLine( 
                      "\nPlease take your cash now." );
                      break;
-
                   default:
-
-                     break;
+                  break;
                }
             } else{
                screen.displayMessageLine( 
