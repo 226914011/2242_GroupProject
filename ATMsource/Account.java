@@ -3,7 +3,7 @@
 
 public class Account 
 {
-   private boolean type;
+   private int type;
    private int accountNumber; // account number
    private int pin; // PIN for authentication
    private double availableBalance; // funds available for withdrawal
@@ -11,7 +11,7 @@ public class Account
    private BankDatabase BD;
     
    // Account constructor initializes attributes
-   public Account(boolean thetype, int theAccountNumber, int thePIN, 
+   public Account(int thetype, int theAccountNumber, int thePIN, 
       double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
    {
       type = thetype;
