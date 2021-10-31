@@ -24,7 +24,6 @@ public class CashDispenser
       count_hundred -= hundred; // update the count of bills
       count_fivehundred -= fivehundred;
       count_thousand -= thousand;
-      System.out.printf("count_hundred=%d,count_fivehundred=%d,count_thousand=%d",count_hundred,count_fivehundred,count_thousand);
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
