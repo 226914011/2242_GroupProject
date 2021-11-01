@@ -52,7 +52,7 @@ public class CashDispenser
          dispenseCash(hundred, fivehundred, thousand);
          return 5;
         
- // not enough bills available
+ 
    } // end method isSufficientCashAvailable
 } // end class CashDispenser
 
