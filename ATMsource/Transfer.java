@@ -68,9 +68,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine("\tUser cannot input own account number \n\tPleasse comfirm your input is valid account number\n\n");
             return false;
         }
-        
         return true;
-        
     }
 
     //boolean method - check the account have enough money to transfer and amount is positive double number
@@ -98,8 +96,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "1 - Comfirm" );
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
-            //clear input buffer
-            keypad.getInput();
+
             int input = validation.checkInt(keypad.getInput()); // get user input through keypad
             if (input == INVALID)  continue;
             
