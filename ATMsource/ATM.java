@@ -56,14 +56,15 @@ public class ATM
       int accountNumber = 0;
       int pin = 0;
 
-      //need edit
+      // promt user for inputting account number and PIN
       do{
          screen.displayMessage( "\nPlease enter your account number: " );
          accountNumber = validation.checkInt(keypad.getInput()); // input account number
+         if (accountNumber == INVALID)   continue;
          screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
          pin = validation.checkInt(keypad.getInput()); // input PIN
 
-      } while (pin == INVALID || accountNumber == INVALID);
+      } while (accountNumber == INVALID || pin == INVALID);
 
       // set userAuthenticated to boolean value returned by database
       userAuthenticated = 
