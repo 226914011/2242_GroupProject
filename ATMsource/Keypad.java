@@ -20,7 +20,7 @@ public class Keypad
 
    // return a double value enter by user
    public double getDoubleInput(){
-      return input.nextDouble(); // we assume that user enters an double
+      return input.nextDouble();
    }
 
 } // end class Keypad  

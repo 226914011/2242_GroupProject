@@ -27,7 +27,7 @@ public class ATM
       keypad = new Keypad(); // create keypad 
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
-      validation = new Validation(screen);
+      validation = new Validation(screen); // create validation
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -53,6 +53,7 @@ public class ATM
    // attempts to authenticate user against database
    private void authenticateUser() 
    {
+      //delare accountNumber and pin
       int accountNumber = 0;
       int pin = 0;
 
@@ -64,7 +65,7 @@ public class ATM
          screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
          pin = validation.checkInt(keypad.getInput()); // input PIN
 
-      } while (accountNumber == INVALID || pin == INVALID);
+      } while (accountNumber == INVALID || pin == INVALID); //re-enter the informtion when user Type in a invalid input
 
       // set userAuthenticated to boolean value returned by database
       userAuthenticated = 

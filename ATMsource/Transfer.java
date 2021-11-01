@@ -2,7 +2,8 @@
 //  This class represents the transfer function of an ATM
 
 public class Transfer extends Transaction{
-    private Keypad keypad; // reference to keypad
+    //declare instance variable for transfer class
+    private Keypad keypad;
     private Screen screen;
     private BankDatabase bankDatabase;
     private int tarAccNum;
@@ -10,6 +11,7 @@ public class Transfer extends Transaction{
     private boolean CANCELED,accValidate;
     private Validation validation;
 
+    //declare a int value for invalid input
     private static final int INVALID = -1;
 
 
@@ -120,14 +122,19 @@ public class Transfer extends Transaction{
             int input = validation.checkInt(keypad.getInput()); // get user input through keypad
             if (input == INVALID)  continue;    //check is this a valid integer
             
+            //determine the next action
             switch(input){
+                //confirm input
                 case 1: 
                     return true;
+                //re-enter the transfer information
                 case 2: 
                     return false;
+                //cancel transfer
                 case 3:
                     CANCELED = true;
                     return true;
+                //re-enter the user choice for next action
                 default:
                     screen.displayMessageLine( 
                     "\nInvalid selection. Try again." );

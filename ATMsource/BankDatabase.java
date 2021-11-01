@@ -15,10 +15,17 @@ public class BankDatabase
       readData = ReadData();
       //Get account data from File
       accounts = new Account[readData.size()];
+
+      //crete saving account and Cheque account object by reading data.txt
       for(String data: readData){
+         //store the information of each account
+         //buffer format: [account type, account number, pin, Available Balance, total Balance]
          String buffer [] = data.split("/");
+
+         //crete Saving account object when first buffer element is "1"
          if(buffer[0].equals("1")){
             accounts[counter] = new SavingAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
+         //crete Cheque account object
          }else{
             accounts[counter] = new ChequeAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
          }
@@ -149,7 +156,8 @@ public class BankDatabase
    {
       getAccount( userAccountNumber ).debit( amount );
    } // end method debit
-
+   
+   //check whether Account is exist or not
    public boolean checkAccountExist(int inAccNum){
       return getAccount(inAccNum) != null;
    }
