@@ -85,7 +85,6 @@ public class Transfer extends Transaction{
     }
 
     //boolean method - check the account have enough money to transfer and amount is positive double number
-    //havn't check dec place size 
     private boolean amountValidity(){
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
         //return false when input amount equal to 0
