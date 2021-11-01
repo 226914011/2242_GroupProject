@@ -7,7 +7,7 @@ public class Transfer extends Transaction{
     private BankDatabase bankDatabase;
     private int tarAccNum;
     private double amount;
-    private boolean CANCELED;
+    private boolean CANCELED,accValidate;
     private Validation validation;
 
     private static final int INVALID = -1;
@@ -32,12 +32,16 @@ public class Transfer extends Transaction{
         {
             screen.displayMessage("\nPlease enter the account number for transfer: ");
             tarAccNum = validation.checkInt(keypad.getInput());
+            accValidate = !accNumValidity();
+            if(tarAccNum == INVALID || accValidate ){
+                continue;
+            }
             //ask user input amount
             screen.displayMessage("\nPlease enter the amount to transfer (it will ignore digits after two decimal point): ");
             amount = Math.floor(keypad.getDoubleInput()*100)/100.0;
             //clear input buffer
             keypad.getInput();
-        } while(!accNumValidity() || !amountValidity() || !confirmUserInput() || tarAccNum == INVALID); //if user inter a invalid information, re-enter the imformation
+        } while(!amountValidity()||tarAccNum == INVALID || accValidate || !confirmUserInput()); //if user inter a invalid information, re-enter the imformation
 
 
         if (!CANCELED){
@@ -63,9 +67,12 @@ public class Transfer extends Transaction{
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
         //return false when transfer account number equal to own account or account number does not exist
-        if( getAccountNumber() == tarAccNum || !bankDatabase.checkAccountExist(tarAccNum)){
-            screen.displayMessageLine("\tYou have inputted an invalid user account, please re-enter the user account");
-            screen.displayMessageLine("\tUser cannot input own account number \n\tPleasse comfirm your input is valid account number\n\n");
+        if(!bankDatabase.checkAccountExist(tarAccNum)){
+            screen.displayMessageLine("\tThe account " + tarAccNum + " is an invalid user account.\n\tPlease re-enter the user account.\n");
+            return false;
+        }
+        if(getAccountNumber() == tarAccNum){
+            screen.displayMessageLine("\tThe account " + tarAccNum + " is your own account.\n\tPleasse input an valid account number.\n");
             return false;
         }
         return true;
@@ -74,9 +81,10 @@ public class Transfer extends Transaction{
     //boolean method - check the account have enough money to transfer and amount is positive double number
     //havn't check dec place size 
     private boolean amountValidity(){
-        if (amount > bankDatabase.getAvailableBalance(getAccountNumber()) || amount < 0.0){
-            screen.displayMessageLine("\tYou have inputted an invalid amount, please re-enter the amount");
-            screen.displayMessageLine("\tAmount should smaller than AvailableBalance and larger than 0\n\n");
+        double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
+        if (amount > availablebalance){
+            screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
+            screen.displayMessageLine("\tAmount should smaller or equal to $" + availablebalance + ".\n");
             return false;
         }
         
