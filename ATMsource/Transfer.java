@@ -99,8 +99,6 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
 
-            keypad.getNext();
-
             int input = validation.checkInt(keypad.getInput()); // get user input through keypad
             if (input == INVALID)  continue;
             

@@ -11,8 +11,7 @@ public class Validation {
     //Return integer method - check data type is integer
     public int checkInt (String check){
         try {
-            int buffer = Integer.parseInt(check);
-            return buffer;
+            return Integer.parseInt(check);
         } catch (Exception e) {
             screen.displayMessageLine("\tInvalid data type: input should be integer!");
             return -1;
