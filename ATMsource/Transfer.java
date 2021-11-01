@@ -71,11 +71,12 @@ public class Transfer extends Transaction{
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
-        //return false when transfer account number equal to own account or account number does not exist
+        //return false when account number does not exist
         if(!bankDatabase.checkAccountExist(tarAccNum)){
             screen.displayMessageLine("\tThe account " + tarAccNum + " is an invalid user account.\n\tPlease re-enter the user account.\n");
             return false;
         }
+        //return false when transfer account number equal to own account
         if(getAccountNumber() == tarAccNum){
             screen.displayMessageLine("\tThe account " + tarAccNum + " is your own account.\n\tPleasse input an valid account number.\n");
             return false;
@@ -87,6 +88,12 @@ public class Transfer extends Transaction{
     //havn't check dec place size 
     private boolean amountValidity(){
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
+        //return false when input amount equal to 0
+        if (amount == 0){
+            screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
+            screen.displayMessageLine("\tAmount should larger than $0.\n");
+            return false;
+        }
         //return false when input amount larger than Available Balance
         if (amount > availablebalance){
             screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
