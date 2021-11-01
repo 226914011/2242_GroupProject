@@ -54,27 +54,31 @@ public class Withdrawal extends Transaction
             {   
                // check whether the cash dispenser has enough money
                switch (cashDispenser.isSufficientCashAvailable( amount )) {
+                  //case -  user not input amount that is the multiple of 100
                   case 1:
                      screen.displayMessageLine( 
                      "\nWrong cash type input in the ATM." +
                      "\n\nPlease input desired amount which is multiple of 100" );
                      break;
-
+                  //case -  user input amount larger than the ATM available cash
                   case 2:
                      screen.displayMessageLine( 
                      "\nInsufficient cash available in the ATM." +
                      "\n\nPlease choose a smaller amount." );
                      break;
+                  //case -  ATM not enough $100 dollar note or $500 dollar note
                   case 3:
                      screen.displayMessageLine( 
                      "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 and HK$500 dollar notes." +
                      "\n\nPlease choose another amount which is smaller or larger" );
                      break;
+                  //case -  ATM not enough 100$ dollar note
                   case 4:
                      screen.displayMessageLine( 
                      "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 dollar notes." +
                      "\n\nPlease choose another amount which is smaller or larger" );
                      break;
+                  //case - user input amount that can withdraw
                   case 5:
                      // update the account involved to reflect withdrawal
                      bankDatabase.debit( getAccountNumber(), amount );
@@ -84,7 +88,7 @@ public class Withdrawal extends Transaction
                      "\nPlease take your cash now." );
                      break;
                   default:
-                  break;
+                     break;
                }
             } else{
                screen.displayMessageLine( 
@@ -126,8 +130,8 @@ public class Withdrawal extends Transaction
          screen.displayMessageLine( "6 - Cancel transaction" );
          screen.displayMessage( "\nChoose a withdrawal option: " );
 
-         int input = validation.checkInt(keypad.getInput()); // get user input through keypad
-         if (input == INVAILD)  continue;
+         int input = validation.checkInt(keypad.getInput()); // get user input through keypad and do validation check
+         if (input == INVAILD)  continue; //continue when user not enter a valid integer input
 
          // determine how to proceed based on the input value
          switch ( input )
@@ -140,8 +144,8 @@ public class Withdrawal extends Transaction
                break;       
             case 5:
                screen.displayMessage( "\nPlease input your custom amount: " );
-               int userinput = validation.checkInt(keypad.getInput()) ;
-               if (userinput == INVAILD)  continue;
+               int userinput = validation.checkInt(keypad.getInput()) ; // get user input through keypad and do validation check
+               if (userinput == INVAILD)  continue; //continue when user not enter a valid integer input
                userChoice = userinput ; // save user's choice
                break;       
             case CANCELED: // the user chose to cancel
