@@ -100,7 +100,7 @@ public class Transfer extends Transaction{
             screen.displayMessage("Your transfer amount: ");
             screen.displayDollarAmount(amount);
             screen.displayMessageLine("\n");
-            screen.displayMessageLine("Comfirm your input?");
+            screen.displayMessageLine("Confirm your input?");
             screen.displayMessageLine( "1 - Confirm" );
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
