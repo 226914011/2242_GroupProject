@@ -18,13 +18,9 @@ public class Keypad
       return input.nextLine(); // change user input to string type for validation 
    } // end method getInput
 
+   // return a double value enter by user
    public double getDoubleInput(){
       return input.nextDouble(); // we assume that user enters an double
-   }
-
-   public String getNext()
-   {
-      return input.next(); //keypad read the next input
    }
 
 } // end class Keypad  

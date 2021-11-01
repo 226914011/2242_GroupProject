@@ -17,23 +17,24 @@ public class Transfer extends Transaction{
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         
-        keypad = atmKeypad;
-        validation = atmValidation;
-        bankDatabase = getBankDatabase();
-        screen = getScreen();
+        keypad = atmKeypad; // get reference
+        validation = atmValidation; // get reference
+        bankDatabase = getBankDatabase();   // get reference
+        screen = getScreen();   // get reference
     }
 
     public void execute() {
-        BankDatabase bankDatabase = getBankDatabase(); // get reference
-        Screen screen = getScreen(); // get reference
-        //ask user input the account information
-        
+        //ask user input the transfer information
         do
         {
+            //ask user input account number for transfer
             screen.displayMessage("\nPlease enter the account number for transfer: ");
             tarAccNum = validation.checkInt(keypad.getInput());
+
+            //check input is a valid integer
             if(tarAccNum == INVALID)    continue;
-            
+
+            //check input is a valid account number
             accValidate = !accNumValidity();
             if (accValidate)    continue;
 
@@ -44,11 +45,14 @@ public class Transfer extends Transaction{
             keypad.getInput();
         } while(tarAccNum == INVALID || accValidate || !amountValidity() ||!confirmUserInput()); //if user inter a invalid information, re-enter the imformation
 
-
+        //do transfer
         if (!CANCELED){
+            //debit the money from owner account number
             bankDatabase.debit(getAccountNumber(), amount);
+            //credit the money from transfer target account number
             bankDatabase.credit(tarAccNum, amount);
 
+            //display transfer success message
             screen.displayMessageLine("\nThe transfer is success. ");
 
             //Show account updated available balance and total balance
@@ -83,6 +87,7 @@ public class Transfer extends Transaction{
     //havn't check dec place size 
     private boolean amountValidity(){
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
+        //return false when input amount larger than Available Balance
         if (amount > availablebalance){
             screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
             screen.displayMessageLine("\tAmount should smaller or equal to $" + availablebalance + ".\n");
@@ -90,13 +95,13 @@ public class Transfer extends Transaction{
         }
         
         return true;
-        
     }
 
 
     //boolean method - confirm the information
     private boolean confirmUserInput(){
         do{
+            //display confrim message
             screen.displayMessageLine("\nThe account number for transfer: " + tarAccNum);
             screen.displayMessage("Your transfer amount: ");
             screen.displayDollarAmount(amount);
@@ -107,7 +112,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "3 - cancel transfer" );
 
             int input = validation.checkInt(keypad.getInput()); // get user input through keypad
-            if (input == INVALID)  continue;
+            if (input == INVALID)  continue;    //check is this a valid integer
             
             switch(input){
                 case 1: 
