@@ -55,7 +55,7 @@ public class Transfer extends Transaction{
             bankDatabase.credit(tarAccNum, amount);
 
             //display transfer success message
-            screen.displayMessageLine("\nThe transfer is success. ");
+            screen.displayMessageLine("\nThe transfer is successful. ");
 
             //Show account updated available balance and total balance
             screen.displayMessageLine( "\nUpdated balance Information:" );
