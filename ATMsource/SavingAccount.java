@@ -8,7 +8,7 @@ public class SavingAccount extends Account {
         public SavingAccount (int theAccountNumber, int thePIN, 
         double theAvailableBalance, double theTotalBalance, BankDatabase theBD)
         {
-           super(2, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, theBD); 
+           super(1, theAccountNumber, thePIN, theAvailableBalance, theTotalBalance, theBD); 
         }
         
         // set method for instance variable interestRate

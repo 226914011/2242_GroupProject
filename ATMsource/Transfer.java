@@ -32,16 +32,17 @@ public class Transfer extends Transaction{
         {
             screen.displayMessage("\nPlease enter the account number for transfer: ");
             tarAccNum = validation.checkInt(keypad.getInput());
+            if(tarAccNum == INVALID)    continue;
+            
             accValidate = !accNumValidity();
-            if(tarAccNum == INVALID || accValidate ){
-                continue;
-            }
+            if (accValidate)    continue;
+
             //ask user input amount
             screen.displayMessage("\nPlease enter the amount to transfer (it will ignore digits after two decimal point): ");
             amount = Math.floor(keypad.getDoubleInput()*100)/100.0;
             //clear input buffer
             keypad.getInput();
-        } while(!amountValidity()||tarAccNum == INVALID || accValidate || !confirmUserInput()); //if user inter a invalid information, re-enter the imformation
+        } while(tarAccNum == INVALID || accValidate || !amountValidity() ||!confirmUserInput()); //if user inter a invalid information, re-enter the imformation
 
 
         if (!CANCELED){
