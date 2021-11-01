@@ -140,7 +140,7 @@ public class Withdrawal extends Transaction
                break;       
             case 5:
                screen.displayMessage( "\nPlease input your custom amount: " );
-               int userinput=validation.checkInt(keypad.getInput()) ;
+               int userinput = validation.checkInt(keypad.getInput()) ;
                if (userinput == INVAILD)  continue;
                userChoice = userinput ; // save user's choice
                break;       

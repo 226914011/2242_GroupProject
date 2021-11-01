@@ -92,7 +92,7 @@ public class BankDatabase
             StoreData(Integer.parseInt(buffer[0]),Integer.parseInt(buffer[1]), Integer.parseInt(buffer[2]), Double.parseDouble(buffer[3]), Double.parseDouble(buffer[4]), "temp.txt");
          }
       }
-      //Delete temporary file
+      //Delete old data
       f.delete();
       //Rename to "data.txt"
       t.renameTo(f);
