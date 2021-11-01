@@ -65,7 +65,7 @@ public class Transfer extends Transaction{
         //return false when transfer account number equal to own account or account number does not exist
         if( getAccountNumber() == tarAccNum || !bankDatabase.checkAccountExist(tarAccNum)){
             screen.displayMessageLine("\tYou have inputted an invalid user account, please re-enter the user account");
-            screen.displayMessageLine("\tUser cannot input own account number \n\tPleasse comfirm your input is valid account number\n\n");
+            screen.displayMessageLine("\tUser cannot input own account number \n\tPlease confirm your input is valid account number\n\n");
             return false;
         }
         return true;
@@ -93,7 +93,7 @@ public class Transfer extends Transaction{
             screen.displayDollarAmount(amount);
             screen.displayMessageLine("\n");
             screen.displayMessageLine("Comfirm your input?");
-            screen.displayMessageLine( "1 - Comfirm" );
+            screen.displayMessageLine( "1 - Confirm" );
             screen.displayMessageLine( "2 - re-enter the information" );
             screen.displayMessageLine( "3 - cancel transfer" );
 
