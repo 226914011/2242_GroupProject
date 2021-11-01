@@ -56,7 +56,7 @@ public class Withdrawal extends Transaction
                switch (cashDispenser.isSufficientCashAvailable( amount )) {
                   case 1:
                      screen.displayMessageLine( 
-                     "\nInsufficient cash available in the ATM." +
+                     "\nWrong cash type input in the ATM." +
                      "\n\nPlease input desired amount which is multiple of 100" );
                      break;
 
