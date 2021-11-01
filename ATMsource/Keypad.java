@@ -12,15 +12,21 @@ public class Keypad
       input = new Scanner( System.in );    
    } // end no-argument Keypad constructor
 
-   // return an integer value entered by user 
+   // return a string value entered by user 
    public String getInput()
    {
-      return input.nextLine(); // we assume that user enters an integer  
+      return input.nextLine(); // change user input to string type for validation 
    } // end method getInput
 
    public double getDoubleInput(){
       return input.nextDouble(); // we assume that user enters an double
    }
+
+   public String getNext()
+   {
+      return input.next(); //keypad read the next input
+   }
+
 } // end class Keypad  
 
 
