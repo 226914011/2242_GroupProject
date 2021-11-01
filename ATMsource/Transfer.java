@@ -78,7 +78,7 @@ public class Transfer extends Transaction{
         }
         //return false when transfer account number equal to own account
         if(getAccountNumber() == tarAccNum){
-            screen.displayMessageLine("\tThe account " + tarAccNum + " is your own account.\n\tPleasse input an valid account number.\n");
+            screen.displayMessageLine("\tThe account " + tarAccNum + " is your own account.\n\tPlease input an valid account number.\n");
             return false;
         }
         return true;
