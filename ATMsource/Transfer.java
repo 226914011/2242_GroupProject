@@ -39,7 +39,7 @@ public class Transfer extends Transaction{
             if (accValidate)    continue;
 
             //ask user input amount
-            screen.displayMessage("\nPlease enter the amount to transfer (it will ignore digits after two decimal point): ");
+            screen.displayMessage("\nPlease enter the amount to transfer (it will ignore digits after two decimal places): ");
             amount = Math.floor(keypad.getDoubleInput()*100)/100.0;
             //clear input buffer
             keypad.getInput();
