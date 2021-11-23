@@ -3,32 +3,56 @@
 
 public class CashDispenser 
 {
-   // the default initial number of bills in the cash dispenser
-   private final static int INITIAL_COUNT = 500;
-   private int count; // number of $20 bills remaining
-   
+   // the default initial number in the cash dispenser
+   private final static int INITIAL_COUNT_HUNDRED = 500;
+   private final static int INITIAL_COUNT_FIVEHUNDRED = 100;
+   private final static int INITIAL_COUNT_THOUSAND = 100;
+   private int count_hundred; // number of $100 remaining
+   private int count_fivehundred; // number of $500 remaining
+   private int count_thousand; // number of $1000 remaining
    // no-argument CashDispenser constructor initializes count to default
    public CashDispenser()
-   {
-      count = INITIAL_COUNT; // set count attribute to default
+   {  // set count attribute to default
+      count_hundred = INITIAL_COUNT_HUNDRED; //500 * 100
+      count_fivehundred = INITIAL_COUNT_FIVEHUNDRED; // 300 * 500
+      count_thousand = INITIAL_COUNT_THOUSAND; // 100 * 1000
    } // end CashDispenser constructor
 
    // simulates dispensing of specified amount of cash
-   public void dispenseCash( int amount )
+   public void dispenseCash( int hundred, int fivehundred, int thousand )
    {
-      int billsRequired = amount / 20; // number of $20 bills required
-      count -= billsRequired; // update the count of bills
+      count_hundred -= hundred; // update the count of $100 
+      count_fivehundred -= fivehundred;// update the count of $500 
+      count_thousand -= thousand;// update the count of $1000 
    } // end method dispenseCash
 
    // indicates whether cash dispenser can dispense desired amount
-   public boolean isSufficientCashAvailable( int amount )
+   public int isSufficientCashAvailable( int amount )
    {
-      int billsRequired = amount / 20; // number of $20 bills required
-
-      if ( count >= billsRequired  )
-         return true; // enough bills available
-      else 
-         return false; // not enough bills available
+      int hundred, fivehundred, thousand, remaining;
+         if(amount % 100 != 0) return 1;  //when user not input the multiple of 100, return 1
+         if (amount > count_hundred * 100 + count_fivehundred * 500 + count_thousand * 1000) return 2;//that means there has not enough dollar note
+         thousand = amount / 1000; //how many 1000$ dollar note needed
+         remaining = amount % 1000; //remain amount after withdraw 1000$ dollar note
+         fivehundred = remaining / 500; // how many 500$ dollar note needed
+         // Check if 1000$ enought for withdraw
+         if(count_thousand < thousand){
+            fivehundred += (thousand - count_thousand) * 2;
+            thousand = count_thousand;
+         }
+         if(amount - thousand * 1000 > count_fivehundred * 500 + count_hundred * 100) return 3;//that means there has not enough 100$ dollar note or 500$ dollar note
+         remaining = remaining % 500; // remain aount after withdraw 500$ dollar note
+         hundred = remaining / 100; // how many 100$ dollar note needed
+         // Check if 500$ enought for withdraw
+         if(count_fivehundred < fivehundred){
+            hundred += (fivehundred - count_fivehundred) * 5;
+            fivehundred = count_fivehundred;
+         }
+         if (amount - thousand * 1000 - fivehundred * 500 > count_hundred * 100) return 4;//that means there has not enough 100$ dollar note
+         dispenseCash(hundred, fivehundred, thousand);
+         return 5;
+        
+ 
    } // end method isSufficientCashAvailable
 } // end class CashDispenser
 
