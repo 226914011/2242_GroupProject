@@ -91,7 +91,7 @@ public class mainmenu extends JFrame {
 	
 	public class DisplayMessageJPanel extends JPanel{
 	    public DisplayMessageJPanel(){
-	        setSize(new Dimension(1440, 1024));
+	        setPreferredSize(new Dimension(1440, 1024));
 	        //Absolute layout
 	        setLayout(null);
 
