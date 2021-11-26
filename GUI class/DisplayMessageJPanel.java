@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class DisplayMessageJPanel extends JPanel{
     public DisplayMessageJPanel(){
-        setSize(new Dimension(1440, 1024));
+        setPreferredSize(new Dimension(1440, 1024));
         //Absolute layout
         setLayout(null);
 
@@ -28,11 +28,9 @@ public class DisplayMessageJPanel extends JPanel{
         JFrame mainFrame = new JFrame();
         DisplayMessageJPanel hihi = new DisplayMessageJPanel();
 
-        mainFrame.setPreferredSize(new Dimension(1440, 1024));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainFrame.add(hihi);
-        //this is very important XD
         mainFrame.pack();
     }
 }
