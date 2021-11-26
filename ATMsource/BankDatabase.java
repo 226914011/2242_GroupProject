@@ -15,10 +15,17 @@ public class BankDatabase
       readData = ReadData();
       //Get account data from File
       accounts = new Account[readData.size()];
+
+      //crete saving account and Cheque account object by reading data.txt
       for(String data: readData){
-         String  buffer [] = data.split("/");
-         if(buffer[0].equals("false")){
+         //store the information of each account
+         //buffer format: [account type, account number, pin, Available Balance, total Balance]
+         String buffer [] = data.split("/");
+
+         //crete Saving account object when first buffer element is "1"
+         if(buffer[0].equals("1")){
             accounts[counter] = new SavingAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
+         //crete Cheque account object
          }else{
             accounts[counter] = new ChequeAccount(Integer.parseInt(buffer[1]) , Integer.parseInt(buffer[2]) ,Double.parseDouble(buffer[3]),Double.parseDouble(buffer[4]), this);
          }
@@ -51,7 +58,7 @@ public class BankDatabase
    }
 
    //Function - Store data
-   public void StoreData(Boolean type,int userAccountNumber,int PIN,double availableBalance,double totalBalance,String path){
+   public void StoreData(int type,int userAccountNumber,int PIN,double availableBalance,double totalBalance,String path){
       //declare variable of file pathname
       File f = new File(path);
       //Write data to file
@@ -63,7 +70,7 @@ public class BankDatabase
             Wf.write("\n");
          }
          //Write data to file by parameter declared
-         Wf.write(Boolean.toString(type) + "/" + userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
+         Wf.write(type + "/" + userAccountNumber + "/" + PIN + "/" + Double.toString(availableBalance) + "/" + Double.toString(totalBalance));
          //Ending Input Stream
          Wf.close();
       //Exception for IO
@@ -73,7 +80,7 @@ public class BankDatabase
    }
 
    //Function - Update data
-   public void UpdateData(Boolean type,int userAccountNumber,int PIN,double availableBalance,double totalBalance){
+   public void UpdateData(int type,int userAccountNumber,int PIN,double availableBalance,double totalBalance){
       //Check is data file exists
       if(ReadData().isEmpty()){
          return;
@@ -89,10 +96,10 @@ public class BankDatabase
          if(buffer[1].equals(String.valueOf(userAccountNumber))){
             StoreData(type,userAccountNumber, PIN ,availableBalance, totalBalance, "temp.txt");
          }else{
-            StoreData(Boolean.parseBoolean(buffer[0]),Integer.parseInt(buffer[1]), Integer.parseInt(buffer[2]), Double.parseDouble(buffer[3]), Double.parseDouble(buffer[4]), "temp.txt");
+            StoreData(Integer.parseInt(buffer[0]),Integer.parseInt(buffer[1]), Integer.parseInt(buffer[2]), Double.parseDouble(buffer[3]), Double.parseDouble(buffer[4]), "temp.txt");
          }
       }
-      //Delete temporary file
+      //Delete old data
       f.delete();
       //Rename to "data.txt"
       t.renameTo(f);
@@ -149,7 +156,8 @@ public class BankDatabase
    {
       getAccount( userAccountNumber ).debit( amount );
    } // end method debit
-
+   
+   //check whether Account is exist or not
    public boolean checkAccountExist(int inAccNum){
       return getAccount(inAccNum) != null;
    }
