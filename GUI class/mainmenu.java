@@ -53,6 +53,8 @@ public class mainmenu extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setPreferredSize(new Dimension(1440, 1024));
 		panel.setLayout(null);
+
+		//copy hold part until this line XD
 		
 		
 		//main menu button, size: 532 * 90
@@ -82,6 +84,7 @@ public class mainmenu extends JFrame {
 		lblNewLabel.setBounds(458, 104, 524, 85);
 		panel.add(lblNewLabel);
 		
+		//copy this
         pack();
 
 	}
