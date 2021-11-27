@@ -41,17 +41,27 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
+      exitSystem = new ExitSystem();
+      takeCard = new TakeCard();
+      transferComfirm = new TransferComfirm();
+      transferUpdate = new TransferUpdate();
+      viewBalance = new ViewBalance();
+      welcome = new Welcome();
+      withdrawalMenu = new WithdrawedCash();
+      withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM 
    public void run()
    {
+      /**
       // loop while user is not yet authenticated
       while ( !userAuthenticated ) 
       {
          screen.displayMessageLine( "\nWelcome!" );       
          authenticateUser(); // authenticate user
       } // end while  
+      **/
       displayMainMenu(); // user is now authenticated 
    } // end method run
 

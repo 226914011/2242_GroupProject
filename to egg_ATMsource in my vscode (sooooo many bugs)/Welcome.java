@@ -35,7 +35,7 @@ public class Welcome extends Screen {
 		JLabel WelcomeLabel = new JLabel("Welcome to the ATM System!");
 		WelcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
 		WelcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		WelcomeLabel.setBounds(0, 483, 1440, 58);
+		WelcomeLabel.setBounds(0, 0, 1440, 1024);
 		panel.add(WelcomeLabel);
 		
 
