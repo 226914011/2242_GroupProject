@@ -50,7 +50,7 @@ public class Screen extends JFrame
 	   return Mainframe;
     }
 
-	public JPanel getSrceenContentPane(){
+	public JPanel getScreenContentPane(){
 		return contentPane;
 	}
 

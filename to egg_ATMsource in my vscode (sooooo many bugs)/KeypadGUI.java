@@ -7,17 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Graphics;
 
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
+public class KeypadGUI extends Screen{
 
-public class LoginSystem extends Screen {
+	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
@@ -26,25 +22,33 @@ public class LoginSystem extends Screen {
 	/**
 	 * Create the frame.
 	 */
-	public LoginSystem() {
+	public KeypadGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = new JPanel();
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 		//need to change when copy to vscode
-		LoginDisplayPanel loginDisplayPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
-        super.getMainframe().getContentPane().add(loginDisplayPanel);
+		JPanel DisplayPanel = new JPanel();
+        getContentPane().add(DisplayPanel);
         //must ah
+        contentPane.setPreferredSize(new Dimension(1440, 1024));
 
 
-		super.getScreenContentPane().add(loginDisplayPanel, BorderLayout.CENTER);
-		loginDisplayPanel.setPreferredSize(new Dimension(890, 1024));
-		loginDisplayPanel.setLayout(null);
+		contentPane.add(DisplayPanel, BorderLayout.CENTER);
+		DisplayPanel.setPreferredSize(new Dimension(890, 1024));
+		DisplayPanel.setLayout(null);
+		
 		
 		//need to change when I copy it to vscode, this part of code will be paste to KeypadJPanel class
 		KeypadJPanel keypadPanel = new KeypadJPanel();	//it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
 		keypadPanel.setPreferredSize(new Dimension(550, 1024));
-		super.getScreenContentPane().add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
+		contentPane.add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
 		keypadPanel.setLayout(null);
 
+		setResizable( false );
+
+        pack();
 	}
 	
 	
@@ -55,17 +59,13 @@ public class LoginSystem extends Screen {
 	        //Absolute layout
 	        setLayout(null);
 	        
-	        //transparent background
-	        setOpaque(false);
-	        
-	        
 			
 	        //keypad display textField
 			keypadDisplayTextField = new JTextField();
 			keypadDisplayTextField.setEditable(false);
 			keypadDisplayTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 			keypadDisplayTextField.setBounds(100, 339, 400, 56);
-			add(keypadDisplayTextField);
+			this.add(keypadDisplayTextField);
 			keypadDisplayTextField.setColumns(10);
 	        
 	        //keypad button setting
@@ -74,7 +74,7 @@ public class LoginSystem extends Screen {
 			actualKeypadPanel.setOpaque(false);
 
 			
-			add(actualKeypadPanel);
+			this.add(actualKeypadPanel);
 			actualKeypadPanel.setLayout(new GridLayout(4, 4, 6, 6));
 			
 			//keypad button from tutor 9
@@ -115,54 +115,16 @@ public class LoginSystem extends Screen {
 		    // "."
 		    actualKeypadPanel.add(keys[ 13 ]);
 
-		    // initialize all button font size and button color
+		    // initialize all button font size
 		    for (int i = 0; i <= 13; i++) {
 		    	if (i<=9 || i ==13)
 		    		keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
 		    	else
 		    		keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
-
-				keys[i].setBackground(new Color(106,107,138));
-				keys[i].setOpaque(true);
-				keys[i].setBorderPainted(false);
-					
 		    }
 		    
-
-	        //background with color
-	        //setBackground(new Color(56, 60, 102));
-	    }
-	}
-	
-	
-	public class LoginDisplayPanel extends JPanel{
-		public LoginDisplayPanel(String displayText, String imagePath){
-			setPreferredSize(new Dimension(890, 1024));
-			setLayout(null);
-			
-			//transparent jpanel
-			setOpaque(false);
-			
-			
-			JLabel userImageLabel = new JLabel("");
-			userImageLabel.setBounds(186, 423, 252, 249);
-			userImageLabel.setIcon(new ImageIcon(imagePath));
-			add(userImageLabel);
-			
-			JLabel cardNumLabel = new JLabel(displayText);
-			cardNumLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-			cardNumLabel.setForeground(Color.white);
-			cardNumLabel.setBounds(186, 313, 650, 92);
-			add(cardNumLabel);
-		}
-	}
-	
-	public class MyBGcontentPane extends JPanel{
-	    @Override
-	    public void paintComponent(Graphics g) {
-	          super.paintComponent(g);
-	          ImageIcon bgimage = new ImageIcon("ATM_login.png");
-	          g.drawImage(bgimage.getImage(), 0, 0, this.getWidth(), this.getHeight(),  null);
+	        //background with color, can // this in following version
+	        setBackground(new Color(56, 60, 102));
 	    }
 	}
 }

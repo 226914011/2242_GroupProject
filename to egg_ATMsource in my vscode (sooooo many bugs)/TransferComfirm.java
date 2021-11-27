@@ -11,32 +11,14 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class transferComfirm extends JFrame {
+public class TransferComfirm extends Screen {
 
 	private JPanel contentPane;
 	private JTextField accountNumTextField;
 	private JTextField transferAmountTtextField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					transferComfirm frame = new transferComfirm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public transferComfirm() {
+	public TransferComfirm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
