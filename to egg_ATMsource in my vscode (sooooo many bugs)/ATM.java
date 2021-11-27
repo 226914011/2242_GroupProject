@@ -4,7 +4,7 @@ import java.awt.*;
 // ATM.java
 // Represents an automated teller machine
 
-import javax.swing.BoxLayout;
+import javax.swing.*;
 
 public class ATM 
 {
@@ -57,6 +57,7 @@ public class ATM
    // start ATM 
    public void run()
    {
+      JButton keys [] = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
       welcome.buildGUI();
@@ -71,6 +72,11 @@ public class ATM
 
             screen.getSrceenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
             screen.getMainframe().revalidate();
+
+            KeypadHandler keypadHandler = new KeypadHandler();
+            for (int i = 0; i <= 9; i++ ){
+               keys[i].addActionListener(keypadHandler);
+            }
          }
       });
       /**
@@ -191,6 +197,13 @@ public class ATM
 
       return temp; // return the newly created object
    } // end method createTransaction
+
+   private class KeypadHandler implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent e) {   
+         keypad.getKeypadDisplayTextField().replaceSelection(e.getActionCommand());
+      }
+   }
 
    private class MainmenuHandler implements ActionListener{
       public void actionPerformed(ActionEvent e) {

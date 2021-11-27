@@ -9,10 +9,11 @@ import javax.swing.*;
 public class Keypad
 {
    private JTextField keypadDisplayTextField;
-	private JButton keys[];
+	private JButton[] keys;
    private KeypadJPanel keypadJPanel;
    private Scanner input; // reads data from the command line
-                         
+   private String userInput = "";
+   
    // no-argument constructor initializes the Scanner
    public Keypad()
    {
@@ -23,7 +24,7 @@ public class Keypad
    // return a string value entered by user 
    public String getInput()
    {
-      return input.nextLine(); // change user input to string type for validation 
+      return userInput; // change user input to string type for validation 
    } // end method getInput
 
    // return a double value enter by user
@@ -50,6 +51,7 @@ public class Keypad
         keypadDisplayTextField.setBounds(100, 339, 400, 56);
         add(keypadDisplayTextField);
         keypadDisplayTextField.setColumns(10);
+        keypadDisplayTextField.setText(userInput);
           
           //keypad button setting
         JPanel actualKeypadPanel = new JPanel();
@@ -119,6 +121,16 @@ public class Keypad
   
   public KeypadJPanel getKeypadJPanel(){
      return keypadJPanel;
+  }
+
+  public JButton[] getKeys(){
+     return keys;
+  }
+  public String getUserInput(){
+     return userInput;
+  }
+  public JTextField getKeypadDisplayTextField(){
+     return keypadDisplayTextField;
   }
 } // end class Keypad  
 
