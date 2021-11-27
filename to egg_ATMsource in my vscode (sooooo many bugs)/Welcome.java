@@ -10,8 +10,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 public class Welcome extends Screen {
-
-	private JPanel contentPane;
 	private JLabel welcomeLabel;
 
 
@@ -19,17 +17,13 @@ public class Welcome extends Screen {
 	 * Create the frame.
 	 */
 	public Welcome() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
 		//need to change when copy to vscode
 		JPanel panel = new JPanel();
-        getContentPane().add(panel);
+        super.getMainframe().getContentPane().add(panel);
         
 
-		contentPane.add(panel, BorderLayout.CENTER);
+		super.getSrceenContentPane().add(panel, BorderLayout.CENTER);
 		panel.setPreferredSize(new Dimension(1440, 1024));
 		panel.setLayout(null);
 		

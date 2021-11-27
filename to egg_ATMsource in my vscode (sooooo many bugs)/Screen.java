@@ -13,7 +13,7 @@ public class Screen extends JFrame
 {
    //GUI componnent
 	private static JFrame Mainframe;
-	private static JPanel contentPane;
+	private static MyBGcontentPane contentPane;
 	public JPanel mainmenupanel;
 	public JButton balanceButton;
 	public JButton withdrawButton;
@@ -24,7 +24,7 @@ public class Screen extends JFrame
 	public Screen(){
 		Mainframe = new JFrame("CC bank ATM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
+		contentPane = new MyBGcontentPane();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
     
@@ -33,12 +33,6 @@ public class Screen extends JFrame
 	}
 
 	public void menuGUI(){
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 1000);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
 		mainmenupanel = new JPanel();
 		mainmenupanel.setSize(1000, 1000);
         getContentPane().add(mainmenupanel);
@@ -86,11 +80,18 @@ public class Screen extends JFrame
 	   return Mainframe;
     }
 
-	public JPanel getContentPane(){
+	public JPanel getSrceenContentPane(){
 		return contentPane;
 	}
 
-
+	public class MyBGcontentPane extends JPanel{
+	    @Override
+	    public void paintComponent(Graphics g) {
+	          super.paintComponent(g);
+	          ImageIcon bgimage = new ImageIcon("ATM_login.png");
+	          g.drawImage(bgimage.getImage(), 0, 0, this.getWidth(), this.getHeight(),  null);
+	    }
+	}
 } // end class Screen
 
 
