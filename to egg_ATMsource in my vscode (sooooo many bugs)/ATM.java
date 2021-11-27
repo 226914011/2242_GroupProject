@@ -41,15 +41,15 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      exitSystem = new ExitSystem();
-      mainmenu = new MainMenu();
-      takeCard = new TakeCard();
-      transferComfirm = new TransferComfirm();
-      transferUpdate = new TransferUpdate();
-      viewBalance = new ViewBalance();
+      //exitSystem = new ExitSystem();
+      //mainmenu = new MainMenu();
+      //takeCard = new TakeCard();
+      //transferComfirm = new TransferComfirm();
+      //transferUpdate = new TransferUpdate();
+      //viewBalance = new ViewBalance();
       welcome = new Welcome();
-      withdrawalMenu = new WithdrawalMenu();
-      withdrawedCash = new WithdrawedCash();
+      //withdrawalMenu = new WithdrawalMenu();
+      //withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM 
