@@ -4,7 +4,7 @@ import java.awt.*;
 // ATM.java
 // Represents an automated teller machine
 
-import javax.swing.BoxLayout;
+import javax.swing.*;
 
 public class ATM 
 {
@@ -22,6 +22,7 @@ public class ATM
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
+   private boolean firstInitialize;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -34,6 +35,7 @@ public class ATM
    public ATM() 
    {
       userAuthenticated = false; // user is not authenticated to start
+      firstInitialize = true;
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad 
@@ -57,21 +59,33 @@ public class ATM
    // start ATM 
    public void run()
    {
+      JButton keys [] = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
-
       welcome.buildGUI();
       screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
       
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
+
             screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
 
             screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
             screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
+
+            if (firstInitialize){
+               KeypadHandler keypadHandler = new KeypadHandler();
+               for (int i = 0; i <= 13; i++ ){
+                  keys[i].addActionListener(keypadHandler);
+               }
+            }
          }
       });
       /**
@@ -192,6 +206,46 @@ public class ATM
 
       return temp; // return the newly created object
    } // end method createTransaction
+
+   private class KeypadHandler implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent e){
+         switch (e.getActionCommand()) {
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9": 
+               keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+               break;
+            case ".":
+               //need popup some remind message
+               keypad.warning();
+               break;
+            case "Cancel":
+               screen.getMainframe().getContentPane().removeAll();
+               screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
+               keypad.getKeypadDisplayTextField().setText("");
+               firstInitialize = false;
+               keypad.closeWaring();
+               run();
+               break;
+            case "Clear":
+               keypad.getKeypadDisplayTextField().setText("");
+               break;
+            case "Enter":
+               break;
+            default:
+               break;
+         }
+      }
+   }
 
    private class MainmenuHandler implements ActionListener{
       public void actionPerformed(ActionEvent e) {
