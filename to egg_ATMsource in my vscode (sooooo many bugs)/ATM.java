@@ -46,7 +46,7 @@ public class ATM
       //takeCard = new TakeCard();
       //transferComfirm = new TransferComfirm();
       //transferUpdate = new TransferUpdate();
-      //viewBalance = new ViewBalance();
+      viewBalance = new ViewBalance();
       welcome = new Welcome();
       //withdrawalMenu = new WithdrawalMenu();
       //withdrawedCash = new WithdrawedCash();

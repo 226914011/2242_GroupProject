@@ -17,10 +17,6 @@ public class ViewBalance extends Screen {
 	private JTextField ABalanceTextField;
 	private JTextField TBalanceTextField;
 
-
-	/**
-	 * Create the frame.
-	 */
 	public ViewBalance() {
 		super();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
