@@ -62,6 +62,7 @@ public class ATM
       screen.getMainframe().setResizable(false);
       welcome.buildGUI();
       screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
       
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
@@ -74,7 +75,7 @@ public class ATM
             screen.getMainframe().revalidate();
 
             KeypadHandler keypadHandler = new KeypadHandler();
-            for (int i = 0; i <= 9; i++ ){
+            for (int i = 0; i <= 13; i++ ){
                keys[i].addActionListener(keypadHandler);
             }
          }
@@ -200,8 +201,37 @@ public class ATM
 
    private class KeypadHandler implements ActionListener{
       @Override
-      public void actionPerformed(ActionEvent e) {   
-         keypad.getKeypadDisplayTextField().replaceSelection(e.getActionCommand());
+      public void actionPerformed(ActionEvent e){
+         switch (e.getActionCommand()) {
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9": 
+               keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+               break;
+            case ".":
+               //need popup some remind message,
+               break;
+            case "Cancel":
+               screen.getMainframe().getContentPane().removeAll();
+               screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
+               run();
+               break;
+            case "Clear":
+               keypad.getKeypadDisplayTextField().setText("");
+               break;
+            case "Enter":
+               break;
+            default:
+               break;
+         }
       }
    }
 
