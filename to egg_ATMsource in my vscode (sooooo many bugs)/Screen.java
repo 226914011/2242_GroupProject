@@ -12,50 +12,21 @@ import javax.swing.border.EmptyBorder;
 public class Screen extends JFrame
 {
    //GUI componnent
-	public JFrame Mainframe;
-   public JPanel contentPane;
-   public JPanel mainmenupanel;
-   public JButton balanceButton;
-   public JButton withdrawButton;
-   public JButton transferButton;
-   public JButton exitButton;
+	private static JFrame Mainframe;
+	private static JPanel contentPane;
 
-   public void menuGUI(){
+
+	public Screen(){
+		Mainframe = new JFrame("CC bank ATM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 1000);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		mainmenupanel = new JPanel();
-		mainmenupanel.setSize(1000, 1000);
-        getContentPane().add(mainmenupanel);
-		contentPane.add(mainmenupanel, BorderLayout.CENTER);
-		mainmenupanel.setLayout(null);
-		
-		balanceButton = new JButton("1. View my balance");
-		balanceButton.setBounds(234, 300, 532, 100);
-		balanceButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		mainmenupanel.add(balanceButton);
-		
-		withdrawButton = new JButton("2. Withdraw");
-		withdrawButton.setBounds(234, 450, 532, 100);
-		withdrawButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		mainmenupanel.add(withdrawButton);
-		
-		transferButton = new JButton("3. Transfer");
-		transferButton.setBounds(234, 600, 532, 100);
-		transferButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		mainmenupanel.add(transferButton);
-		
-		exitButton = new JButton("4. Exit");
-		exitButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		exitButton.setBounds(234, 750, 532, 100);
-		mainmenupanel.add(exitButton);
-		contentPane.setLayout(null);
+    
+		//set panel size
+        contentPane.setPreferredSize(new Dimension(1440, 1024));
+	}
 
-      setVisible(true);
-   }
 
    // displays a message without a carriage return
    public void displayMessage( String message ) 
@@ -65,15 +36,23 @@ public class Screen extends JFrame
 
    // display a message with a carriage return
    public void displayMessageLine( String message ) 
-   {
+	{
       System.out.println( message );   
-   } // end method displayMessageLine
+	} // end method displayMessageLine
 
    // display a dollar amount
-   public void displayDollarAmount( double amount )
-   {
-      System.out.printf( "$%,.2f", amount );   
-   } // end method displayDollarAmount 
+	public void displayDollarAmount( double amount )
+	{
+		System.out.printf( "$%,.2f", amount );   
+	} // end method displayDollarAmount 
+
+    public JFrame getMainframe(){
+	   return Mainframe;
+    }
+
+	public JPanel getContentPane(){
+		return contentPane;
+	}
 
 
 } // end class Screen
