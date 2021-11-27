@@ -16,13 +16,17 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
    private Validation validation;
    private ExitSystem exitSystem;
-   private LoginSystem loginSystem;
    private MainMenu mainmenu;
    private Welcome welcome;
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
    private boolean firstInitialize;
+   private int accountNumber;
+   private JButton keys [];
+   private KeypadHandler keypadHandler;
+   private LoginHandler loginHandler;
+   private int pin;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -42,24 +46,19 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      loginSystem = new LoginSystem();
       //exitSystem = new ExitSystem();
-      //mainmenu = new MainMenu();
-      //takeCard = new TakeCard();
-      //transferComfirm = new TransferComfirm();
-      //transferUpdate = new TransferUpdate();
-      //viewBalance = new ViewBalance();
+      mainmenu = new MainMenu();
       welcome = new Welcome();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
-      //withdrawalMenu = new WithdrawalMenu();
-      //withdrawedCash = new WithdrawedCash();
+      keypadHandler = new KeypadHandler();
+      loginHandler= new LoginHandler();
    } // end no-argument ATM constructor
 
    // start ATM 
    public void run()
    {
-      JButton keys [] = keypad.getKeys();
+      keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
       welcome.buildGUI();
@@ -69,23 +68,7 @@ public class ATM
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            screen.getMainframe().getContentPane().removeAll();
-            screen.getMainframe().revalidate();
-
-            screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
-            screen.getMainframe().revalidate();
-            screen.getMainframe().repaint();
-
-            screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
-            screen.getMainframe().revalidate();
-            screen.getMainframe().repaint();
-
-            if (firstInitialize){
-               KeypadHandler keypadHandler = new KeypadHandler();
-               for (int i = 0; i <= 13; i++ ){
-                  keys[i].addActionListener(keypadHandler);
-               }
-            }
+            loginGUI();
          }
       });
       /**
@@ -99,24 +82,28 @@ public class ATM
       //displayMainMenu(); // user is now authenticated 
    } // end method run
 
+   private void loginGUI(){
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+
+      screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+
+      screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+
+      if (firstInitialize){
+         for (int i = 0; i <= 13; i++ ){
+            keys[i].addActionListener(keypadHandler);
+         }
+      }
+   }
+
    // attempts to authenticate user against database
    private void authenticateUser() 
    {
-      //delare accountNumber and pin
-      int accountNumber = 0;
-      int pin = 0;
-
-      // promt user for inputting account number and PIN
-      do{
-         screen.displayMessage( "\nPlease enter your account number: " );
-         accountNumber = validation.checkInt(keypad.getInput()); // input account number
-         if (accountNumber == INVALID)   continue;
-         screen.displayMessage( "\nEnter your PIN: " ); // prompt for PIN
-         pin = validation.checkInt(keypad.getInput()); // input PIN
-
-      } while (accountNumber == INVALID || pin == INVALID); //re-enter the informtion when user Type in a invalid input
-
-      // set userAuthenticated to boolean value returned by database
       userAuthenticated = 
          bankDatabase.authenticateUser( accountNumber, pin );
       
@@ -124,10 +111,23 @@ public class ATM
       if ( userAuthenticated )
       {
          currentAccountNumber = accountNumber; // save user's account #
+         screen.getMainframe().getContentPane().removeAll();
+         screen.getMainframe().revalidate();
+         screen.getMainframe().repaint();
+
+         mainmenu.buildGUI();
+         screen.getMainframe().revalidate();
+         screen.getMainframe().repaint();
       } // end if
-      else
-         screen.displayMessageLine( 
-             "Invalid account number or PIN. Please try again." );
+      else{
+         //need change
+         loginCardNumberPanel.invalidMessage();
+         keypad.getKeypadDisplayTextField().setText("");
+         keys[12].removeActionListener(loginHandler);
+         keys[12].addActionListener(keypadHandler);
+         loginGUI();
+      }
+
    } // end method authenticateUser
 
    // display the main menu and perform transactions
@@ -232,18 +232,42 @@ public class ATM
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
                keypad.getKeypadDisplayTextField().setText("");
+               loginCardNumberPanel.cancelInvalidMessage();
                firstInitialize = false;
-               keypad.closeWaring();
+               keypad.closeWarning();
                run();
                break;
             case "Clear":
                keypad.getKeypadDisplayTextField().setText("");
                break;
             case "Enter":
+               accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
+               screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
+               screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
+
+               screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
+               screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
+
+               keypad.getKeypadDisplayTextField().setText("");
+               loginCardNumberPanel.cancelInvalidMessage();
+               firstInitialize = false;
+               keypad.closeWarning();
+               keys[12].removeActionListener(keypadHandler);
+               keys[12].addActionListener(loginHandler);
                break;
             default:
                break;
          }
+      }
+   }
+
+   private class LoginHandler implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent e){
+         pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
+         authenticateUser();
       }
    }
 

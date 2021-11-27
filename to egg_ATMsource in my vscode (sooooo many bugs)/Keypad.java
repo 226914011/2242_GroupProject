@@ -146,7 +146,7 @@ public class Keypad
      warningLabel.setVisible(true);
   }
 
-  public void closeWaring(){
+  public void closeWarning(){
    warningLabel.setVisible(false);
   }
 } // end class Keypad  

@@ -18,24 +18,13 @@ import javax.swing.SwingConstants;
 
 public class MainMenu extends Screen {
 
-	private JPanel contentPane;
-
-	public MainMenu() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
+	public void buildGUI() {
+		DisplayMessageJPanel panel = new DisplayMessageJPanel();
+        super.getMainframe().getContentPane().add(panel);
         
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
+		super.getScreenContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-
-		//copy hold part until this line XD
 		
 		
 		//main menu button, size: 532 * 90
@@ -59,27 +48,15 @@ public class MainMenu extends Screen {
 		exitButton.setBounds(458, 814, 524, 90);
 		panel.add(exitButton);
 		
-		JLabel lblNewLabel = new JLabel("Enter a choice");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 64));
-		lblNewLabel.setBounds(458, 104, 524, 85);
-		panel.add(lblNewLabel);
+		JLabel choiceLabel = new JLabel("Enter a choice");
+		choiceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		choiceLabel.setBounds(458, 104, 524, 85);
+		choiceLabel.setForeground(Color.LIGHT_GRAY);
+		panel.add(choiceLabel);
 		
 		//copy this
-        pack();
+        super.getMainframe().pack();
 
 	}
-	
-	public class DisplayMessageJPanel extends JPanel{
-	    public DisplayMessageJPanel(){
-	        setPreferredSize(new Dimension(1440, 1024));
-	        //Absolute layout
-	        setLayout(null);
-
-
-	        //background with color
-	        setBackground(new Color(56, 60, 102));
-	    }
-
-}
 }
