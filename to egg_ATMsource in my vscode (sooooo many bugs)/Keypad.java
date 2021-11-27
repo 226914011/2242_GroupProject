@@ -11,6 +11,7 @@ public class Keypad
    private JTextField keypadDisplayTextField;
 	private JButton[] keys;
    private KeypadJPanel keypadJPanel;
+   private JLabel warningLabel;
    private Scanner input; // reads data from the command line
    private String userInput = "";
    
@@ -53,6 +54,15 @@ public class Keypad
         keypadDisplayTextField.setColumns(10);
         keypadDisplayTextField.setText(userInput);
           
+
+        warningLabel = new JLabel("* Please do not use \".\" as input");
+        warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        warningLabel.setBounds(100, 267, 400, 32);
+        warningLabel.setForeground(Color.RED);
+        warningLabel.setVisible(false);
+        add(warningLabel);
+
+        
           //keypad button setting
         JPanel actualKeypadPanel = new JPanel();
         actualKeypadPanel.setBounds(100, 399, 400, 400);
@@ -131,6 +141,13 @@ public class Keypad
   }
   public JTextField getKeypadDisplayTextField(){
      return keypadDisplayTextField;
+  }
+  public void warning(){
+     warningLabel.setVisible(true);
+  }
+
+  public void closeWaring(){
+   warningLabel.setVisible(false);
   }
 } // end class Keypad  
 
