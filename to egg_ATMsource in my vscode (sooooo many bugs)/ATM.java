@@ -22,6 +22,7 @@ public class ATM
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
+   private boolean firstInitialize;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -34,6 +35,7 @@ public class ATM
    public ATM() 
    {
       userAuthenticated = false; // user is not authenticated to start
+      firstInitialize = true;
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad 
@@ -69,14 +71,20 @@ public class ATM
          public void mouseClicked(MouseEvent e) {
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
+
             screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
 
             screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
             screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
 
-            KeypadHandler keypadHandler = new KeypadHandler();
-            for (int i = 0; i <= 13; i++ ){
-               keys[i].addActionListener(keypadHandler);
+            if (firstInitialize){
+               KeypadHandler keypadHandler = new KeypadHandler();
+               for (int i = 0; i <= 13; i++ ){
+                  keys[i].addActionListener(keypadHandler);
+               }
             }
          }
       });
@@ -216,12 +224,16 @@ public class ATM
                keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                break;
             case ".":
-               //need popup some remind message,
+               //need popup some remind message
+               keypad.warning();
                break;
             case "Cancel":
                screen.getMainframe().getContentPane().removeAll();
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
+               keypad.getKeypadDisplayTextField().setText("");
+               firstInitialize = false;
+               keypad.closeWaring();
                run();
                break;
             case "Clear":
