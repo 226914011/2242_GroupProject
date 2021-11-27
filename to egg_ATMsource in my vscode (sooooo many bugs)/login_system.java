@@ -17,29 +17,13 @@ import java.awt.Graphics;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 
-public class login_system extends SCreen {
+public class login_system extends Screen {
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					login_system frame = new login_system();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

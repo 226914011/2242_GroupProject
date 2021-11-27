@@ -17,21 +17,6 @@ public class ViewBalance extends Screen {
 	private JTextField ABalanceTextField;
 	private JTextField TBalanceTextField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewBalance frame = new ViewBalance();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

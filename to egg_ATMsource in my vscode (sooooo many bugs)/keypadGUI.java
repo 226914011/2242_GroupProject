@@ -11,29 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 
-public class keypadGUI extends JPanel{
+public class keypadGUI extends Screen{
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					keypadGUI frame = new keypadGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

@@ -17,21 +17,6 @@ public class transferComfirm extends Screen {
 	private JTextField accountNumTextField;
 	private JTextField transferAmountTtextField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					transferComfirm frame = new transferComfirm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

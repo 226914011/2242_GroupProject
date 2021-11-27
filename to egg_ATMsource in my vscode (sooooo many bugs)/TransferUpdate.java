@@ -16,21 +16,6 @@ public class TransferUpdate extends Screen {
 	private JTextField availableBtxtfield;
 	private JTextField totalbaltxtfield;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TransferUpdate frame = new TransferUpdate();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
