@@ -18,9 +18,6 @@ public class TransferComfirm extends Screen {
 	private JTextField transferAmountTtextField;
 
 
-	/**
-	 * Create the frame.
-	 */
 	public TransferComfirm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
