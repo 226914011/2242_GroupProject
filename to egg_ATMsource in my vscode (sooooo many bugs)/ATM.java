@@ -82,38 +82,34 @@ public class ATM
       Transaction currentTransaction = null;
       
       boolean userExited = false; // user has not chosen to exit
+  
+      // show main menu and get user selection
+      int mainMenuSelection = menuChioce;
 
-      // loop while user has not chosen option to exit system
-      while ( !userExited )
-      {     
-         // show main menu and get user selection
-         int mainMenuSelection = menuChioce;
-
-         // decide how to proceed based on user's menu selection
-         switch ( mainMenuSelection )
-         {
-            // user chose to perform one of three transaction types
-            case BALANCE_INQUIRY: 
-            case WITHDRAWAL: 
-            case TRANSFER:
-               // initialize as new object of chosen type
-               currentTransaction = 
-                  createTransaction( mainMenuSelection );
-               currentTransaction.execute(); // execute transaction
-               break; 
-            case EXIT: // user chose to terminate session
-               screen.displayMessageLine( "\nExiting the system..." );
-               userExited = true; // this ATM session should end
-               userAuthenticated = false; // reset before next ATM session
-               currentAccountNumber = 0; // reset before next ATM session 
-               screen.displayMessageLine( "\nThank you! Goodbye!" );      
-               break;
-            default: // user did not enter an integer from 1-4
-               screen.displayMessageLine( 
-                  "\nYou did not enter a valid selection. Try again." );
-               break;
-         } // end switch
-      } // end while
+      // decide how to proceed based on user's menu selection
+      switch ( mainMenuSelection )
+      {
+         // user chose to perform one of three transaction types
+         case BALANCE_INQUIRY: 
+         case WITHDRAWAL: 
+         case TRANSFER:
+            // initialize as new object of chosen type
+            currentTransaction = 
+               createTransaction( mainMenuSelection );
+            currentTransaction.execute(); // execute transaction    
+            break; 
+         case EXIT: // user chose to terminate session
+            screen.displayMessageLine( "\nExiting the system..." );
+            userExited = true; // this ATM session should end
+            userAuthenticated = false; // reset before next ATM session
+            currentAccountNumber = 0; // reset before next ATM session 
+            screen.displayMessageLine( "\nThank you! Goodbye!" );      
+            System.exit(1); //exit programme
+         default: // user did not enter an integer from 1-4
+            screen.displayMessageLine( 
+               "\nYou did not enter a valid selection. Try again." );
+            break;
+      } // end switch
    } // end method performTransactions
    
    // display the main menu and return an input selection
