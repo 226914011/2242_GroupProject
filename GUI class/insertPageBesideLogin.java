@@ -15,7 +15,7 @@ import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 
-public class insertPageBesideLogin extends JFrame {
+public class InsertPageBesideLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
@@ -30,7 +30,7 @@ public class insertPageBesideLogin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					insertPageBesideLogin frame = new insertPageBesideLogin();
+					InsertPageBesideLogin frame = new InsertPageBesideLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class insertPageBesideLogin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public insertPageBesideLogin() {
+	public InsertPageBesideLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
