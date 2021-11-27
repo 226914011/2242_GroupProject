@@ -13,14 +13,18 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.Graphics;
 
 public class signin extends JFrame {
 
+    private JFrame frame;
     private JPanel contentPane;
     private JTextField textField;
     private JPasswordField passwordField;
+    private ImageIcon bgicon;
+    private JLabel bglabel;
 
     /**
      * Launch the application.
@@ -42,18 +46,19 @@ public class signin extends JFrame {
      * Create the frame.
      */
     public signin() {
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 2000, 2000);
+        setBounds(0, 0, 1000, 1000);
         contentPane = new JPanel();
         contentPane.setForeground(new Color(255, 255, 255));
-        contentPane.setBounds(0, 0, 2000, 2000);
-        contentPane.setBackground(Color.WHITE);
+        contentPane.setBounds(0, 0, 1000, 1000);
+        contentPane.setBackground(new Color(56, 60, 102));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("Username");
-        lblNewLabel.setForeground(Color.WHITE);
+        lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setBounds(289, 468, 100, 27);
         contentPane.add(lblNewLabel);
         lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -86,6 +91,9 @@ public class signin extends JFrame {
         });
         btnNewButton.setBounds(447, 692, 117, 36);
         contentPane.add(btnNewButton);
+
+        JLabel Label3 = new JLabel();
+        Label3.setBackground(new Color(255, 255, 255));
 
     }
 
