@@ -47,7 +47,7 @@ public class ATM
       transferUpdate = new TransferUpdate();
       viewBalance = new ViewBalance();
       welcome = new Welcome();
-      withdrawalMenu = new WithdrawedCash();
+      withdrawalMenu = new WithdrawedMenu();
       withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
