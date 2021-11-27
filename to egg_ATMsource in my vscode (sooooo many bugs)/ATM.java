@@ -13,7 +13,7 @@ public class ATM
    private Validation validation;
    private ExitSystem exitSystem;
    private InsertPageBesideLogin insertPageBesideLogin;
-   private LoginSystem login_system;
+   private LoginSystem loginSystem;
    private MainMenu mainmenu;
    private TakeCard takeCard;
    private TransferComfirm transferComfirm;
@@ -41,6 +41,7 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
+      loginSystem = new LoginSystem();
       //exitSystem = new ExitSystem();
       //mainmenu = new MainMenu();
       //takeCard = new TakeCard();
@@ -60,11 +61,7 @@ public class ATM
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            while ( !userAuthenticated ) 
-            {
-               authenticateUser(); // authenticate user
-            } // end while  
-            displayMainMenu(); // user is now authenticated 
+            
          }
       });
       /**

@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -19,18 +20,18 @@ public class Welcome extends Screen {
 	public Welcome() {
 		
 		//need to change when copy to vscode
-		JPanel panel = new JPanel();
+		DisplayMessageJPanel panel = new DisplayMessageJPanel();
         super.getMainframe().getContentPane().add(panel);
         
 
 		super.getSrceenContentPane().add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
+
 		
 		welcomeLabel = new JLabel("Welcome to the ATM System!");
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setBounds(0, 0, 1440, 1024);
+		welcomeLabel.setForeground(Color.WHITE);
 		panel.add(welcomeLabel);
 		
 
