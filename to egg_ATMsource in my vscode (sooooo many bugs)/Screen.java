@@ -62,7 +62,7 @@ public class Screen extends JFrame
 		
 		exitButton = new JButton("4. Exit");
 		exitButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-
+	}
 
    // displays a message without a carriage return
    public void displayMessage( String message ) 
