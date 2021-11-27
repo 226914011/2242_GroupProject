@@ -59,6 +59,7 @@ public class ATM
    {
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
+
       welcome.buildGUI();
       screen.getMainframe().repaint();
       
@@ -67,9 +68,9 @@ public class ATM
          public void mouseClicked(MouseEvent e) {
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
-            screen.getSrceenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
+            screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
 
-            screen.getSrceenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+            screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
             screen.getMainframe().revalidate();
          }
       });
