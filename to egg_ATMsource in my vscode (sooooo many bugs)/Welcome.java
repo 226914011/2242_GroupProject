@@ -12,6 +12,7 @@ import java.awt.Font;
 public class Welcome extends Screen {
 
 	private JPanel contentPane;
+	private JLabel welcomeLabel;
 
 
 	/**
@@ -32,14 +33,18 @@ public class Welcome extends Screen {
 		panel.setPreferredSize(new Dimension(1440, 1024));
 		panel.setLayout(null);
 		
-		JLabel WelcomeLabel = new JLabel("Welcome to the ATM System!");
-		WelcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
-		WelcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		WelcomeLabel.setBounds(0, 0, 1440, 1024);
-		panel.add(WelcomeLabel);
+		welcomeLabel = new JLabel("Welcome to the ATM System!");
+		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setBounds(0, 0, 1440, 1024);
+		panel.add(welcomeLabel);
 		
 
 		pack();
 	}
 
+
+	public JLabel getWelcomeLabel(){
+		return welcomeLabel;
+	}
 }

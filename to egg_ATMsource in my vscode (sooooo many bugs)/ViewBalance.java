@@ -22,6 +22,7 @@ public class ViewBalance extends Screen {
 	 * Create the frame.
 	 */
 	public ViewBalance() {
+		super();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));

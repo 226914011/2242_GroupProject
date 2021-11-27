@@ -47,13 +47,25 @@ public class ATM
       transferUpdate = new TransferUpdate();
       viewBalance = new ViewBalance();
       welcome = new Welcome();
-      withdrawalMenu = new WithdrawedMenu();
+      withdrawalMenu = new WithdrawalMenu();
       withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM 
    public void run()
    {
+      welcome.setVisible(true);
+      welcome.setResizable(false);
+      welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+            while ( !userAuthenticated ) 
+            {
+               authenticateUser(); // authenticate user
+            } // end while  
+            displayMainMenu(); // user is now authenticated 
+         }
+      });
       /**
       // loop while user is not yet authenticated
       while ( !userAuthenticated ) 
@@ -62,7 +74,7 @@ public class ATM
          authenticateUser(); // authenticate user
       } // end while  
       **/
-      displayMainMenu(); // user is now authenticated 
+      //displayMainMenu(); // user is now authenticated 
    } // end method run
 
    // attempts to authenticate user against database
