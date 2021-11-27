@@ -35,14 +35,14 @@ public class LoginSystem extends Screen {
         //must ah
 
 
-		super.getSrceenContentPane().add(loginDisplayPanel, BorderLayout.CENTER);
+		super.getScreenContentPane().add(loginDisplayPanel, BorderLayout.CENTER);
 		loginDisplayPanel.setPreferredSize(new Dimension(890, 1024));
 		loginDisplayPanel.setLayout(null);
 		
 		//need to change when I copy it to vscode, this part of code will be paste to KeypadJPanel class
 		KeypadJPanel keypadPanel = new KeypadJPanel();	//it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
 		keypadPanel.setPreferredSize(new Dimension(550, 1024));
-		super.getSrceenContentPane().add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
+		super.getScreenContentPane().add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
 		keypadPanel.setLayout(null);
 
 	}
