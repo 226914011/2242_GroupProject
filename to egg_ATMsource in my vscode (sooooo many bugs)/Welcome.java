@@ -10,36 +10,42 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class Welcome extends Screen {
+public class Welcome extends Screen{
 	private JLabel welcomeLabel;
+	private DisplayMessageJPanel welcomePanel;
 
+
+	public Welcome(){
+
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Welcome() {
-		
+	public void buildGUI() {
+		welcomePanel = new DisplayMessageJPanel();
+
+
 		//need to change when copy to vscode
-		DisplayMessageJPanel panel = new DisplayMessageJPanel();
-        super.getMainframe().getContentPane().add(panel);
+        super.getMainframe().getContentPane().add(welcomePanel);
         
 
-		super.getSrceenContentPane().add(panel, BorderLayout.CENTER);
+		super.getSrceenContentPane().add(welcomePanel, BorderLayout.CENTER);
 
-		
 		welcomeLabel = new JLabel("Welcome to the ATM System!");
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setBounds(0, 0, 1440, 1024);
 		welcomeLabel.setForeground(Color.WHITE);
-		panel.add(welcomeLabel);
+		welcomePanel.add(welcomeLabel);
 		
 
-		pack();
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
 	}
-
 
 	public JLabel getWelcomeLabel(){
 		return welcomeLabel;
 	}
+
 }
