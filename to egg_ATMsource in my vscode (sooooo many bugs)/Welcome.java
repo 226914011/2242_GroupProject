@@ -12,7 +12,7 @@ import java.awt.Font;
 
 public class Welcome extends Screen {
 	private JLabel welcomeLabel;
-
+	private JLabel touchLabel;
 
 	/**
 	 * Create the frame.
@@ -22,11 +22,9 @@ public class Welcome extends Screen {
 		//need to change when copy to vscode
 		DisplayMessageJPanel panel = new DisplayMessageJPanel();
         super.getMainframe().getContentPane().add(panel);
-        
-
 		super.getSrceenContentPane().add(panel, BorderLayout.CENTER);
 
-		
+	
 		welcomeLabel = new JLabel("Welcome to the ATM System!");
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -34,7 +32,13 @@ public class Welcome extends Screen {
 		welcomeLabel.setForeground(Color.WHITE);
 		panel.add(welcomeLabel);
 		
-
+		touchLabel = new JLabel("Touch the screen to continue...");
+		touchLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		touchLabel.setFont(new Font("Arial", Font.PLAIN, 35));
+		touchLabel.setBounds(0, 570, 1440, 58);
+		touchLabel.setForeground(Color.WHITE);
+		panel.add(touchLabel);
+		
 		pack();
 	}
 
