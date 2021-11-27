@@ -14,7 +14,7 @@ public class ATM
    private ExitSystem exitSystem;
    private InsertPageBesideLogin insertPageBesideLogin;
    private LoginSystem login_system;
-   private Mainmenu mainmenu;
+   private MainMenu mainmenu;
    private TakeCard takeCard;
    private TransferComfirm transferComfirm;
    private TransferUpdate transferUpdate;
