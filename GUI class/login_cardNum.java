@@ -49,26 +49,15 @@ public class login_cardNum extends JFrame {
 		setContentPane(contentPane);
 		
 		//need to change when copy to vscode
-		DisplayWithKeypadPanel displayWithKeypadPanel = new DisplayWithKeypadPanel();
-        getContentPane().add(displayWithKeypadPanel);
+		LoginDisplayPanel loginDisplayPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
+        getContentPane().add(loginDisplayPanel);
         //must ah
         contentPane.setPreferredSize(new Dimension(1440, 1024));
 
 
-		contentPane.add(displayWithKeypadPanel, BorderLayout.CENTER);
-		displayWithKeypadPanel.setPreferredSize(new Dimension(890, 1024));
-		displayWithKeypadPanel.setLayout(null);
-		
-		JLabel cardNumLabel = new JLabel("Please Enter the Card Number:");
-		cardNumLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-		cardNumLabel.setBounds(186, 313, 650, 92);
-		displayWithKeypadPanel.add(cardNumLabel);
-		
-		JLabel userImageLabel = new JLabel("");
-		userImageLabel.setBounds(186, 423, 252, 249);
-		userImageLabel.setIcon(new ImageIcon("Group_7.png"));
-		displayWithKeypadPanel.add(userImageLabel);
-		
+		contentPane.add(loginDisplayPanel, BorderLayout.CENTER);
+		loginDisplayPanel.setPreferredSize(new Dimension(890, 1024));
+		loginDisplayPanel.setLayout(null);
 		
 		//need to change when I copy it to vscode, this part of code will be paste to KeypadJPanel class
 		KeypadJPanel keypadPanel = new KeypadJPanel();	//it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
@@ -224,10 +213,20 @@ public class login_cardNum extends JFrame {
 	}
 	
 	
-	public class DisplayWithKeypadPanel extends JPanel{
-		public DisplayWithKeypadPanel(){
+	public class LoginDisplayPanel extends JPanel{
+		public LoginDisplayPanel(String displayText, String imagePath){
 			setPreferredSize(new Dimension(890, 1024));
 			setLayout(null);
+			
+			JLabel userImageLabel = new JLabel("");
+			userImageLabel.setBounds(186, 423, 252, 249);
+			userImageLabel.setIcon(new ImageIcon(imagePath));
+			add(userImageLabel);
+			
+			JLabel cardNumLabel = new JLabel(displayText);
+			cardNumLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+			cardNumLabel.setBounds(186, 313, 650, 92);
+			add(cardNumLabel);
 		}
 	}
 }
