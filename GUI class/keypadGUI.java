@@ -62,6 +62,7 @@ public class keypadGUI extends JFrame {
 		contentPane.add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
 		keypadPanel.setLayout(null);
 
+		setResizable( false );
 
         pack();
 	}
@@ -137,8 +138,6 @@ public class keypadGUI extends JFrame {
 		    	else
 		    		keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
 		    }
-		    
-		    
 		    
 	        //background with color, can // this in following version
 	        setBackground(new Color(56, 60, 102));
