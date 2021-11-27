@@ -14,7 +14,7 @@ public class ATM
    private ExitSystem exitSystem;
    private InsertPageBesideLogin insertPageBesideLogin;
    private LoginSystem login_system;
-   private Mainmenu mainmenu;
+   private MainMenu mainmenu;
    private TakeCard takeCard;
    private TransferComfirm transferComfirm;
    private TransferUpdate transferUpdate;
@@ -42,6 +42,7 @@ public class ATM
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
       exitSystem = new ExitSystem();
+      mainmenu = new MainMenu();
       takeCard = new TakeCard();
       transferComfirm = new TransferComfirm();
       transferUpdate = new TransferUpdate();
