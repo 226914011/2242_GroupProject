@@ -17,7 +17,7 @@ import java.awt.Graphics;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 
-public class Login_system extends Screen {
+public class LoginSystem extends Screen {
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
@@ -28,7 +28,7 @@ public class Login_system extends Screen {
 	/**
 	 * Create the frame.
 	 */
-	public Login_system() {
+	public LoginSystem() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new MyBGcontentPane();
 		contentPane.setLayout(new BorderLayout(0, 0));

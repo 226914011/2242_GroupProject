@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 
-public class keypadGUI extends Screen{
+public class KeypadGUI extends Screen{
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
@@ -22,7 +22,7 @@ public class keypadGUI extends Screen{
 	/**
 	 * Create the frame.
 	 */
-	public keypadGUI() {
+	public KeypadGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));

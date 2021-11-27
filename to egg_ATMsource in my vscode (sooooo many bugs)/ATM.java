@@ -13,7 +13,7 @@ public class ATM
    private Validation validation;
    private ExitSystem exitSystem;
    private InsertPageBesideLogin insertPageBesideLogin;
-   private Login_system login_system;
+   private LoginSystem login_system;
    private Mainmenu mainmenu;
    private TakeCard takeCard;
    private TransferComfirm transferComfirm;
