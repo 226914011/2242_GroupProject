@@ -13,7 +13,15 @@ public class ATM
    private Validation validation;
    private ExitSystem exitSystem;
    private InsertPageBesideLogin insertPageBesideLogin;
-   private 
+   private Login_system login_system;
+   private Mainmenu mainmenu;
+   private TakeCard takeCard;
+   private TransferComfirm transferComfirm;
+   private TransferUpdate transferUpdate;
+   private ViewBalance viewBalance;
+   private Welcome welcome;
+   private WithdrawalMenu withdrawalMenu;
+   private WithdrawedCash withdrawedCash;
    private static int menuChioce;
 
    // constants corresponding to main menu options

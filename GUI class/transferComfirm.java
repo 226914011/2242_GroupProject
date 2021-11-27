@@ -11,7 +11,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class transferComfirm extends JFrame {
+public class TransferComfirm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField accountNumTextField;
@@ -24,7 +24,7 @@ public class transferComfirm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					transferComfirm frame = new transferComfirm();
+					TransferComfirm frame = new TransferComfirm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class transferComfirm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public transferComfirm() {
+	public TransferComfirm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));

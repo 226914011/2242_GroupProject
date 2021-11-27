@@ -11,7 +11,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class transferComfirm extends Screen {
+public class TransferComfirm extends Screen {
 
 	private JPanel contentPane;
 	private JTextField accountNumTextField;
@@ -21,7 +21,7 @@ public class transferComfirm extends Screen {
 	/**
 	 * Create the frame.
 	 */
-	public transferComfirm() {
+	public TransferComfirm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));

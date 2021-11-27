@@ -16,7 +16,7 @@ import java.awt.GridLayout;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
 
-public class mainmenu extends Screen {
+public class Mainmenu extends Screen {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class mainmenu extends Screen {
 	/**
 	 * Create the frame.
 	 */
-	public mainmenu() {
+	public Mainmenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
