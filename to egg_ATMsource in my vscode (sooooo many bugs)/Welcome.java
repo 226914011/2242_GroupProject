@@ -13,6 +13,7 @@ import java.awt.Font;
 public class Welcome extends Screen{
 	private JLabel welcomeLabel;
 	private DisplayMessageJPanel welcomePanel;
+	private JLabel touchLabel;
 
 
 	public Welcome(){
@@ -39,6 +40,14 @@ public class Welcome extends Screen{
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomePanel.add(welcomeLabel);
 		
+		touchLabel = new JLabel("Touch the screen to continue...");
+		touchLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		touchLabel.setFont(new Font("Arial", Font.PLAIN, 35));
+		touchLabel.setBounds(0, 570, 1440, 58);
+		touchLabel.setForeground(Color.WHITE);
+		welcomePanel.add(touchLabel);
+		
+		pack();
 
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
