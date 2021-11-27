@@ -59,7 +59,7 @@ public class login_cardNum extends JFrame {
 		displayWithKeypadPanel.setPreferredSize(new Dimension(890, 1024));
 		displayWithKeypadPanel.setLayout(null);
 		
-		JLabel cardNumLabel = new JLabel("Please Enter the Username:");
+		JLabel cardNumLabel = new JLabel("Please Enter the Card Number:");
 		cardNumLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		cardNumLabel.setBounds(186, 313, 650, 92);
 		displayWithKeypadPanel.add(cardNumLabel);
