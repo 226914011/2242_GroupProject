@@ -17,7 +17,7 @@ import java.awt.Graphics;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 
-public class login_cardNum extends JFrame {
+public class login_system extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
@@ -32,7 +32,7 @@ public class login_cardNum extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login_cardNum frame = new login_cardNum();
+					login_system frame = new login_system();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class login_cardNum extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public login_cardNum() {
+	public login_system() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new MyBGcontentPane();
 		contentPane.setLayout(new BorderLayout(0, 0));
