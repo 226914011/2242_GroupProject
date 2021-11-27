@@ -1,14 +1,10 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class TransferComfirm extends Screen {
+public class TransferConfirm extends Screen {
 
 	private DisplayMessageJPanel transferConfirmPanel;
 	private JTextField accountNumTextField;
@@ -19,17 +15,8 @@ public class TransferComfirm extends Screen {
 	private JButton transferReEnterButton;
 	private JButton btnCancel;
 
-<<<<<<< Updated upstream:to egg_ATMsource in my vscode (sooooo many bugs)/transferComfirm.java
-
-	public TransferComfirm() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-=======
 	public void buildGUI(){
 	transferConfirmPanel = new DisplayMessageJPanel();
->>>>>>> Stashed changes:to egg_ATMsource in my vscode (sooooo many bugs)/TransferComfirm.java
 		
 	super.getMainframe().getContentPane().add(transferConfirmPanel);
 	super.getScreenContentPane().add(transferConfirmPanel, BorderLayout.CENTER);
