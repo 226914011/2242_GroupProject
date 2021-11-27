@@ -18,8 +18,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 
 public class LoginSystem extends Screen {
-
-	private JPanel contentPane;
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
@@ -30,29 +28,23 @@ public class LoginSystem extends Screen {
 	 */
 	public LoginSystem() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new MyBGcontentPane();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		contentPane.setOpaque(false);
 		
 		//need to change when copy to vscode
 		LoginDisplayPanel loginDisplayPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
-        getContentPane().add(loginDisplayPanel);
+        super.getMainframe().getContentPane().add(loginDisplayPanel);
         //must ah
-        contentPane.setPreferredSize(new Dimension(1440, 1024));
 
 
-		contentPane.add(loginDisplayPanel, BorderLayout.CENTER);
+		super.getSrceenContentPane().add(loginDisplayPanel, BorderLayout.CENTER);
 		loginDisplayPanel.setPreferredSize(new Dimension(890, 1024));
 		loginDisplayPanel.setLayout(null);
 		
 		//need to change when I copy it to vscode, this part of code will be paste to KeypadJPanel class
 		KeypadJPanel keypadPanel = new KeypadJPanel();	//it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
 		keypadPanel.setPreferredSize(new Dimension(550, 1024));
-		contentPane.add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
+		super.getSrceenContentPane().add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
 		keypadPanel.setLayout(null);
 
-        pack();
 	}
 	
 	

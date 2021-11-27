@@ -21,6 +21,8 @@ public class InsertPageBesideLogin extends Screen {
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -45,171 +47,179 @@ public class InsertPageBesideLogin extends Screen {
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		//need to change when copy to vscode
+		DisplayWithKeypadPanel loginDisplayPanel = new DisplayWithKeypadPanel("Please enter the account  number for transfer:");
+        getContentPane().add(loginDisplayPanel);
+        //must ah
+        contentPane.setPreferredSize(new Dimension(1440, 1024));
 
-		// need to change when copy to vscode
-		DisplayWithKeypadPanel loginDisplayPanel = new DisplayWithKeypadPanel(
-				"Please enter the account  number for transfer:");
-		getContentPane().add(loginDisplayPanel);
-		// must ah
-		contentPane.setPreferredSize(new Dimension(1440, 1024));
 
 		contentPane.add(loginDisplayPanel, BorderLayout.CENTER);
 		loginDisplayPanel.setPreferredSize(new Dimension(890, 1024));
 		loginDisplayPanel.setLayout(null);
-
-		// need to change when I copy it to vscode, this part of code will be paste to
-		// KeypadJPanel class
-		JPanel keypadPanel = new JPanel(); // it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
+		
+		
+		
+		
+		//need to change when I copy it to vscode, this part of code will be paste to KeypadJPanel class
+		JPanel keypadPanel = new JPanel();	//it need to be change to KeypadJPanel keypadPanel = new KeypadJPanel();
 		keypadPanel.setPreferredSize(new Dimension(550, 1024));
-		contentPane.add(keypadPanel, BorderLayout.EAST); // this is sooooooooooooooooooooooooooooooo usefulllll, pls
-															// remember keypad should in BorderLayout.EAST
+		contentPane.add(keypadPanel, BorderLayout.EAST);			// this is sooooooooooooooooooooooooooooooo  usefulllll, pls remember keypad should in BorderLayout.EAST
 		keypadPanel.setLayout(null);
 
-		// for testing
-		// keypad display textField
+		
+		//for testing
+        //keypad display textField
 		keypadDisplayTextField = new JTextField();
 		keypadDisplayTextField.setEditable(false);
 		keypadDisplayTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		keypadDisplayTextField.setBounds(100, 339, 400, 56);
 		keypadPanel.add(keypadDisplayTextField);
 		keypadDisplayTextField.setColumns(10);
-
-		// keypad button setting
+        
+        //keypad button setting
 		JPanel actualKeypadPanel = new JPanel();
 		actualKeypadPanel.setBounds(100, 399, 400, 400);
 		actualKeypadPanel.setOpaque(false);
 
+		
 		keypadPanel.add(actualKeypadPanel);
 		actualKeypadPanel.setLayout(new GridLayout(4, 4, 6, 6));
-
-		// keypad button from tutor 9
-		keys = new JButton[14]; // array keys contains 16 JButtons
+		
+		//keypad button from tutor 9
+	    keys = new JButton[ 14 ]; // array keys contains 16 JButtons 
 
 		// initialize all digit key buttons
-		for (int i = 0; i <= 9; i++)
-			keys[i] = new JButton(String.valueOf(i));
-
+		for ( int i = 0; i <= 9; i++ )
+			keys[ i ] = new JButton( String.valueOf( i ) );
+		
 		// initialize all function key buttons
-		keys[10] = new JButton("Cancel");
-		keys[11] = new JButton("Clear");
-		keys[12] = new JButton("Enter");
-		keys[13] = new JButton(".");
+		keys[ 10 ] = new JButton( "Cancel" );
+		keys[ 11 ] = new JButton( "Clear" );
+		keys[ 12 ] = new JButton( "Enter" );
+		keys[ 13 ] = new JButton( "." );
+		
+	    // add buttons to keyPadJPanel panel
+	    // 7, 8, 9, divide
+	    for ( int i = 7; i <= 10; i++ )
+	    	actualKeypadPanel.add(keys[i]);
+	    
+	    // 4, 5, 6
+	    for ( int i = 4; i <= 6; i++ )
+	    	actualKeypadPanel.add(keys[i]);
+	    
+	    // Clear
+	    actualKeypadPanel.add(keys[ 11 ]);
+	    
+	    // 1, 2, 3
+	    for ( int i = 1; i <= 3; i++ )
+	    	actualKeypadPanel.add(keys[i]);
+	    
+	    //Enter
+	    actualKeypadPanel.add(keys[ 12 ]);
+	    
+	    //0
+	    actualKeypadPanel.add(keys[ 0 ]);
+	    
+	    // "."
+	    actualKeypadPanel.add(keys[ 13 ]);
 
-		// add buttons to keyPadJPanel panel
-		// 7, 8, 9, divide
-		for (int i = 7; i <= 10; i++)
-			actualKeypadPanel.add(keys[i]);
+	    // initialize all button font size
+	    for (int i = 0; i <= 13; i++) {
+	    	if (i<=9 || i ==13)
+	    		keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
+	    	else
+	    		keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
+	    }
 
-		// 4, 5, 6
-		for (int i = 4; i <= 6; i++)
-			actualKeypadPanel.add(keys[i]);
-
-		// Clear
-		actualKeypadPanel.add(keys[11]);
-
-		// 1, 2, 3
-		for (int i = 1; i <= 3; i++)
-			actualKeypadPanel.add(keys[i]);
-
-		// Enter
-		actualKeypadPanel.add(keys[12]);
-
-		// 0
-		actualKeypadPanel.add(keys[0]);
-
-		// "."
-		actualKeypadPanel.add(keys[13]);
-
-		// initialize all button font size
-		for (int i = 0; i <= 13; i++) {
-			if (i <= 9 || i == 13)
-				keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
-			else
-				keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
-		}
-
-		pack();
+        pack();
 	}
-
-	// just copy and paste it to Keypad XD,
-	public class KeypadJPanel extends JPanel {
-		public KeypadJPanel() {
-			setPreferredSize(new Dimension(550, 1024));
-			// Absolute layout
-			setLayout(null);
-
-			// keypad display textField
+	
+	
+	//just copy and paste it to Keypad XD, 
+	public class KeypadJPanel extends JPanel{
+	    public KeypadJPanel(){
+	        setPreferredSize(new Dimension(550, 1024));
+	        //Absolute layout
+	        setLayout(null);
+	        
+			
+	        //keypad display textField
 			keypadDisplayTextField = new JTextField();
 			keypadDisplayTextField.setEditable(false);
 			keypadDisplayTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 			keypadDisplayTextField.setBounds(100, 339, 400, 56);
 			add(keypadDisplayTextField);
 			keypadDisplayTextField.setColumns(10);
-
-			// keypad button setting
+	        
+	        //keypad button setting
 			JPanel actualKeypadPanel = new JPanel();
 			actualKeypadPanel.setBounds(100, 399, 400, 400);
 			actualKeypadPanel.setOpaque(false);
 
+			
 			add(actualKeypadPanel);
 			actualKeypadPanel.setLayout(new GridLayout(4, 4, 6, 6));
-
-			// keypad button from tutor 9
-			keys = new JButton[14]; // array keys contains 16 JButtons
+			
+			//keypad button from tutor 9
+		    keys = new JButton[ 14 ]; // array keys contains 16 JButtons 
 
 			// initialize all digit key buttons
-			for (int i = 0; i <= 9; i++)
-				keys[i] = new JButton(String.valueOf(i));
-
+			for ( int i = 0; i <= 9; i++ )
+				keys[ i ] = new JButton( String.valueOf( i ) );
+			
 			// initialize all function key buttons
-			keys[10] = new JButton("Cancel");
-			keys[11] = new JButton("Clear");
-			keys[12] = new JButton("Enter");
-			keys[13] = new JButton(".");
+			keys[ 10 ] = new JButton( "Cancel" );
+			keys[ 11 ] = new JButton( "Clear" );
+			keys[ 12 ] = new JButton( "Enter" );
+			keys[ 13 ] = new JButton( "." );
+			
+		    // add buttons to keyPadJPanel panel
+		    // 7, 8, 9, divide
+		    for ( int i = 7; i <= 10; i++ )
+		    	actualKeypadPanel.add(keys[i]);
+		    
+		    // 4, 5, 6
+		    for ( int i = 4; i <= 6; i++ )
+		    	actualKeypadPanel.add(keys[i]);
+		    
+		    // Clear
+		    actualKeypadPanel.add(keys[ 11 ]);
+		    
+		    // 1, 2, 3
+		    for ( int i = 1; i <= 3; i++ )
+		    	actualKeypadPanel.add(keys[i]);
+		    
+		    //Enter
+		    actualKeypadPanel.add(keys[ 12 ]);
+		    
+		    //0
+		    actualKeypadPanel.add(keys[ 0 ]);
+		    
+		    // "."
+		    actualKeypadPanel.add(keys[ 13 ]);
 
-			// add buttons to keyPadJPanel panel
-			// 7, 8, 9, divide
-			for (int i = 7; i <= 10; i++)
-				actualKeypadPanel.add(keys[i]);
-
-			// 4, 5, 6
-			for (int i = 4; i <= 6; i++)
-				actualKeypadPanel.add(keys[i]);
-
-			// Clear
-			actualKeypadPanel.add(keys[11]);
-
-			// 1, 2, 3
-			for (int i = 1; i <= 3; i++)
-				actualKeypadPanel.add(keys[i]);
-
-			// Enter
-			actualKeypadPanel.add(keys[12]);
-
-			// 0
-			actualKeypadPanel.add(keys[0]);
-
-			// "."
-			actualKeypadPanel.add(keys[13]);
-
-			// initialize all button font size
-			for (int i = 0; i <= 13; i++) {
-				if (i <= 9 || i == 13)
-					keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
-				else
-					keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
-			}
-
-			// background with color
-			setBackground(new Color(56, 60, 102));
-		}
+		    // initialize all button font size
+		    for (int i = 0; i <= 13; i++) {
+		    	if (i<=9 || i ==13)
+		    		keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
+		    	else
+		    		keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
+		    }
+		    
+		    
+	        //background with color
+	        setBackground(new Color(56, 60, 102));
+	    }
 	}
-
-	public class DisplayWithKeypadPanel extends JPanel {
-		public DisplayWithKeypadPanel(String displayText) {
+	
+	
+	public class DisplayWithKeypadPanel extends JPanel{
+		public DisplayWithKeypadPanel(String displayText){
 			setPreferredSize(new Dimension(890, 1024));
 			setLayout(null);
-
+			
 			JLabel messageLabel = new JLabel(displayText);
 			messageLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 			messageLabel.setBounds(50, 339, 840, 92);

@@ -1,6 +1,10 @@
 import java.awt.event.*;
+import java.awt.*;
+
 // ATM.java
 // Represents an automated teller machine
+
+import javax.swing.BoxLayout;
 
 public class ATM 
 {
@@ -12,16 +16,11 @@ public class ATM
    private BankDatabase bankDatabase; // account information database
    private Validation validation;
    private ExitSystem exitSystem;
-   private InsertPageBesideLogin insertPageBesideLogin;
-   private LoginSystem login_system;
+   private LoginSystem loginSystem;
    private MainMenu mainmenu;
-   private TakeCard takeCard;
-   private TransferComfirm transferComfirm;
-   private TransferUpdate transferUpdate;
-   private ViewBalance viewBalance;
    private Welcome welcome;
-   private WithdrawalMenu withdrawalMenu;
-   private WithdrawedCash withdrawedCash;
+   private LoginDisplayPanel loginCardNumberPanel;
+   private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
 
    // constants corresponding to main menu options
@@ -41,30 +40,37 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      exitSystem = new ExitSystem();
-      mainmenu = new MainMenu();
-      takeCard = new TakeCard();
-      transferComfirm = new TransferComfirm();
-      transferUpdate = new TransferUpdate();
-      viewBalance = new ViewBalance();
+      loginSystem = new LoginSystem();
+      //exitSystem = new ExitSystem();
+      //mainmenu = new MainMenu();
+      //takeCard = new TakeCard();
+      //transferComfirm = new TransferComfirm();
+      //transferUpdate = new TransferUpdate();
+      //viewBalance = new ViewBalance();
       welcome = new Welcome();
-      withdrawalMenu = new WithdrawalMenu();
-      withdrawedCash = new WithdrawedCash();
+      loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
+      loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
+      //withdrawalMenu = new WithdrawalMenu();
+      //withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM 
    public void run()
    {
-      welcome.setVisible(true);
-      welcome.setResizable(false);
+      screen.getMainframe().setVisible(true);
+      screen.getMainframe().setResizable(false);
+      welcome.buildGUI();
+      screen.getMainframe().repaint();
+      
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            while ( !userAuthenticated ) 
-            {
-               authenticateUser(); // authenticate user
-            } // end while  
-            displayMainMenu(); // user is now authenticated 
+            screen.getMainframe().getContentPane().removeAll();
+            screen.getMainframe().revalidate();
+            screen.getSrceenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
+
+            screen.getSrceenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+            screen.getMainframe().revalidate();
          }
       });
       /**
@@ -149,6 +155,7 @@ public class ATM
    // display the main menu and return an input selection
    private void displayMainMenu()
    {
+      /**
       screen.menuGUI();
 
       MainmenuHandler mainmenuHandler = new MainmenuHandler(); 
@@ -156,6 +163,7 @@ public class ATM
       screen.withdrawButton.addActionListener(mainmenuHandler);
       screen.transferButton.addActionListener(mainmenuHandler);
       screen.exitButton.addActionListener(mainmenuHandler);
+      **/
 
    } // end method displayMainMenu
          
