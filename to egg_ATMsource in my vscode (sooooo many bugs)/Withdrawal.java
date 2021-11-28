@@ -28,7 +28,6 @@ public class Withdrawal extends Transaction {
    private double availableBalance;
    private BankDatabase bankDatabase;
    private WithdrawalConfirm withdrawalConfirm;
-   private boolean firstinitialize;
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
@@ -55,15 +54,10 @@ public class Withdrawal extends Transaction {
       atm = theATM;
       withdrawalConfirm = atmWithdrawalConfirm;
       withdrawedCash = atmWithdrawedCash;
-      firstinitialize = true;
    } // end Withdrawal constructor
 
    // perform transaction
    public void execute() {
-
-      boolean cashDispensed = false; // cash was not dispensed yet
-      double availableBalance; // amount available for withdrawal
-
       // get references to bank database and screen
       bankDatabase = getBankDatabase();
       withdrawalmainmenuGUI();
@@ -181,7 +175,7 @@ public class Withdrawal extends Transaction {
       }
    }
 
-   public void takeCashGUI(){
+   private void takeCashGUI(){
       Timer timer = new Timer("Timer");         // timer for counting 
 
       screen.getMainframe().getContentPane().removeAll();
@@ -212,7 +206,7 @@ public class Withdrawal extends Transaction {
       timer.schedule(openTakeCashTask, 4000L);
    }
 
-   public void transferConfirmGUI(){
+   private void transferConfirmGUI(){
       JButton [] Buttons = withdrawalConfirm.getConfirmGUIButtons();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
@@ -227,7 +221,8 @@ public class Withdrawal extends Transaction {
 
    }
 
-   public void insertAmountGUI(){
+   private void insertAmountGUI(){
+      JButton[] keys = keypad.getKeys();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
@@ -238,7 +233,32 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
+      AmountListener amountListener = new AmountListener();
       //delete ".", "cancel", "enter" actionlistener, and add new actionlistener for withdrawal class
+      for (int i = 10; i <=12 ; i+= 2){
+         for (var temp: keys[i].getActionListeners()){
+            keys[i].removeActionListener(temp);
+         }
+         keys[i].addActionListener(amountListener);
+      }
+      
+
+   }
+
+   private class AmountListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         switch (e.getActionCommand()){
+            case "Cancel":
+               withdrawalmainmenuGUI();
+               break;
+            case "Enter":
+               amount = Integer.parseInt(keypad.getKeypadDisplayTextField().getText());
+               checkAmount();
+               break;
+         }
+         keypad.getKeypadDisplayTextField().setText("");
+      }
    }
 
 } // end class Withdrawal
