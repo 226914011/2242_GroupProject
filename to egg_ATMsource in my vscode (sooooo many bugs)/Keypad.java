@@ -126,8 +126,7 @@ public class Keypad
             keys[i].setBorderPainted(false);
          }
          
-         //background with color
-         //setBackground(new Color(56, 60, 102));
+
       }
   }
   
@@ -150,6 +149,12 @@ public class Keypad
 
   public void closeWarning(){
    warningLabel.setVisible(false);
+  }
+
+  public void setKeypadColor(){
+      //background with color
+      keypadJPanel.setBackground(new Color(56, 60, 102));
+      keypadJPanel.setOpaque(true);
   }
 } // end class Keypad  
 
