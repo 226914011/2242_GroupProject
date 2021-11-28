@@ -11,13 +11,12 @@ public class TransferAccount extends Screen {
     private InsertPagePanel insertPagePanel;
     private Keypad keypad;
     private JPanel keypadPanel;
-    private Screen screen;
     private KeypadHandler keypadHandler;
     private JButton keys [],Buttons [],wButtons []; 
     private TransferAmount transferAmount;
 
-    public void buildGUI(){
-        transferAmount = new TransferAmount();
+    public void buildGUI(TransferAmount atmTransferAmount){
+        transferAmount = atmTransferAmount;
         insertPagePanel = new InsertPagePanel("Please enter the account number for transfer:");
         super.getMainframe().getContentPane().add(insertPagePanel);
 
@@ -62,9 +61,9 @@ public class TransferAccount extends Screen {
                  keypad.warning();
                  break;
               case "Cancel":
-                 screen.getMainframe().getContentPane().removeAll();
-                 screen.getMainframe().revalidate();
-                 screen.getMainframe().repaint();
+                  getMainframe().getContentPane().removeAll();
+                 getMainframe().revalidate();
+                 getMainframe().repaint();
                  keypad.getKeypadDisplayTextField().setText("");
                  //loginCardNumberPanel.invalidMessage(false);
                  keypad.closeWarning();
@@ -77,9 +76,9 @@ public class TransferAccount extends Screen {
                  //accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
                  keypad.getKeypadDisplayTextField().setText("");
                  keypad.closeWarning();
-                 screen.getMainframe().getContentPane().removeAll();
-                 screen.getMainframe().revalidate();
-                 screen.getMainframe().repaint();
+                 getMainframe().getContentPane().removeAll();
+                 getMainframe().revalidate();
+                 getMainframe().repaint();
                 transferAmount.buildGUI();
                  //pinGUI();
                  break;

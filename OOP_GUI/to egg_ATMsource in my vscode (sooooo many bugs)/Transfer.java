@@ -35,7 +35,7 @@ public class Transfer extends Transaction{
     public void execute() {
         BankDatabase bankDatabase = getBankDatabase();
         screen.getMainframe().getContentPane().removeAll();
-        transferAccount.buildGUI();
+        transferAccount.buildGUI(transferAmount);
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
         
