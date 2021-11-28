@@ -18,72 +18,74 @@ import javax.swing.SwingConstants;
 
 public class MainMenu extends Screen {
 
-	private JPanel contentPane;
+	private JButton Buttons[] = new JButton[4];
 
-
-	/**
-	 * Create the frame.
-	 */
-	public MainMenu() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
+	public void buildGUI() {
+		DisplayMessageJPanel panel = new DisplayMessageJPanel();
+        super.getMainframe().getContentPane().add(panel);
         
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
+		super.getScreenContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-
-		//copy hold part until this line XD
-		
 		
 		//main menu button, size: 532 * 90
+		/*
 		JButton balanceButton = new JButton("1. View my balance");
 		balanceButton.setBounds(458, 313, 524, 90);
 		balanceButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
+		balanceButton.setFocusPainted(false);
 		panel.add(balanceButton);
 		
 		JButton WithdrawButton = new JButton("2. Withdraw");
 		WithdrawButton.setBounds(458, 480, 524, 90);
 		WithdrawButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
+		WithdrawButton.setFocusPainted(false);
 		panel.add(WithdrawButton);
 		
 		JButton transferButton = new JButton("3. Transfer");
 		transferButton.setBounds(458, 644, 524, 90);
 		transferButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
+		transferButton.setFocusPainted(false);
 		panel.add(transferButton);
 		
 		JButton exitButton = new JButton("4. Exit");
 		exitButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		exitButton.setBounds(458, 814, 524, 90);
+		exitButton.setFocusPainted(false);
 		panel.add(exitButton);
 		
-		JLabel lblNewLabel = new JLabel("Enter a choice");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 64));
-		lblNewLabel.setBounds(458, 104, 524, 85);
-		panel.add(lblNewLabel);
+		JLabel choiceLabel = new JLabel("Enter a choice");
+		choiceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		choiceLabel.setBounds(458, 104, 524, 85);
+		choiceLabel.setForeground(Color.LIGHT_GRAY);
+		panel.add(choiceLabel);*/
+
+		JLabel choiceLabel = new JLabel("Enter a choice");
+		choiceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		choiceLabel.setBounds(458, 104, 524, 85);
+		choiceLabel.setForeground(Color.LIGHT_GRAY);
+		panel.add(choiceLabel);
+
+		Buttons[0] = new JButton("1. View my balance");
+		Buttons[1] = new JButton("2. Withdraw");
+		Buttons[2] = new JButton("3. Transfer");
+		Buttons[3] = new JButton("4. Exit");
 		
+		for (int i = 0; i < 4; i++) {
+			Buttons[i].setFont(new Font("Arial Black", Font.PLAIN, 40));
+			Buttons[i].setBounds(458, (313 + 167 * i) , 524, 90);
+			Buttons[i].setFocusPainted(false);
+			panel.add(Buttons[i]);
+		}
+
 		//copy this
-        pack();
+        super.getMainframe().pack();
 
 	}
-	
-	public class DisplayMessageJPanel extends JPanel{
-	    public DisplayMessageJPanel(){
-	        setPreferredSize(new Dimension(1440, 1024));
-	        //Absolute layout
-	        setLayout(null);
 
-
-	        //background with color
-	        setBackground(new Color(56, 60, 102));
-	    }
-
-}
+	public JButton[] getButtons(){
+		return Buttons;
+	}
 }

@@ -17,8 +17,6 @@ public class KeypadGUI extends Screen{
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
-
-
 	/**
 	 * Create the frame.
 	 */
