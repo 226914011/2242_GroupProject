@@ -16,6 +16,8 @@ public class ViewBalance extends Screen {
 	private DisplayMessageJPanel viewbalancePanel;
 	private JTextField ABalanceTextField;
 	private JTextField TBalanceTextField;
+	private JLabel BalanceLabel;
+	private JButton ReturnButton;
 
 
 	/**
@@ -68,10 +70,10 @@ public class ViewBalance extends Screen {
 		ReturnButton.setBounds(458, 837, 524, 85);
 		viewbalancePanel.add(ReturnButton);
 
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 
-		System.out.println("Fk you 4everrrrrrrrrrrrrrrrrrrrr");
 	}
 	public JTextField getABalanceTextField(){
 		return ABalanceTextField;
@@ -79,4 +81,5 @@ public class ViewBalance extends Screen {
 	public JTextField getTBalanceTextField(){
 		return TBalanceTextField;
 	}
+
 }

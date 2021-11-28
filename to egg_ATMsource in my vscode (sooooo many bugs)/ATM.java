@@ -30,6 +30,7 @@ public class ATM
    private KeypadHandler keypadHandler;
    private LoginHandler loginHandler;
    private int pin;
+   private ViewBalance viewBalance;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -57,6 +58,7 @@ public class ATM
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
       loginHandler= new LoginHandler();
+      viewBalance = new ViewBalance();
    } // end no-argument ATM constructor
 
    // start ATM 
@@ -191,7 +193,7 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry( 
-               currentAccountNumber, screen, bankDatabase);
+               currentAccountNumber, screen, bankDatabase, viewBalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen, 
@@ -206,15 +208,7 @@ public class ATM
       return temp; // return the newly created object
    } // end method createTransaction
 
-   public void displayBalance(String availableBalance, String totalBalance){
-      screen.getMainframe().getContentPane().removeAll();
-      viewbalance.buildGUI();
-      viewbalance.getABalanceTextField().setText(availableBalance);
-      viewbalance.getTBalanceTextField().setText(totalBalance);
-      screen.getMainframe().repaint();
-      screen.getMainframe().revalidate();
-      System.out.println("FK youuuuuuuuuuuuuuuuuuuuuuuuuuu");
-   }
+
 
    private class KeypadHandler implements ActionListener{
       @Override
