@@ -17,6 +17,8 @@ public class ATM
    private Validation validation;
    private ExitSystem exitSystem;
    private MainMenu mainmenu;
+   private WithdrawalMenu withdrawalmenu;
+   private ViewBalance viewbalance;
    private Welcome welcome;
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
@@ -203,6 +205,17 @@ public class ATM
 
       return temp; // return the newly created object
    } // end method createTransaction
+
+   public void displayBalance(String availableBalance, String totalBalance){
+      viewbalance = new ViewBalance();
+      screen.getMainframe().getContentPane().removeAll();
+      viewbalance.buildGUI();
+      viewbalance.getABalanceTextField().setText(availableBalance);
+      viewbalance.getTBalanceTextField().setText(totalBalance);
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+      System.out.println("FK youuuuuuuuuuuuuuuuuuuuuuuuuuu");
+   }
 
    private class KeypadHandler implements ActionListener{
       @Override
