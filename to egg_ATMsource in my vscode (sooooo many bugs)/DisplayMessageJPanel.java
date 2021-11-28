@@ -1,3 +1,6 @@
+// DisplayMessageJPanel.java
+// Represents the panel for displaying message for different GUI
+
 import javax.swing.*;
 import java.awt.*;
 
