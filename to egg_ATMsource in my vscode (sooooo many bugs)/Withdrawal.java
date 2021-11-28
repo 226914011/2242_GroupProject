@@ -4,6 +4,8 @@
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import java.util.*;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 public class Withdrawal extends Transaction {
@@ -58,10 +60,6 @@ public class Withdrawal extends Transaction {
 
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      screen.getMainframe().getContentPane().removeAll();
-      screen.getMainframe().revalidate();
-      screen.getMainframe().repaint();
-      withdrawalmenu.buildGUI();
       withdrawalmainmenuGUI();
 
       /***
@@ -133,6 +131,11 @@ public class Withdrawal extends Transaction {
    } // end method execute
 
    private void withdrawalmainmenuGUI() {
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+      withdrawalmenu.buildGUI();
+
       wButtons = withdrawalmenu.getwButtons();
       withdrawalHandler = new WithdrawalMenuHandler();
       for (var temp : wButtons) {
@@ -215,13 +218,18 @@ public class Withdrawal extends Transaction {
                cancelTransaction.buildGUI();
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
-               try {
-                  TimeUnit.SECONDS.sleep(3);
-               } catch (InterruptedException e1) {
-                  // TODO Auto-generated catch block
-                  e1.printStackTrace();
-               }
-               atm.mainmenuGUI();
+               TimerTask returnToMainMenuTask = new TimerTask() {
+                  public void run() {
+                     screen.getMainframe().getContentPane().removeAll();
+                     screen.getMainframe().revalidate();
+                     screen.getMainframe().repaint();
+                     atm.mainmenuGUI();
+                  }
+               };
+               Timer timer = new Timer("Timer");
+               
+               long delay = 3000L;
+               timer.schedule(returnToMainMenuTask, delay);
                break;
             default: break;
          }
@@ -234,7 +242,6 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
-      cancelTransaction.buildGUI();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
    }

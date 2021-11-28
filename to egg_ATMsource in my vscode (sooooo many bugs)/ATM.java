@@ -143,7 +143,6 @@ public class ATM
       if ( userAuthenticated )
       {
          currentAccountNumber = accountNumber; // save user's account #
-         screen.getMainframe().getContentPane().removeAll();
          mainmenuGUI();
       } // end if
       else{
@@ -197,7 +196,9 @@ public class ATM
    // display the main menu and return an input selection
    public void mainmenuGUI()
    {
-      
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
       mainmenu.buildGUI();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
