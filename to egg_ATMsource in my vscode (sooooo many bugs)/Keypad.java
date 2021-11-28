@@ -36,54 +36,54 @@ public class Keypad
    
 	public class KeypadJPanel extends JPanel{
       public KeypadJPanel(){
-          setPreferredSize(new Dimension(550, 1024));
-          //Absolute layout
-          setLayout(null);
+         setPreferredSize(new Dimension(550, 1024));
+         //Absolute layout
+         setLayout(null);
           
-          //transparent background
-          setOpaque(false);
+         //transparent background
+         setOpaque(false);
           
           
         
-          //keypad display textField
-        keypadDisplayTextField = new JTextField();
-        keypadDisplayTextField.setEditable(false);
-        keypadDisplayTextField.setFont(new Font("Arial", Font.PLAIN, 40));
-        keypadDisplayTextField.setBounds(100, 339, 400, 56);
-        add(keypadDisplayTextField);
-        keypadDisplayTextField.setColumns(10);
-        keypadDisplayTextField.setText(userInput);
+         //keypad display textField
+         keypadDisplayTextField = new JTextField();
+         keypadDisplayTextField.setEditable(false);
+         keypadDisplayTextField.setFont(new Font("Arial", Font.PLAIN, 40));
+         keypadDisplayTextField.setBounds(100, 339, 400, 56);
+         add(keypadDisplayTextField);
+         keypadDisplayTextField.setColumns(10);
+         keypadDisplayTextField.setText(userInput);
           
 
-        warningLabel = new JLabel("* Please do not use \".\" as input");
-        warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-        warningLabel.setBounds(100, 267, 400, 32);
-        warningLabel.setForeground(Color.RED);
-        warningLabel.setVisible(false);
-        add(warningLabel);
+         warningLabel = new JLabel("* Please do not use \".\" as input");
+         warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+         warningLabel.setBounds(100, 267, 400, 32);
+         warningLabel.setForeground(Color.RED);
+         warningLabel.setVisible(false);
+         add(warningLabel);
 
         
-          //keypad button setting
-        JPanel actualKeypadPanel = new JPanel();
-        actualKeypadPanel.setBounds(100, 399, 400, 400);
-        actualKeypadPanel.setOpaque(false);
+         //keypad button setting
+         JPanel actualKeypadPanel = new JPanel();
+         actualKeypadPanel.setBounds(100, 399, 400, 400);
+         actualKeypadPanel.setOpaque(false);
 
         
-        add(actualKeypadPanel);
-        actualKeypadPanel.setLayout(new GridLayout(4, 4, 6, 6));
+         add(actualKeypadPanel);
+         actualKeypadPanel.setLayout(new GridLayout(4, 4, 6, 6));
         
-        //keypad button from tutor 9
+         //keypad button from tutor 9
          keys = new JButton[ 14 ]; // array keys contains 16 JButtons 
 
-        // initialize all digit key buttons
-        for ( int i = 0; i <= 9; i++ )
-           keys[ i ] = new JButton( String.valueOf( i ) );
+          // initialize all digit key buttons
+         for ( int i = 0; i <= 9; i++ )
+            keys[ i ] = new JButton( String.valueOf( i ) );
         
         // initialize all function key buttons
-        keys[ 10 ] = new JButton( "Cancel" );
-        keys[ 11 ] = new JButton( "Clear" );
-        keys[ 12 ] = new JButton( "Enter" );
-        keys[ 13 ] = new JButton( "." );
+         keys[ 10 ] = new JButton( "Cancel" );
+         keys[ 11 ] = new JButton( "Clear" );
+         keys[ 12 ] = new JButton( "Enter" );
+         keys[ 13 ] = new JButton( "." );
         
          // add buttons to keyPadJPanel panel
          // 7, 8, 9, divide
@@ -121,16 +121,13 @@ public class Keypad
                keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
             else
                keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
-
-           keys[i].setBackground(new Color(106,107,138));
-           keys[i].setOpaque(true);
-           keys[i].setBorderPainted(false);
-              
+            keys[i].setBackground(new Color(106,107,138));
+            keys[i].setOpaque(true);
+            keys[i].setBorderPainted(false);
          }
          
-
-          //background with color
-          //setBackground(new Color(56, 60, 102));
+         //background with color
+         //setBackground(new Color(56, 60, 102));
       }
   }
   
