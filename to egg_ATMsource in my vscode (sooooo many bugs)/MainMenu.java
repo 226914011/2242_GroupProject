@@ -69,7 +69,7 @@ public class MainMenu extends Screen {
 		panel.add(choiceLabel);
 
 		Buttons[0] = new JButton("1. View my balance");
-		Buttons[1] = new JButton("2. Withdraw");
+		Buttons[1] = new JButton("2. Withdrawal");
 		Buttons[2] = new JButton("3. Transfer");
 		Buttons[3] = new JButton("4. Exit");
 
