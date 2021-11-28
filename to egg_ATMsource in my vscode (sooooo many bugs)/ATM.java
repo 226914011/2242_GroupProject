@@ -18,6 +18,7 @@ public class ATM
    private ExitSystem exitSystem;
    private MainMenu mainmenu;
    private WithdrawalMenu withdrawalmenu;
+   private ViewBalance viewbalance;
    private Welcome welcome;
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
@@ -32,6 +33,7 @@ public class ATM
    private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private int pin;
+   private ViewBalance viewBalance;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -54,10 +56,12 @@ public class ATM
       //exitSystem = new ExitSystem();
       mainmenu = new MainMenu();
       welcome = new Welcome();
+      viewbalance = new ViewBalance();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
       loginHandler= new LoginHandler();
+      viewBalance = new ViewBalance();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -200,7 +204,7 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase);
+               currentAccountNumber, screen, bankDatabase, viewBalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
@@ -214,6 +218,8 @@ public class ATM
 
       return temp; // return the newly created object
    } // end method createTransaction
+
+
 
    private class KeypadHandler implements ActionListener{
       @Override

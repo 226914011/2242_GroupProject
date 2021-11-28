@@ -1,13 +1,24 @@
 // BalanceInquiry.java
 // Represents a balance inquiry ATM transaction
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.JTextField;
 
 public class BalanceInquiry extends Transaction
 {  
+   private ATM atm;
+   private Screen screen;
+   private ViewBalance viewBalance;
+
    // BalanceInquiry constructor
    public BalanceInquiry( int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase )
+      BankDatabase atmBankDatabase , ViewBalance atmViewBalance)
    {
       super( userAccountNumber, atmScreen, atmBankDatabase );
+      screen = super.getScreen();
+      viewBalance = atmViewBalance;
    } // end BalanceInquiry constructor
 
    // performs the transaction
@@ -15,7 +26,6 @@ public class BalanceInquiry extends Transaction
    {
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      Screen screen = getScreen();
 
       // get the available balance for the account involved
       double availableBalance = 
@@ -24,7 +34,14 @@ public class BalanceInquiry extends Transaction
       // get the total balance for the account involved
       double totalBalance = 
          bankDatabase.getTotalBalance( getAccountNumber() );
-      
+
+      screen.getMainframe().getContentPane().removeAll();
+      viewBalance.buildGUI();
+      viewBalance.getABalanceTextField().setText(String.valueOf(availableBalance));
+      viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));
+      screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
+      /*
       // display the balance information on the screen
       screen.displayMessageLine( "\nBalance Information:" );
       screen.displayMessage( " - Available balance: " ); 
@@ -32,6 +49,7 @@ public class BalanceInquiry extends Transaction
       screen.displayMessage( "\n - Total balance:     " );
       screen.displayDollarAmount( totalBalance );
       screen.displayMessageLine( "" );
+      */
    } // end method execute
 } // end class BalanceInquiry
 
