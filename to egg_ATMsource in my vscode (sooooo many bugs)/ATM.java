@@ -84,13 +84,9 @@ public class ATM
 
    private void loginGUI(){
       screen.getMainframe().getContentPane().removeAll();
-      screen.getMainframe().revalidate();
-
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
-      screen.getMainframe().revalidate();
-      screen.getMainframe().repaint();
-
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+      
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
