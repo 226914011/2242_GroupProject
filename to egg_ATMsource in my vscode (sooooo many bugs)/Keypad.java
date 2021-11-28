@@ -12,28 +12,14 @@ public class Keypad
 	private JButton[] keys;
    private KeypadJPanel keypadJPanel;
    private JLabel warningLabel;
-   private Scanner input; // reads data from the command line
    private String userInput = "";
    
    // no-argument constructor initializes the Scanner
    public Keypad()
    {
-      input = new Scanner( System.in );    
       keypadJPanel = new KeypadJPanel();
    } // end no-argument Keypad constructor
 
-   // return a string value entered by user 
-   public String getInput()
-   {
-      return userInput; // change user input to string type for validation 
-   } // end method getInput
-
-   // return a double value enter by user
-   public double getDoubleInput(){
-      return input.nextDouble();
-   }
-
-   
 	public class KeypadJPanel extends JPanel{
       public KeypadJPanel(){
          setPreferredSize(new Dimension(550, 1024));
@@ -42,8 +28,6 @@ public class Keypad
           
          //transparent background
          setOpaque(false);
-          
-          
         
          //keypad display textField
          keypadDisplayTextField = new JTextField();
@@ -129,28 +113,25 @@ public class Keypad
          //background with color
          //setBackground(new Color(56, 60, 102));
       }
-  }
+   }
   
-  public KeypadJPanel getKeypadJPanel(){
+   public KeypadJPanel getKeypadJPanel(){
      return keypadJPanel;
-  }
+   }
 
-  public JButton[] getKeys(){
+   public JButton[] getKeys(){
      return keys;
-  }
-  public String getUserInput(){
-     return userInput;
-  }
-  public JTextField getKeypadDisplayTextField(){
+   }
+   public JTextField getKeypadDisplayTextField(){
      return keypadDisplayTextField;
-  }
-  public void warning(){
+   }
+   public void warning(){
      warningLabel.setVisible(true);
-  }
+   }
 
-  public void closeWarning(){
-   warningLabel.setVisible(false);
-  }
+   public void closeWarning(){
+      warningLabel.setVisible(false);
+   }
 } // end class Keypad  
 
 
