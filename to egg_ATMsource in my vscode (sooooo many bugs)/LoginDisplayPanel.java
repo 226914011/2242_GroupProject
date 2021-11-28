@@ -32,8 +32,11 @@ public class LoginDisplayPanel extends JPanel{
         add(invalidInputLabel);
     }
 
-    public void invalidMessage(boolean wrong){
-        invalidInputLabel.setVisible(wrong);
+    public void invalidMessage(){
+        invalidInputLabel.setVisible(true);
     } 
 
+    public void cancelInvalidMessage(){
+        invalidInputLabel.setVisible(false);
+    } 
 }
