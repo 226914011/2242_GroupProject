@@ -15,7 +15,7 @@ public class WithdrawalConfirm extends Screen {
 	private JButton cancelButton;
 
 
-	public WithdrawalConfirm() {
+	public void buildGUI() {
 		withConfirmPanel = new DisplayMessageJPanel();	// initialize withConfirmPanel
 
 		// inherits from superclass Screen to get mainframe and panel, and adding the current panel

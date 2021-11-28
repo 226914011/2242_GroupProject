@@ -122,7 +122,7 @@ public class Keypad
             keys[i].setOpaque(true);
             keys[i].setBorderPainted(false);
          }
-         setBackground(new Color(56, 60, 102));
+
 
          //transparent background
          setOpaque(false);
@@ -153,6 +153,7 @@ public class Keypad
   public void setKeypadColor(boolean color){
       //background with color
       if(color){
+         keypadJPanel.setBackground(new Color(56, 60, 102));
          keypadJPanel.setOpaque(true);
       }
       else

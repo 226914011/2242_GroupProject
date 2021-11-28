@@ -10,22 +10,31 @@ public class Transfer extends Transaction{
     private double amount;
     private boolean CANCELED,accValidate;
     private Validation validation;
+    private TransferAccount transferAccount;
 
     //declare a int value for invalid input
     private static final int INVALID = -1;
 
 
     //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation) {
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation, TransferAccount atmTransferAccount) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         
         keypad = atmKeypad; // get reference
         validation = atmValidation; // get reference
         bankDatabase = getBankDatabase();   // get reference
-        screen = getScreen();   // get reference
+        screen = super.getScreen();   // get reference
+        transferAccount = atmTransferAccount;
     }
 
     public void execute() {
+        BankDatabase bankDatabase = getBankDatabase();
+        screen.getMainframe().getContentPane().removeAll();
+        transferAccount.buildGUI();
+        screen.getMainframe().repaint();
+        screen.getMainframe().revalidate();
+        
+        
         /**
         //ask user input the transfer information
         do
