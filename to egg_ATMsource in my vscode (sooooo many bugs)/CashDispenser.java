@@ -5,11 +5,13 @@ public class CashDispenser
 {
    // the default initial number in the cash dispenser
    private final static int INITIAL_COUNT_HUNDRED = 1;
-   private final static int INITIAL_COUNT_FIVEHUNDRED = 1;
-   private final static int INITIAL_COUNT_THOUSAND = 1;
+   private final static int INITIAL_COUNT_FIVEHUNDRED = 2;
+   private final static int INITIAL_COUNT_THOUSAND = 2;
    private int count_hundred; // number of $100 remaining
    private int count_fivehundred; // number of $500 remaining
    private int count_thousand; // number of $1000 remaining
+   private int hundred, fivehundred, thousand, remaining;
+
    // no-argument CashDispenser constructor initializes count to default
    public CashDispenser()
    {  // set count attribute to default
@@ -29,7 +31,6 @@ public class CashDispenser
    // indicates whether cash dispenser can dispense desired amount
    public int isSufficientCashAvailable( int amount )
    {
-      int hundred, fivehundred, thousand, remaining;
          if(amount % 100 != 0) return 1;  //when user not input the multiple of 100, return 1
          if (amount > count_hundred * 100 + count_fivehundred * 500 + count_thousand * 1000) return 2;//that means there has not enough dollar note
          thousand = amount / 1000; //how many 1000$ dollar note needed
@@ -49,11 +50,14 @@ public class CashDispenser
             fivehundred = count_fivehundred;
          }
          if (amount - thousand * 1000 - fivehundred * 500 > count_hundred * 100) return 4;//that means there has not enough 100$ dollar note
-         dispenseCash(hundred, fivehundred, thousand);
          return 5;
         
  
    } // end method isSufficientCashAvailable
+
+   public void takeCash(){
+      dispenseCash(hundred, fivehundred, thousand);
+   }
 } // end class CashDispenser
 
 

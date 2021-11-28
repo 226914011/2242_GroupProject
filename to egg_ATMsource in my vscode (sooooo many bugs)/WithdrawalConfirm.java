@@ -11,10 +11,14 @@ public class WithdrawalConfirm extends Screen {
 	private JTextField withAmountTextField;
 	private JLabel amountWLabel;
 	private JLabel confirmationLabel;
-	private JButton confirmButton;
+	private JButton[] confirmGUIButtons;
 	private JButton reEnterButton;
 	private JButton cancelButton;
 
+
+	public WithdrawalConfirm(){
+		confirmGUIButtons = new JButton[3];
+	}
 
 	public void buildGUI() {
 		withConfirmPanel = new DisplayMessageJPanel();	// initialize withConfirmPanel
@@ -40,26 +44,34 @@ public class WithdrawalConfirm extends Screen {
 		withAmountTextField.setEditable(false);
 		withAmountTextField.setBounds(730, 313, 524, 85);
 		withAmountTextField.setColumns(10);
+		withAmountTextField.setText("");
 		withConfirmPanel.add(withAmountTextField);
 		
-		confirmButton = new JButton("Confirm");
-		confirmButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		confirmButton.setBounds(166, 836, 292, 84);
-		withConfirmPanel.add(confirmButton);
-		
-		reEnterButton = new JButton("Re-enter");
-		reEnterButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		reEnterButton.setBounds(574, 836, 292, 84);
-		withConfirmPanel.add(reEnterButton);
-		
-		cancelButton = new JButton("Cancel");
-		cancelButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		cancelButton.setBounds(982, 836, 292, 84);
-		withConfirmPanel.add(cancelButton);
-		
+		confirmGUIButtons[0] = new JButton("Confirm");
+		confirmGUIButtons[1] = new JButton("Re-enter");
+		confirmGUIButtons[2] = new JButton("Cancel");
+
+
+		//format
+		for(int i = 0; i <= 2; i++){
+			confirmGUIButtons[i].setFont(new Font("Arial Black", Font.PLAIN, 40));
+			confirmGUIButtons[i].setBounds(166 + 408*i, 836, 292, 84);
+			withConfirmPanel.add(confirmGUIButtons[i]);
+		}
+
 		super.getMainframe().setVisible(true);		// set the panel to visible
 		super.getMainframe().pack();				// set the frame to fit the preferred size
 		super.getMainframe().repaint();				// refresh the frame
 
 	}
+
+	public void setDisplayWithdrawalAmount(int amount){
+		//String.format in this line just accpect double input
+		withAmountTextField.setText(String.format( "$%,.2f", Double.valueOf(amount)));
+	}
+
+	public JButton[] getConfirmGUIButtons(){
+		return confirmGUIButtons;
+	}
+
 }

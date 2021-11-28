@@ -28,6 +28,7 @@ public class Withdrawal extends Transaction {
    private double availableBalance;
    private BankDatabase bankDatabase;
    private WithdrawalConfirm withdrawalConfirm;
+   private boolean firstinitialize;
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
@@ -53,6 +54,8 @@ public class Withdrawal extends Transaction {
       cancelTransaction = atmCancelTransaction;
       atm = theATM;
       withdrawalConfirm = atmWithdrawalConfirm;
+      withdrawedCash = atmWithdrawedCash;
+      firstinitialize = true;
    } // end Withdrawal constructor
 
    // perform transaction
@@ -78,59 +81,6 @@ public class Withdrawal extends Transaction {
          temp.addActionListener(withdrawalHandler);
       }
    }
-
-   // display a menu of withdrawal amounts and the option to cancel;
-   // return the chosen amount or 0 if the user chooses to cancel
-   private int displayMenuOfAmounts() {
-      int userChoice = 0; // local variable to store return value
-
-      Screen screen = getScreen(); // get screen reference
-
-      // array of amounts to correspond to menu numbers
-      int amounts[] = { 0, 100, 200, 500, 1000 };
-
-      // loop while no valid choice has been made
-      while (userChoice == 0) {
-         // display the menu
-         screen.displayMessageLine("\nWithdrawal Menu:");
-         screen.displayMessageLine("1 - $100");
-         screen.displayMessageLine("2 - $200");
-         screen.displayMessageLine("3 - $500");
-         screen.displayMessageLine("4 - $1000");
-         screen.displayMessageLine("5 - Custom Amount");
-         screen.displayMessageLine("6 - Cancel transaction");
-         screen.displayMessage("\nChoose a withdrawal option: ");
-
-         int input = validation.checkInt(keypad.getInput()); // get user input through keypad and do validation check
-         if (input == INVAILD)
-            continue; // continue when user not enter a valid integer input
-
-         // determine how to proceed based on the input value
-         switch (input) {
-            case 1: // if the user chose a withdrawal amount
-            case 2: // (i.e., chose option 1, 2, 3, 4 or 5), return the
-            case 3: // corresponding amount from amounts array
-            case 4:
-               userChoice = amounts[input]; // save user's choice
-               break;
-            case 5:
-               screen.displayMessage("\nPlease input your custom amount: ");
-               int userinput = validation.checkInt(keypad.getInput()); // get user input through keypad and do
-                                                                       // validation check
-               if (userinput == INVAILD)
-                  continue; // continue when user not enter a valid integer input
-               userChoice = userinput; // save user's choice
-               break;
-            case CANCELED: // the user chose to cancel
-               userChoice = CANCELED; // save user's choice
-               break;
-            default: // the user did not enter a value from 1-6
-               screen.displayMessageLine("\nInvalid selection. Try again.");
-         } // end switch
-      } // end while
-
-      return userChoice; // return withdrawal amount or CANCELED
-   } // end method displayMenuOfAmounts
 
    private void checkAmount(){
       // get available balance of account involved
@@ -170,16 +120,36 @@ public class Withdrawal extends Transaction {
       }
    }
 
+   private class WithdrawalConfirmHandler implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         switch (e.getActionCommand()) {
+            case "Confirm":
+               // update the account involved to reflect withdrawal
+               bankDatabase.debit( getAccountNumber(), amount );
+               cashDispenser.takeCash();
+               takeCashGUI();
+               break;
+            case "Re-enter":
+               withdrawalmainmenuGUI();
+               break;
+            case "Cancel":
+               atm.mainmenuGUI();
+               break;
+         }
+      }
+   }
+
    private class WithdrawalMenuHandler implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
-         int userChoice[] = { 0, 100, 200, 500, 1000 };
+         int userChoice[] = {100, 200, 500, 1000}; 
          switch (e.getActionCommand()) {
             case "1. $100":
             case "2. $200":
             case "3. $500":
             case "4. $1000":
-               amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))];
+               amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))-1];
                checkAmount();
                break;
             case "5. Custom Amount":
@@ -211,20 +181,50 @@ public class Withdrawal extends Transaction {
       }
    }
 
+   public void takeCashGUI(){
+      Timer timer = new Timer("Timer");         // timer for counting 
+
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+      takeCard.buildGUI();
+
+      TimerTask openTakeCardGUI = new TimerTask() {
+         public void run(){
+            screen.getMainframe().getContentPane().removeAll();
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
+            withdrawedCash.buildGUI();
+         }
+      };
+
+      timer.schedule(openTakeCardGUI, 2000L);
+
+      TimerTask openTakeCashTask = new TimerTask() {
+         public void run() {
+            screen.getMainframe().getContentPane().removeAll();
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
+
+            atm.welcomeGUI();
+         }
+      };
+      timer.schedule(openTakeCashTask, 4000L);
+   }
 
    public void transferConfirmGUI(){
+      JButton [] Buttons = withdrawalConfirm.getConfirmGUIButtons();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
       withdrawalConfirm.buildGUI();
-      /** 
-      // update the account involved to reflect withdrawal
-      bankDatabase.debit( getAccountNumber(), amount );
-      //cashDispensed = true; // cash was dispensed
-      // instruct user to take cash
-      screen.displayMessageLine( 
-      "\nPlease take your cash now." );
-      **/
+      withdrawalConfirm.setDisplayWithdrawalAmount(amount);
+      
+      WithdrawalConfirmHandler withdrawalHandler = new WithdrawalConfirmHandler();
+      for(var temp : Buttons){
+         temp.addActionListener(withdrawalHandler);
+      }
+
    }
 
    public void insertAmountGUI(){

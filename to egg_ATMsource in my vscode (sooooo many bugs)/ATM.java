@@ -82,6 +82,7 @@ public class ATM
       transferAccount = new TransferAccount();
       transferConfirm = new TransferConfirm();
       withdrawalConfirm = new WithdrawalConfirm();
+      withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -103,7 +104,7 @@ public class ATM
    } // end method run
 
    // method - show welcome page GUI
-   private void welcomeGUI(){                         
+   public void welcomeGUI(){                         
       screen.getMainframe().getContentPane().removeAll();
       welcome.buildGUI();
       screen.getMainframe().repaint();
@@ -248,9 +249,7 @@ public class ATM
          }
       };
 
-      timer.schedule(openExitGUI, delay);
-
-      delay = 4000L;
+      timer.schedule(openExitGUI, 2000L);
 
       TimerTask openwelcomeTask = new TimerTask() {
          public void run() {
@@ -266,7 +265,7 @@ public class ATM
          }
       };
       
-      timer.schedule(openwelcomeTask, delay);
+      timer.schedule(openwelcomeTask, 4000L);
    }
 
    // return object of specified Transaction subclass

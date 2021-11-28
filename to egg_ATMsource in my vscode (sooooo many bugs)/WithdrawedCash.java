@@ -18,6 +18,7 @@ public class WithdrawedCash extends Screen {
 		takeCashLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		takeCashLabel.setForeground(Color.DARK_GRAY);
 		takeCashLabel.setBounds(50, 471, 925, 58);
+		takeCashLabel.setForeground(Color.LIGHT_GRAY);
 		withCashPanel.add(takeCashLabel);
 
 		super.getMainframe().pack();
