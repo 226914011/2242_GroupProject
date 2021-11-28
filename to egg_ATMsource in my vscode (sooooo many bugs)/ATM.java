@@ -16,23 +16,23 @@ public class ATM
    private Keypad keypad; // ATM's keypad
    private CashDispenser cashDispenser; // ATM's cash dispenser
    private BankDatabase bankDatabase; // account information database
-   private Validation validation;
-   private ExitSystem exitSystem;
-   private MainMenu mainmenu;
-   private WithdrawalMenu withdrawalmenu;
-   private Welcome welcome;
-   private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;
-   private InsertPagePanel transferTargetAccPanel, transferEnterAmountPanel, customAmountPanel;
-   private TransferConfirm transferConfirm;
-   private TakeCard takeCard;
-   private WithdrawedCash withdrawedCash;
+   private Validation validation;   // validation for user input
+   private ExitSystem exitSystem;   // Exit System GUI
+   private MainMenu mainmenu;       // Main Menu GUI
+   private WithdrawalMenu withdrawalmenu; // Wuthdrawal Menu GUI
+   private Welcome welcome;     // Welcome message GUI
+   private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;  // Login System GUI
+   private InsertPagePanel transferTargetAccPanel, transferEnterAmountPanel, customAmountPanel;    // GUI for inserting page
+   private TransferConfirm transferConfirm;  // Transfer confirmation page GUI
+   private TakeCard takeCard;  // Take Card reminder GUI
+   private WithdrawedCash withdrawedCash; // Displaying "Please take your cash now" GUI
    private static int menuChioce,withdrawalmenuChioce;
    private int accountNumber,pin,ScreenNum;
-   private JButton keys [],Buttons [],wButtons [];
-   private KeypadHandler keypadHandler;
-   private LoginHandler loginHandler;
-   private ViewBalance viewbalance;
-   private CancelTransaction cancelTransaction;
+   private JButton keys [],Buttons [],wButtons []; // ATM's virtual keypad button
+   private KeypadHandler keypadHandler;         // Event handler for keypad
+   private LoginHandler loginHandler;  // Event Handler for login page
+   private ViewBalance viewbalance; // Balance Inquiry GUI
+   private CancelTransaction cancelTransaction; // Cancel Transaction GUI
 
 
    // constants corresponding to main menu options
@@ -60,22 +60,22 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      exitSystem = new ExitSystem();
-      mainmenu = new MainMenu();
-      welcome = new Welcome();
-      viewbalance = new ViewBalance();
-      withdrawalmenu = new WithdrawalMenu();
-      loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
-      loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
-      keypadHandler = new KeypadHandler();
-      loginHandler= new LoginHandler();
-      transferEnterAmountPanel = new InsertPagePanel("<html>please enter the account to transfer!<br/><br/>(It will ignore after two decimal point):</html>");
+      exitSystem = new ExitSystem();   // create exit system GUI
+      mainmenu = new MainMenu();       // create main menu GUI
+      welcome = new Welcome();         // create welcome page GUI
+      viewbalance = new ViewBalance(); // create balance inquiry GUI
+      withdrawalmenu = new WithdrawalMenu();   // create withdrawal menu page GUI
+      loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");   // create login page GUI - card no
+      loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");   // create login page GUI - password
+      keypadHandler = new KeypadHandler();   // create keypad event handler
+      loginHandler= new LoginHandler();   // create login page event handler
+      transferEnterAmountPanel = new InsertPagePanel("<html>please enter the account to transfer!<br/><br/>(It will ignore after two decimal point):</html>");       // create new text for transfer page
       transferTargetAccPanel = new InsertPagePanel("Please enter the account number for transfer:");
       customAmountPanel = new InsertPagePanel("Please input your custom amount:");
-      transferConfirm = new TransferConfirm();
-      takeCard = new TakeCard();
-      withdrawedCash = new WithdrawedCash();
-      cancelTransaction = new CancelTransaction();
+      transferConfirm = new TransferConfirm();  // create confirm transfer page GUI
+      takeCard = new TakeCard(); // create "Please take your card" GUI
+      withdrawedCash = new WithdrawedCash(); // create "Please take your cash" GUI
+      cancelTransaction = new CancelTransaction(); // create "Cancelling Transaction" GUI
    } // end no-argument ATM constructor
 
    // start ATM
@@ -96,7 +96,8 @@ public class ATM
       //displayMainMenu(); // user is now authenticated
    } // end method run
 
-   private void welcomeGUI(){
+   // method - show welcome page GUI
+   private void welcomeGUI(){                         
       screen.getMainframe().getContentPane().removeAll();
       welcome.buildGUI();
       screen.getMainframe().repaint();
@@ -105,6 +106,7 @@ public class ATM
       loginCardNumberPanel.invalidMessage(false);
    }
 
+   // method - show login page GUI
    private void loginGUI(){
       welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
@@ -124,7 +126,7 @@ public class ATM
       }
    }
 
-   //
+   // method - show pin GUI
    private void pinGUI(){
       screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
       screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
@@ -239,7 +241,7 @@ public class ATM
             welcomeGUI();
          }
       };
-      Timer timer = new Timer("Timer");
+      Timer timer = new Timer("Timer");         // timer for counting 
       
       long delay = 2000L;
       timer.schedule(openwelcomeTask, delay);
@@ -272,7 +274,7 @@ public class ATM
    } // end method createTransaction
 
 
-
+   // private inner class for keypad event handling
    private class KeypadHandler implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent e){
@@ -317,6 +319,7 @@ public class ATM
       }
    }
 
+   // private inner class for login page event handling
    private class LoginHandler implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent e){
@@ -327,6 +330,7 @@ public class ATM
       }
    }
 
+   // private inner class for main menu event handling
    private class MainmenuHandler implements ActionListener{
       public void actionPerformed(ActionEvent e) {
          switch(e.getActionCommand()){
