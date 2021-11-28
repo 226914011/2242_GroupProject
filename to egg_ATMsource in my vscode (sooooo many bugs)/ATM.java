@@ -38,6 +38,14 @@ public class ATM
    private static final int EXIT = 4;
    private static final int INVALID = -1;
 
+   //
+   private MouseListener ml = new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+         loginGUI();
+      }
+   };
+
    // no-argument ATM constructor initializes instance variables
    public ATM()
    {
@@ -61,7 +69,7 @@ public class ATM
 
    // start ATM
    public void run()
-   {
+   {  System.out.println("runed");
       keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
@@ -78,19 +86,15 @@ public class ATM
    } // end method run
 
    private void welcomeGUI(){
+      screen.getMainframe().getContentPane().removeAll();
       welcome.buildGUI();
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
-
-      welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
-         @Override
-         public void mouseClicked(MouseEvent e) {
-            loginGUI();
-         }
-      });
+      welcome.getWelcomeLabel().addMouseListener(ml);
    }
 
    private void loginGUI(){
+      welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
@@ -140,9 +144,10 @@ public class ATM
          keys[12].addActionListener(keypadHandler);
          if(Cancel){
             run();
-         }else
+         }else{
             loginCardNumberPanel.invalidMessage(true);
             loginGUI();
+         }
       }
 
    } // end method authenticateUser
