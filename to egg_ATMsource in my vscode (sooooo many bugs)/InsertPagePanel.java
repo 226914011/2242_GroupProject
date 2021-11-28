@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InsertPagePanel extends JPanel{
+    JLabel invalidMesssage;
+
     public InsertPagePanel(String displayText){
         setPreferredSize(new Dimension(890, 1024));
         setLayout(null);
@@ -16,7 +18,19 @@ public class InsertPagePanel extends JPanel{
         messageLabel.setForeground(Color.LIGHT_GRAY);
         add(messageLabel);
 
+        invalidMesssage = new JLabel("");
+        invalidMesssage.setFont(new Font("Arial", Font.PLAIN, 25));
+        invalidMesssage.setBounds(50, 245, 840, 90);
+        invalidMesssage.setVisible(true);
+        invalidMesssage.setForeground(Color.RED);
+        add(invalidMesssage);
+
         //background with color
         setBackground(new Color(56, 60, 102));
     }
+
+    public void setInvalidMessage(String message){
+        invalidMesssage.setText(message);
+    }
+
 }

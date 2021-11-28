@@ -77,6 +77,7 @@ public class Withdrawal extends Transaction {
    }
 
    private void checkAmount(){
+      System.out.println("in");
       // get available balance of account involved
       availableBalance = 
          bankDatabase.getAvailableBalance( getAccountNumber() );
@@ -89,18 +90,26 @@ public class Withdrawal extends Transaction {
             case 1:
                withdrawalmenu.setInvalidMessage( 
                "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>" );
+               customAmountPanel.setInvalidMessage(
+               "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
                break;
             case 2:
                withdrawalmenu.setInvalidMessage( 
+               "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>" );
+               customAmountPanel.setInvalidMessage(
                "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>" );
                break;
             case 3:
                withdrawalmenu.setInvalidMessage( 
                "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );
+               customAmountPanel.setInvalidMessage( 
+               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );   
                break;
             case 4:
                withdrawalmenu.setInvalidMessage( 
                "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );
+               customAmountPanel.setInvalidMessage( 
+               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );   
                break;
             case 5:
                transferConfirmGUI();
@@ -109,8 +118,10 @@ public class Withdrawal extends Transaction {
             break;
          }
       } else{
+         System.out.println("this case");
          withdrawalmenu.setInvalidMessage( 
-               "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>" );
+            "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>" );
+         customAmountPanel.setInvalidMessage("<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>" );
       }
    }
 
@@ -147,6 +158,8 @@ public class Withdrawal extends Transaction {
                checkAmount();
                break;
             case "5. Custom Amount":
+               withdrawalmenu.setInvalidMessage("");
+               customAmountPanel.setInvalidMessage("");
                insertAmountGUI();
                break;
             case "6.Cancel transaction":
@@ -253,11 +266,14 @@ public class Withdrawal extends Transaction {
                withdrawalmainmenuGUI();
                break;
             case "Enter":
-               amount = Integer.parseInt(keypad.getKeypadDisplayTextField().getText());
+               amount = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
+               System.out.println(keypad.getKeypadDisplayTextField().getText());
+               System.out.println(keypad.getKeypadDisplayTextField().getText().length());
+               System.out.println(amount);
                checkAmount();
                break;
          }
-         keypad.getKeypadDisplayTextField().setText("");
+         keypad.getKeypadDisplayTextField().setText(null);
       }
    }
 
