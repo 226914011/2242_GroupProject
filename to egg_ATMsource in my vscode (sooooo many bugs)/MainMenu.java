@@ -27,6 +27,7 @@ public class MainMenu extends Screen {
 		panel.setLayout(null);
 		
 		//main menu button, size: 532 * 90
+		/*
 		JButton balanceButton = new JButton("1. View my balance");
 		balanceButton.setBounds(458, 313, 524, 90);
 		balanceButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
@@ -36,19 +37,19 @@ public class MainMenu extends Screen {
 		JButton WithdrawButton = new JButton("2. Withdraw");
 		WithdrawButton.setBounds(458, 480, 524, 90);
 		WithdrawButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		balanceButton.setFocusPainted(false);
+		WithdrawButton.setFocusPainted(false);
 		panel.add(WithdrawButton);
 		
 		JButton transferButton = new JButton("3. Transfer");
 		transferButton.setBounds(458, 644, 524, 90);
 		transferButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
-		balanceButton.setFocusPainted(false);
+		transferButton.setFocusPainted(false);
 		panel.add(transferButton);
 		
 		JButton exitButton = new JButton("4. Exit");
 		exitButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		exitButton.setBounds(458, 814, 524, 90);
-		balanceButton.setFocusPainted(false);
+		exitButton.setFocusPainted(false);
 		panel.add(exitButton);
 		
 		JLabel choiceLabel = new JLabel("Enter a choice");
@@ -56,9 +57,28 @@ public class MainMenu extends Screen {
 		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
 		choiceLabel.setBounds(458, 104, 524, 85);
 		choiceLabel.setForeground(Color.LIGHT_GRAY);
-		balanceButton.setFocusPainted(false);
+		panel.add(choiceLabel);*/
+
+		JLabel choiceLabel = new JLabel("Enter a choice");
+		choiceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		choiceLabel.setBounds(458, 104, 524, 85);
+		choiceLabel.setForeground(Color.LIGHT_GRAY);
 		panel.add(choiceLabel);
+
+		JButton Buttons[] = new JButton[4];
+		Buttons[0] = new JButton("1. View my balance");
+		Buttons[1] = new JButton("2. Withdraw");
+		Buttons[2] = new JButton("3. Transfer");
+		Buttons[3] = new JButton("4. Exit");
 		
+		for (int i = 0; i < 4; i++) {
+			Buttons[i].setFont(new Font("Arial Black", Font.PLAIN, 40));
+			Buttons[i].setBounds(458, (313 + 167 * i) , 524, 90);
+			Buttons[i].setFocusPainted(false);
+			panel.add(Buttons[i]);
+		}
+
 		//copy this
         super.getMainframe().pack();
 
