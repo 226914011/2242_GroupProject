@@ -19,6 +19,7 @@ public class Withdrawal extends Transaction {
    private InsertPagePanel customAmountPanel;
    private WithdrawedCash withdrawedCash;
    private TakeCard takeCard;
+   private ATM atm;
 
 
    // constant corresponding to menu option to cancel
@@ -29,7 +30,8 @@ public class Withdrawal extends Transaction {
    public Withdrawal(int userAccountNumber, Screen atmScreen,
          BankDatabase atmBankDatabase, Keypad atmKeypad,
          CashDispenser atmCashDispenser, Validation atmValidation, 
-         WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel, WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard) {
+         ATM theATM, WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel, 
+         WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard) {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
       
@@ -41,6 +43,7 @@ public class Withdrawal extends Transaction {
       withdrawalmenu = atmWithdrawalMenu;
       customAmountPanel = atmCustomAmountPanel;
       takeCard = atmTakeCard;
+      atm = theATM;
    } // end Withdrawal constructor
 
    // perform transaction
@@ -188,27 +191,29 @@ public class Withdrawal extends Transaction {
 
    private class WithdrawalMenuHandler implements ActionListener {
       public void actionPerformed(ActionEvent e) {
+         int userChoice[] = { 0, 100, 200, 500, 1000 };
          switch (e.getActionCommand()) {
             case "1 - $100":
-               withdrawalmenuChioce = 1;
-               break;
             case "2 - $200":
-               withdrawalmenuChioce = 2;
-               break;
             case "3 - $500":
-               withdrawalmenuChioce = 3;
-               break;
             case "4 - $1000":
-               withdrawalmenuChioce = 4;
+               amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))];
                break;
             case "5 - Custom Amount":
-               withdrawalmenuChioce = 5;
+               //display cancel GUI page and go to main menu
                break;
             case "6 - Cancel transaction":
-               withdrawalmenuChioce = 6;
+               insertAmountGUI();
                break;
          }
       }
+   }
+
+
+   public void insertAmountGUI(){
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
    }
 
 } // end class Withdrawal
