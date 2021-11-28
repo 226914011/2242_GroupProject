@@ -21,11 +21,6 @@ public class LoginSystem extends Screen {
 	private JTextField keypadDisplayTextField;
 	private JButton keys[];
 
-
-
-	/**
-	 * Create the frame.
-	 */
 	public LoginSystem() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

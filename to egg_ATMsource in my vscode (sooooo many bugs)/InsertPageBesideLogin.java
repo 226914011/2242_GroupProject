@@ -22,10 +22,6 @@ public class InsertPageBesideLogin extends Screen {
 	private JButton keys[];
 
 
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,9 +35,7 @@ public class InsertPageBesideLogin extends Screen {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public InsertPageBesideLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();

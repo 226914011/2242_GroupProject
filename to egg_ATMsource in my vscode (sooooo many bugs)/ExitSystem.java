@@ -1,10 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -14,9 +10,6 @@ public class ExitSystem extends Screen {
 	private JLabel thankByeLabel;
 	private JLabel exitsystemLablel;
 
-	/**
-	 * Create the frame.
-	 */
 	public void buildGUI()
 	{
 		exitsystemPanel = new DisplayMessageJPanel();
