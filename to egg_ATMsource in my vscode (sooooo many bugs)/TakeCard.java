@@ -1,3 +1,6 @@
+// TakeCard.java
+// Display message to remind users take their card 
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
