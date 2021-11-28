@@ -9,6 +9,7 @@ public class WithdrawalMenu extends Screen {
 
 	// private instance variables
 	private DisplayMessageJPanel withdrawalPanel;
+	private JLabel invalidMessageLabel;
 	private JLabel withMenuLabel;
 	private JButton wButtons[] = new JButton[6];
 
@@ -26,6 +27,12 @@ public class WithdrawalMenu extends Screen {
 		withMenuLabel.setForeground(Color.LIGHT_GRAY);
 		withMenuLabel.setBounds(438, 104, 532, 85);	// set boundaries of label
 		withdrawalPanel.add(withMenuLabel);	// adding label to the panel
+
+		invalidMessageLabel = new JLabel("");
+		invalidMessageLabel.setFont(new Font("Arial", Font.PLAIN, 36));	// set font properties of label
+		invalidMessageLabel.setForeground(Color.RED);
+		invalidMessageLabel.setBounds(180, 210, 1068, 56);	// set boundaries of label
+		withdrawalPanel.add(invalidMessageLabel);	// adding label to the panel
 
 		// initializing button array with text
 		wButtons[0] = new JButton("1. $100");
@@ -109,6 +116,9 @@ public class WithdrawalMenu extends Screen {
 	public JButton[] getwButtons(){
 		return wButtons;
 	}
-	
+
+	public void setInvalidMessage(String displayMessage){
+		invalidMessageLabel.setText(displayMessage);
+	}
 }
 
