@@ -226,15 +226,33 @@ public class ATM
    } // end method displayMainMenu
 
    public void exitGUI(){
+      long delay = 2000L;
+      Timer timer = new Timer("Timer");         // timer for counting 
+
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
-      exitSystem.buildGUI();
-      //userExited = true; // this ATM session should end
-      userAuthenticated = false; // reset before next ATM session
-      currentAccountNumber = 0; // reset before next ATM session
+      withdrawedCash.buildGUI();
+
+      TimerTask openExitGUI = new TimerTask() {
+         public void run(){
+            screen.getMainframe().getContentPane().removeAll();
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
+            exitSystem.buildGUI();
+            //userExited = true; // this ATM session should end
+            userAuthenticated = false; // reset before next ATM session
+            currentAccountNumber = 0; // reset before next ATM session
+         }
+      };
+
+      timer.schedule(openExitGUI, delay);
+
+      delay = 4000L;
+
       TimerTask openwelcomeTask = new TimerTask() {
          public void run() {
+            System.out.println("shit");
             accountNumber = 0;
             currentAccountNumber = 0;
             pin = 0;
@@ -245,9 +263,7 @@ public class ATM
             welcomeGUI();
          }
       };
-      Timer timer = new Timer("Timer");         // timer for counting 
       
-      long delay = 2000L;
       timer.schedule(openwelcomeTask, delay);
    }
 
