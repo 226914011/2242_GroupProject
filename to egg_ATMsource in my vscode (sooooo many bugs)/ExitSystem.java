@@ -9,38 +9,36 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class ExitSystem extends Screen {
-
-	private JPanel contentPane;
+	int secondsPassed = 30;
+	private DisplayMessageJPanel exitsystemPanel;
+	private JLabel thankByeLabel;
+	private JLabel exitsystemLable;
 
 	/**
 	 * Create the frame.
 	 */
-	public ExitSystem() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
-        
+	public void buildGUI()
+	{
+		exitsystemPanel = new DisplayMessageJPanel();
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
-		
-		JLabel ExitSystemLabel = new JLabel("Exiting the system...");
-		ExitSystemLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-		ExitSystemLabel.setBounds(50, 427, 925, 58);
-		panel.add(ExitSystemLabel);
-		
-		JLabel thankByeLabel = new JLabel("Thank you! Goodbye!");
+			super.getMainframe().getContentPane().add(exitsystemPanel);
+		super.getScreenContentPane().add(exitsystemPanel, BorderLayout.CENTER);
+
+		exitsystemPanel.add(exitsystemPanel, BorderLayout.CENTER);
+		exitsystemPanel.setPreferredSize(new Dimension(1440, 1024));
+		exitsystemPanel.setLayout(null);
+
+		exitsystemLable = new JLabel("Exiting the system...");
+		exitsystemLable.setFont(new Font("Arial", Font.PLAIN, 40));
+		exitsystemLable.setBounds(50, 427, 925, 58);
+		exitsystemPanel.add(exitsystemLable);
+
+		thankByeLabel = new JLabel("Thank you! Goodbye!");
 		thankByeLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		thankByeLabel.setBounds(50, 535, 925, 58);
-		panel.add(thankByeLabel);
+		exitsystemPanel.add(thankByeLabel);
 
-		pack();
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
 	}
-
 }
