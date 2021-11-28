@@ -61,9 +61,9 @@ public class MainMenu extends Screen {
 		 * panel.add(choiceLabel);
 		 */
 
-		JLabel choiceLabel = new JLabel("Enter a choice");
+		JLabel choiceLabel = new JLabel("Please choose an option");
 		choiceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		choiceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		choiceLabel.setBounds(458, 104, 524, 85);
 		choiceLabel.setForeground(Color.LIGHT_GRAY);
 		panel.add(choiceLabel);
