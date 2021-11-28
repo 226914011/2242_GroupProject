@@ -52,6 +52,7 @@ public class ATM
       //exitSystem = new ExitSystem();
       mainmenu = new MainMenu();
       welcome = new Welcome();
+      viewbalance = new ViewBalance();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
@@ -67,7 +68,6 @@ public class ATM
       welcome.buildGUI();
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
-      
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
@@ -207,13 +207,12 @@ public class ATM
    } // end method createTransaction
 
    public void displayBalance(String availableBalance, String totalBalance){
-      viewbalance = new ViewBalance();
       screen.getMainframe().getContentPane().removeAll();
       viewbalance.buildGUI();
       viewbalance.getABalanceTextField().setText(availableBalance);
       viewbalance.getTBalanceTextField().setText(totalBalance);
-      screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
       System.out.println("FK youuuuuuuuuuuuuuuuuuuuuuuuuuu");
    }
 

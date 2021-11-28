@@ -13,7 +13,7 @@ import javax.swing.JButton;
 
 public class ViewBalance extends Screen {
 
-	private JPanel withdrawalPanel;
+	private DisplayMessageJPanel viewbalancePanel;
 	private JTextField ABalanceTextField;
 	private JTextField TBalanceTextField;
 
@@ -28,45 +28,45 @@ public class ViewBalance extends Screen {
 		setContentPane(contentPane);*/
 	public void buildGUI()
 	{
-		withdrawalPanel = new DisplayMessageJPanel();
+		viewbalancePanel = new DisplayMessageJPanel();
 
-		super.getMainframe().getContentPane().add(withdrawalPanel);
-		super.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
+		super.getMainframe().getContentPane().add(viewbalancePanel);
+		super.getScreenContentPane().add(viewbalancePanel, BorderLayout.CENTER);
 		
 		JLabel BalanceLabel = new JLabel("Balance");
 		BalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		BalanceLabel.setFont(new Font("Arial", Font.BOLD, 64));
 		BalanceLabel.setBounds(458, 104, 524, 84);
-		withdrawalPanel.add(BalanceLabel);
+		viewbalancePanel.add(BalanceLabel);
 		
 		JLabel ABalanceLabel = new JLabel("Available Balance");
 		ABalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		ABalanceLabel.setBounds(50, 314, 544, 85);
-		withdrawalPanel.add(ABalanceLabel);
+		viewbalancePanel.add(ABalanceLabel);
 		
 		JLabel TBalanceLabel = new JLabel("Total Balance");
 		TBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		TBalanceLabel.setBounds(50, 524, 544, 85);
-		withdrawalPanel.add(TBalanceLabel);
+		viewbalancePanel.add(TBalanceLabel);
 		
 		ABalanceTextField = new JTextField();
 		ABalanceTextField.setEditable(false);
 		ABalanceTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		ABalanceTextField.setBounds(730, 313, 524, 85);
-		withdrawalPanel.add(ABalanceTextField);
 		ABalanceTextField.setColumns(10);
+		viewbalancePanel.add(ABalanceTextField);
 		
 		TBalanceTextField = new JTextField();
 		TBalanceTextField.setEditable(false);
 		TBalanceTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		TBalanceTextField.setColumns(10);
 		TBalanceTextField.setBounds(730, 524, 524, 85);
-		withdrawalPanel.add(TBalanceTextField);
+		viewbalancePanel.add(TBalanceTextField);
 		
 		JButton ReturnButton = new JButton("Return to main menu");
 		ReturnButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		ReturnButton.setBounds(458, 837, 524, 85);
-		withdrawalPanel.add(ReturnButton);
+		viewbalancePanel.add(ReturnButton);
 
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
