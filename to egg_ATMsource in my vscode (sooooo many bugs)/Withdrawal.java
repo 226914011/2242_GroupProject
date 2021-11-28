@@ -241,7 +241,11 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getScreenContentPane().add(customAmountPanel, BorderLayout.CENTER);
+      screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
 
+      keypad.setKeypadColor(true);
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
    }

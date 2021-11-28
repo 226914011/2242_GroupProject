@@ -40,8 +40,7 @@ public class Keypad
          //Absolute layout
          setLayout(null);
           
-         //transparent background
-         setOpaque(false);
+
         
          //keypad display textField
          keypadDisplayTextField = new JTextField();
@@ -123,8 +122,10 @@ public class Keypad
             keys[i].setOpaque(true);
             keys[i].setBorderPainted(false);
          }
-         
+         setBackground(new Color(56, 60, 102));
 
+         //transparent background
+         setOpaque(false);
       }
   }
   
@@ -149,10 +150,13 @@ public class Keypad
    warningLabel.setVisible(false);
   }
 
-  public void setKeypadColor(){
+  public void setKeypadColor(boolean color){
       //background with color
-      keypadJPanel.setBackground(new Color(56, 60, 102));
-      keypadJPanel.setOpaque(true);
+      if(color){
+         keypadJPanel.setOpaque(true);
+      }
+      else
+         keypadJPanel.setOpaque(false);
   }
 } // end class Keypad  
 

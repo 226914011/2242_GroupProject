@@ -13,6 +13,7 @@ public class InsertPagePanel extends JPanel{
         JLabel messageLabel = new JLabel(displayText);
         messageLabel.setFont(new Font("Arial", Font.PLAIN, 40));
         messageLabel.setBounds(50, 339, 840, 92);
+        messageLabel.setForeground(Color.LIGHT_GRAY);
         add(messageLabel);
 
         //background with color

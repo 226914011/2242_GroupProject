@@ -108,6 +108,8 @@ public class ATM
    private void loginGUI(){
       welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
+
+      keypad.setKeypadColor(false);
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
 
@@ -217,7 +219,7 @@ public class ATM
 
    } // end method displayMainMenu
 
-   private void exitGUI(){
+   public void exitGUI(){
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
