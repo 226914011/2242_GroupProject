@@ -188,6 +188,7 @@ public class ATM
       screen.exitButton.addActionListener(mainmenuHandler);*/
 
    } // end method displayMainMenu
+   
    private void withdrawalmainmenuGUI()
    {
       wButtons = withdrawalmenu.getwButtons();
@@ -213,6 +214,7 @@ public class ATM
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
             screen.getMainframe().repaint();
+
             welcomeGUI();
          }
       };
@@ -307,6 +309,9 @@ public class ATM
       public void actionPerformed(ActionEvent e){
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
          authenticateUser();
+         keypad.getKeypadDisplayTextField().setText("");
+         keys[12].removeActionListener(loginHandler);
+         keys[12].addActionListener(keypadHandler);
       }
    }
 
