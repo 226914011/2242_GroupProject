@@ -124,6 +124,8 @@ public class Keypad
          }
 
 
+         setBackground(new Color(56, 60, 102));
+
          //transparent background
          setOpaque(false);
       }

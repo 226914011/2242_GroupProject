@@ -1,27 +1,13 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.Graphics;
-
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
 
 public class TransferAccount extends Screen {
     private InsertPagePanel insertPagePanel;
     private Keypad keypad;
-    private Keypad.KeypadJPanel keypadPanel;
+    private JPanel keypadPanel;
 
     public void buildGUI(){
 
@@ -31,13 +17,14 @@ public class TransferAccount extends Screen {
         super.getScreenContentPane().add(insertPagePanel, BorderLayout.CENTER);
 
         keypad = new Keypad();
-        keypadPanel = keypad.new KeypadJPanel();
-        keypadPanel.setPreferredSize(new Dimension(550,1024));
+        keypadPanel = keypad.getKeypadJPanel();
+        keypad.setKeypadColor(true);
         super.getScreenContentPane().add(keypadPanel, BorderLayout.EAST);
 
         super.getMainframe().pack();
         super.getMainframe().repaint();
         super.getMainframe().setVisible(true);
+        
         
     }
 
