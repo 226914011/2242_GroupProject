@@ -4,36 +4,36 @@
 import javax.swing.*;
 import java.awt.*;
 
-
-public class DisplayMessageJPanel extends JPanel{
-    public DisplayMessageJPanel(){
+public class DisplayMessageJPanel extends JPanel {
+    public DisplayMessageJPanel() {
         setPreferredSize(new Dimension(1440, 1024));
-        //Absolute layout
+        // Absolute layout
         setLayout(null);
 
-
-        //background with color
+        // background with color
         setBackground(new Color(56, 60, 102));
     }
 
     /***
-    //for image background
-    @Override
-    public void paintComponent(Graphics g) {
-          super.paintComponent(g);
-          ImageIcon bgimage = new ImageIcon("withdraw_1-4.png");
-          g.drawImage(bgimage.getImage(), 0, 0, this.getWidth(), this.getHeight(),  null);
-    }
-    ***/
+     * //for image background
+     * 
+     * @Override
+     *           public void paintComponent(Graphics g) {
+     *           super.paintComponent(g);
+     *           ImageIcon bgimage = new ImageIcon("withdraw_1-4.png");
+     *           g.drawImage(bgimage.getImage(), 0, 0, this.getWidth(),
+     *           this.getHeight(), null);
+     *           }
+     ***/
 
-    //this is for testing, pls don't copy it in screen
+    // this is for testing, pls don't copy it in screen
     public static void main(String[] args) {
         JFrame mainFrame = new JFrame();
-        DisplayMessageJPanel hihi = new DisplayMessageJPanel();
+        DisplayMessageJPanel panel = new DisplayMessageJPanel();
 
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-        mainFrame.add(hihi);
+        mainFrame.add(panel);
         mainFrame.pack();
     }
 }
