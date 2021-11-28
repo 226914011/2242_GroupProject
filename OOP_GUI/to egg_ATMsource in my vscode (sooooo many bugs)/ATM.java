@@ -35,6 +35,7 @@ public class ATM
    private CancelTransaction cancelTransaction; // Cancel Transaction GUI
    private WithdrawalConfirm withdrawalConfirm; // withdrawal confirmation GUI
    private TransferAccount transferAccount;
+   private TransferAmount transferAmount;
 
 
    // constants corresponding to main menu options
@@ -80,6 +81,7 @@ public class ATM
       cancelTransaction = new CancelTransaction(); // create "Cancelling Transaction" GUI
       withdrawalConfirm = new WithdrawalConfirm(); // create withdrawal confirmation GUI
       transferAccount = new TransferAccount();
+      transferAmount = new TransferAmount();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -270,7 +272,7 @@ public class ATM
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation, transferAccount);
+               bankDatabase, keypad, validation, transferAccount, transferAmount);
             break;
       } // end switch
 
@@ -287,7 +289,7 @@ public class ATM
             case "1":
             case "2":
             case "3":
-            case "4":
+            case "4": 
             case "5":
             case "6":
             case "7":

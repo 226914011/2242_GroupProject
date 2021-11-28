@@ -1,6 +1,6 @@
 //  Transfer.java
 //  This class represents the transfer function of an ATM
-
+import java.awt.event.*;
 public class Transfer extends Transaction{
     //declare instance variable for transfer class
     private Keypad keypad;
@@ -11,13 +11,14 @@ public class Transfer extends Transaction{
     private boolean CANCELED,accValidate;
     private Validation validation;
     private TransferAccount transferAccount;
+    private TransferAmount transferAmount;
 
     //declare a int value for invalid input
     private static final int INVALID = -1;
 
 
     //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation, TransferAccount atmTransferAccount) {
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation, TransferAccount atmTransferAccount, TransferAmount atmTransferAmount) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         
         keypad = atmKeypad; // get reference
@@ -25,7 +26,11 @@ public class Transfer extends Transaction{
         bankDatabase = getBankDatabase();   // get reference
         screen = super.getScreen();   // get reference
         transferAccount = atmTransferAccount;
+        transferAmount = atmTransferAmount;
     }
+
+    
+    
 
     public void execute() {
         BankDatabase bankDatabase = getBankDatabase();
