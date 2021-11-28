@@ -22,6 +22,7 @@ public class Withdrawal extends Transaction {
    private TakeCard takeCard;
    private CancelTransaction cancelTransaction;
    private ATM atm;
+   private WithdrawalMenuHandler withdrawalHandler;
 
 
    // constant corresponding to menu option to cancel
@@ -62,8 +63,6 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().repaint();
       withdrawalmenu.buildGUI();
       withdrawalmainmenuGUI();
-
-      System.out.println("88 world");
 
       /***
       // loop until cash is dispensed or the user cancels
@@ -135,7 +134,7 @@ public class Withdrawal extends Transaction {
 
    private void withdrawalmainmenuGUI() {
       wButtons = withdrawalmenu.getwButtons();
-      WithdrawalMenuHandler withdrawalHandler = new WithdrawalMenuHandler();
+      withdrawalHandler = new WithdrawalMenuHandler();
       for (var temp : wButtons) {
          temp.addActionListener(withdrawalHandler);
       }
@@ -195,32 +194,36 @@ public class Withdrawal extends Transaction {
    } // end method displayMenuOfAmounts
 
    private class WithdrawalMenuHandler implements ActionListener {
+      @Override
       public void actionPerformed(ActionEvent e) {
          int userChoice[] = { 0, 100, 200, 500, 1000 };
          switch (e.getActionCommand()) {
-            case "1 - $100":
-            case "2 - $200":
-            case "3 - $500":
-            case "4 - $1000":
+            case "1. $100":
+            case "2. $200":
+            case "3. $500":
+            case "4. $1000":
                amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))];
                break;
-            case "5 - Custom Amount":
+            case "5. Custom Amount":
                insertAmountGUI();
                break;
-            case "6 - Cancel transaction":
+            case "6.Cancel transaction":
                //display cancel GUI page and go to main menu
                screen.getMainframe().getContentPane().removeAll();
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
                cancelTransaction.buildGUI();
                screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
                try {
-                  TimeUnit.SECONDS.sleep(1);
+                  TimeUnit.SECONDS.sleep(3);
                } catch (InterruptedException e1) {
                   // TODO Auto-generated catch block
                   e1.printStackTrace();
                }
+               atm.mainmenuGUI();
                break;
+            default: break;
          }
       }
    }
