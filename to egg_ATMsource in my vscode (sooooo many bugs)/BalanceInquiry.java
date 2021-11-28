@@ -1,6 +1,7 @@
 // BalanceInquiry.java
 // Represents a balance inquiry ATM transaction
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -14,10 +15,11 @@ public class BalanceInquiry extends Transaction
 
    // BalanceInquiry constructor
    public BalanceInquiry( int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase , ViewBalance atmViewBalance)
+      BankDatabase atmBankDatabase, ATM theATM , ViewBalance atmViewBalance)
    {
       super( userAccountNumber, atmScreen, atmBankDatabase );
       screen = super.getScreen();
+      atm = theATM;
       viewBalance = atmViewBalance;
    } // end BalanceInquiry constructor
 
@@ -41,7 +43,19 @@ public class BalanceInquiry extends Transaction
       viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
+
+      ViewBalanceHandler viewBalanceHandler = new ViewBalanceHandler();
+      viewBalance.getButton().addActionListener(viewBalanceHandler);
    } // end method execute
+
+   private class ViewBalanceHandler implements ActionListener{
+      public void actionPerformed(ActionEvent e) {
+         screen.getMainframe().getContentPane().removeAll();
+         screen.getMainframe().repaint();
+         screen.getMainframe().revalidate();
+         atm.mainmenuGUI();
+      }
+   }
 } // end class BalanceInquiry
 
 

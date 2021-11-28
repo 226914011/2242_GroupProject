@@ -133,9 +133,6 @@ public class ATM
       {
          currentAccountNumber = accountNumber; // save user's account #
          screen.getMainframe().getContentPane().removeAll();
-         mainmenu.buildGUI();
-         screen.getMainframe().revalidate();
-         screen.getMainframe().repaint();
          mainmenuGUI();
       } // end if
       else{
@@ -187,8 +184,13 @@ public class ATM
    } // end method performTransactions
 
    // display the main menu and return an input selection
-   private void mainmenuGUI()
+   public void mainmenuGUI()
    {
+      
+      mainmenu.buildGUI();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+
       Buttons = mainmenu.getButtons();
       MainmenuHandler mainmenuHandler = new MainmenuHandler();
       for (var temp : Buttons){
@@ -248,7 +250,7 @@ public class ATM
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase, viewbalance);
+               currentAccountNumber, screen, bankDatabase, this, viewbalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
