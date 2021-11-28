@@ -3,33 +3,29 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
+// GUI WithdrawalMenu inherits Screen
 public class WithdrawalMenu extends Screen {
 
+	// private instance variables
 	private DisplayMessageJPanel withdrawalPanel;
 	private JLabel withMenuLabel;
-	/*
-	private JButton w100Button;
-	private JButton w200Button;
-	private JButton w500Button;
-	private JButton w1000Button;
-	private JButton wCustomButton;
-	private JButton wCancelButton;
-	*/
-
 	private JButton wButtons[] = new JButton[6];
 
+	// method for building GUI Components
 	public void buildGUI()
 	{
-		withdrawalPanel = new DisplayMessageJPanel();
+		withdrawalPanel = new DisplayMessageJPanel();		// initializing Withdrawal Menu Panel
 
+		// inherits from superclass Screen to get mainframe and panel, and adding the current panel
 		super.getMainframe().getContentPane().add(withdrawalPanel);
 		super.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
 		
-		withMenuLabel = new JLabel("Withdrawal Menu");
-		withMenuLabel.setFont(new Font("Arial", Font.PLAIN, 64));
-		withMenuLabel.setBounds(438, 104, 532, 85);
-		withdrawalPanel.add(withMenuLabel);
+		withMenuLabel = new JLabel("Withdrawal Menu");	// initializing label with text
+		withMenuLabel.setFont(new Font("Arial", Font.PLAIN, 64));	// set font properties of label
+		withMenuLabel.setBounds(438, 104, 532, 85);	// set boundaries of label
+		withdrawalPanel.add(withMenuLabel);	// adding label to the panel
 
+		// initializing button array with text
 		wButtons[0] = new JButton("1. $100");
 		wButtons[1] = new JButton("2. $200");
 		wButtons[2] = new JButton("3. $500");
@@ -37,6 +33,7 @@ public class WithdrawalMenu extends Screen {
 		wButtons[4] = new JButton("5. Custom Amount");
 		wButtons[5] = new JButton("6.Cancel transaction");
 
+		// for loop setting up buttons 
 		for (int i = 0; i < 4; i++) {
 			wButtons[i].setFont(new Font("Arial", Font.PLAIN, 40));
 			if(i < 3)
@@ -78,6 +75,7 @@ public class WithdrawalMenu extends Screen {
 		withdrawalPanel.add(wCancelButton);
 		*/
 		
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}

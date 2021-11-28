@@ -43,7 +43,6 @@ public class Withdrawal extends Transaction {
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
       Screen screen = getScreen();
-      System.out.println("hihih");
       screen.getMainframe().getContentPane().removeAll();
       withdrawalmenu.buildGUI();
       screen.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
@@ -51,7 +50,7 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
       withdrawalmainmenuGUI();
-      System.out.println("hihi");
+
       // loop until cash is dispensed or the user cancels
       do {
          // obtain a chosen withdrawal amount from the user
