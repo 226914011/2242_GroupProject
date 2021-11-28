@@ -32,23 +32,25 @@ public class BalanceInquiry extends Transaction
       double totalBalance = 
          bankDatabase.getTotalBalance( getAccountNumber() );
 
+      // remove all the components in the current content panel of the main frame
       screen.getMainframe().getContentPane().removeAll();
-      viewBalance.buildGUI();
-      viewBalance.getABalanceTextField().setText(String.valueOf(availableBalance));
-      viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));
+      viewBalance.buildGUI();  // method for building GUI of viewing account balance
+      viewBalance.getABalanceTextField().setText(String.valueOf(availableBalance));    // get method to receive account available balance and changed to String type
+      viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));        // get method to receive account total balance and changed to String type
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
 
-      ViewBalanceHandler viewBalanceHandler = new ViewBalanceHandler();
-      viewBalance.getButton().addActionListener(viewBalanceHandler);
+      ViewBalanceHandler viewBalanceHandler = new ViewBalanceHandler();   // create event handler for viewing balance
+      viewBalance.getButton().addActionListener(viewBalanceHandler);      // register button for event handler
    } // end method execute
 
+   // private inner class ViewBalanceHandler for event handling
    private class ViewBalanceHandler implements ActionListener{
       public void actionPerformed(ActionEvent e) {
-         screen.getMainframe().getContentPane().removeAll();
-         screen.getMainframe().repaint();
-         screen.getMainframe().revalidate();
-         atm.mainmenuGUI();
+         screen.getMainframe().getContentPane().removeAll();   // remove all the components in the content panel
+         screen.getMainframe().repaint();                      // refresh the frame
+         screen.getMainframe().revalidate();                   // validate the frame
+         atm.mainmenuGUI();                                    // return to main menu
       }
    }
 } // end class BalanceInquiry
