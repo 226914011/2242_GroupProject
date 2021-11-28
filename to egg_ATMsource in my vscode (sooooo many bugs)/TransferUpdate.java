@@ -1,7 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -55,6 +52,7 @@ public class TransferUpdate extends Screen {
 		backButton.setBounds(574, 835, 292, 85);
 		transferUpdatePanel.add(backButton);
 		
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}
@@ -82,5 +80,5 @@ public class TransferUpdate extends Screen {
 	public JButton getBackButton(){
 		return backButton;
 	}
-	 
+	
 }
