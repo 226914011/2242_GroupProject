@@ -289,7 +289,7 @@ public class ATM
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
                keypad.getKeypadDisplayTextField().setText("");
-               loginCardNumberPanel.cancelInvalidMessage(false);
+               loginCardNumberPanel.invalidMessage(false);
                keypad.closeWarning();
 
                authenticateUser(true);
