@@ -339,7 +339,7 @@ public class ATM
       public void actionPerformed(ActionEvent e) {
          switch(e.getActionCommand()){
             case "1. View my balance": menuChioce = 1; break;
-            case "2. Withdraw": menuChioce = 2; break;
+            case "2. Withdrawal": menuChioce = 2; break;
             case "3. Transfer": menuChioce = 3; break;
             case "4. Exit": menuChioce = 4; break;
          }
