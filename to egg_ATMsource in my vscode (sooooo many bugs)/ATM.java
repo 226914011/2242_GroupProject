@@ -30,7 +30,6 @@ public class ATM
    private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private ViewBalance viewbalance;
-   private
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -236,7 +235,7 @@ public class ATM
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
-               bankDatabase, keypad, cashDispenser, validation);
+               bankDatabase, keypad, cashDispenser, validation, withdrawalmenu);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
