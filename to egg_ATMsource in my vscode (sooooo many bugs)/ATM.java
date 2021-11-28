@@ -24,6 +24,7 @@ public class ATM
    private boolean firstInitialize;
    private int accountNumber;
    private JButton keys [];
+   private JButton Buttons [];
    private KeypadHandler keypadHandler;
    private LoginHandler loginHandler;
    private int pin;
@@ -108,12 +109,10 @@ public class ATM
       {
          currentAccountNumber = accountNumber; // save user's account #
          screen.getMainframe().getContentPane().removeAll();
-         screen.getMainframe().revalidate();
-         screen.getMainframe().repaint();
-
          mainmenu.buildGUI();
          screen.getMainframe().revalidate();
          screen.getMainframe().repaint();
+         mainmenuGUI();
       } // end if
       else{
          //need change
@@ -164,17 +163,19 @@ public class ATM
    } // end method performTransactions
    
    // display the main menu and return an input selection
-   private void displayMainMenu()
+   private void mainmenuGUI()
    {
-      /**
-      screen.menuGUI();
-
+      Buttons = mainmenu.getButtons();
       MainmenuHandler mainmenuHandler = new MainmenuHandler(); 
+      for (var temp : Buttons){
+         temp.addActionListener(mainmenuHandler);
+      }
+
+      /*
       screen.balanceButton.addActionListener(mainmenuHandler);
       screen.withdrawButton.addActionListener(mainmenuHandler);
       screen.transferButton.addActionListener(mainmenuHandler);
-      screen.exitButton.addActionListener(mainmenuHandler);
-      **/
+      screen.exitButton.addActionListener(mainmenuHandler);*/
 
    } // end method displayMainMenu
          

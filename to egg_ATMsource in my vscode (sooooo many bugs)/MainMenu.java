@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 
 public class MainMenu extends Screen {
 
+	private JButton Buttons[] = new JButton[4];
+
 	public void buildGUI() {
 		DisplayMessageJPanel panel = new DisplayMessageJPanel();
         super.getMainframe().getContentPane().add(panel);
@@ -66,7 +68,6 @@ public class MainMenu extends Screen {
 		choiceLabel.setForeground(Color.LIGHT_GRAY);
 		panel.add(choiceLabel);
 
-		JButton Buttons[] = new JButton[4];
 		Buttons[0] = new JButton("1. View my balance");
 		Buttons[1] = new JButton("2. Withdraw");
 		Buttons[2] = new JButton("3. Transfer");
@@ -82,5 +83,9 @@ public class MainMenu extends Screen {
 		//copy this
         super.getMainframe().pack();
 
+	}
+
+	public JButton[] getButtons(){
+		return Buttons;
 	}
 }
