@@ -30,6 +30,7 @@ public class ATM
    private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private ViewBalance viewbalance;
+   private TransferAccount transferAccount;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -65,6 +66,7 @@ public class ATM
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
       loginHandler= new LoginHandler();
+      transferAccount = new TransferAccount();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -258,13 +260,12 @@ public class ATM
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation);
+               bankDatabase, keypad, validation, transferAccount);
             break;
       } // end switch
 
       return temp; // return the newly created object
    } // end method createTransaction
-
 
 
    private class KeypadHandler implements ActionListener{
