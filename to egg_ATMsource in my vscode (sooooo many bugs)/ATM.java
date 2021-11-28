@@ -235,7 +235,7 @@ public class ATM
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
-      withdrawedCash.buildGUI();
+      takeCard.buildGUI();
 
       TimerTask openExitGUI = new TimerTask() {
          public void run(){
