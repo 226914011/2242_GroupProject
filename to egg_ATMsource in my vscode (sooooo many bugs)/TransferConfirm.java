@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -24,11 +25,13 @@ public class TransferConfirm extends Screen {
 		accountNumLabel = new JLabel("The account number for Transfer:");
 		accountNumLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		accountNumLabel.setBounds(50, 313, 605, 82);
+		accountNumLabel.setForeground(Color.LIGHT_GRAY);
 		transferConfirmPanel.add(accountNumLabel);
 		
 		transferAmountLabel = new JLabel("Your transfer amount:");
 		transferAmountLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		transferAmountLabel.setBounds(50, 531, 925, 85);
+		transferAmountLabel.setForeground(Color.LIGHT_GRAY);
 		transferConfirmPanel.add(transferAmountLabel);
 		
 		accountNumTextField = new JTextField();

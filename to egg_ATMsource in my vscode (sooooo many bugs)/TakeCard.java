@@ -4,6 +4,7 @@
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Color;
 
 public class TakeCard extends Screen {
 
@@ -18,6 +19,7 @@ public class TakeCard extends Screen {
 		takeCardLabel = new JLabel("Please take your card now.");
 		takeCardLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		takeCardLabel.setBounds(50, 471, 925, 58);
+		takeCardLabel.setForeground(Color.LIGHT_GRAY);
 		takeCardPanel.add(takeCardLabel);
 
 		super.getMainframe().setVisible(true);

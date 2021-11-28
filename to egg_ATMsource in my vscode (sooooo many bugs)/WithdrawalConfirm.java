@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -25,11 +26,13 @@ public class WithdrawalConfirm extends Screen {
 		amountWLabel = new JLabel("The amount for withdrawal");
 		amountWLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		amountWLabel.setBounds(50, 313, 932, 82);
+		amountWLabel.setForeground(Color.LIGHT_GRAY);
 		withConfirmPanel.add(amountWLabel);
 
 		confirmationLabel = new JLabel("Withdrawal Confirmation");
 		confirmationLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 40));
 		confirmationLabel.setBounds(506, 53, 500, 82);
+		confirmationLabel.setForeground(Color.LIGHT_GRAY);
 		withConfirmPanel.add(confirmationLabel);
 
 		withAmountTextField = new JTextField();

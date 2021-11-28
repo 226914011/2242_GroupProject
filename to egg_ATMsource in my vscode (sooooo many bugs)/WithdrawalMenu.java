@@ -29,9 +29,9 @@ public class WithdrawalMenu extends Screen {
 		withdrawalPanel.add(withMenuLabel);	// adding label to the panel
 
 		invalidMessageLabel = new JLabel("");
-		invalidMessageLabel.setFont(new Font("Arial", Font.PLAIN, 36));	// set font properties of label
+		invalidMessageLabel.setFont(new Font("Arial", Font.PLAIN, 25));	// set font properties of label
 		invalidMessageLabel.setForeground(Color.RED);
-		invalidMessageLabel.setBounds(180, 210, 1068, 56);	// set boundaries of label
+		invalidMessageLabel.setBounds(180, 200, 1068, 90);	// set boundaries of label
 		withdrawalPanel.add(invalidMessageLabel);	// adding label to the panel
 
 		// initializing button array with text

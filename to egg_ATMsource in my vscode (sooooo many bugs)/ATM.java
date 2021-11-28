@@ -80,6 +80,8 @@ public class ATM
       cancelTransaction = new CancelTransaction(); // create "Cancelling Transaction" GUI
       withdrawalConfirm = new WithdrawalConfirm(); // create withdrawal confirmation GUI
       transferAccount = new TransferAccount();
+      transferConfirm = new TransferConfirm();
+      withdrawalConfirm = new WithdrawalConfirm();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -282,7 +284,7 @@ public class ATM
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen, 
                bankDatabase, keypad, cashDispenser, validation, this, withdrawalmenu, 
-               customAmountPanel, withdrawedCash, takeCard, cancelTransaction);
+               customAmountPanel, withdrawedCash, takeCard, cancelTransaction, withdrawalConfirm);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
