@@ -33,6 +33,7 @@ public class ATM
    private LoginHandler loginHandler;  // Event Handler for login page
    private ViewBalance viewbalance; // Balance Inquiry GUI
    private CancelTransaction cancelTransaction; // Cancel Transaction GUI
+   private WithdrawalConfirm withdrawalConfirm; // withdrawal confirmation GUI
 
 
    // constants corresponding to main menu options
@@ -76,6 +77,7 @@ public class ATM
       takeCard = new TakeCard(); // create "Please take your card" GUI
       withdrawedCash = new WithdrawedCash(); // create "Please take your cash" GUI
       cancelTransaction = new CancelTransaction(); // create "Cancelling Transaction" GUI
+      withdrawalConfirm = new WithdrawalConfirm(); // create withdrawal confirmation GUI
    } // end no-argument ATM constructor
 
    // start ATM
