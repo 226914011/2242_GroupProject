@@ -16,6 +16,10 @@ public class Withdrawal extends Transaction {
    private WithdrawalMenu withdrawalmenu;
    private Screen screen;
    private DisplayMessageJPanel withdrawalPanel;
+   private InsertPagePanel customAmountPanel;
+   private WithdrawedCash withdrawedCash;
+   private TakeCard takeCard;
+
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
@@ -24,14 +28,19 @@ public class Withdrawal extends Transaction {
    // Withdrawal constructor
    public Withdrawal(int userAccountNumber, Screen atmScreen,
          BankDatabase atmBankDatabase, Keypad atmKeypad,
-         CashDispenser atmCashDispenser, Validation atmValidation, WithdrawalMenu withdrawalMenu) {
+         CashDispenser atmCashDispenser, Validation atmValidation, 
+         WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel, WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard) {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
-      withdrawalmenu = withdrawalMenu;
+      
       // initialize references to keypad and cash dispenser
       keypad = atmKeypad;
+      screen = super.getScreen();
       validation = atmValidation;
       cashDispenser = atmCashDispenser;
+      withdrawalmenu = atmWithdrawalMenu;
+      customAmountPanel = atmCustomAmountPanel;
+      takeCard = atmTakeCard;
    } // end Withdrawal constructor
 
    // perform transaction
@@ -42,15 +51,13 @@ public class Withdrawal extends Transaction {
 
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      screen = super.getScreen();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
       withdrawalmenu.buildGUI();
-      screen.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
-      screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
       withdrawalmainmenuGUI();
 
+      /***
       // loop until cash is dispensed or the user cancels
       do {
          // obtain a chosen withdrawal amount from the user
@@ -114,6 +121,7 @@ public class Withdrawal extends Transaction {
             return; // return to main menu because user canceled
          } // end else
       } while (!cashDispensed);
+      ***/
 
    } // end method execute
 
@@ -202,6 +210,7 @@ public class Withdrawal extends Transaction {
          }
       }
    }
+
 } // end class Withdrawal
 
 /**************************************************************************

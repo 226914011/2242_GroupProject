@@ -42,8 +42,6 @@ public class Keypad
           
          //transparent background
          setOpaque(false);
-          
-          
         
          //keypad display textField
          keypadDisplayTextField = new JTextField();

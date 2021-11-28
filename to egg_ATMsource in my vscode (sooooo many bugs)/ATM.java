@@ -22,8 +22,11 @@ public class ATM
    private WithdrawalMenu withdrawalmenu;
    private Welcome welcome;
    private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;
+   private InsertPagePanel transferTargetAccPanel, transferEnterAmountPanel, customAmountPanel;
+   private TransferConfirm transferConfirm;
+   private TakeCard takeCard;
+   private WithdrawedCash withdrawedCash;
    private static int menuChioce,withdrawalmenuChioce;
-   private boolean firstInitialize;
    private int accountNumber,pin,ScreenNum;
    private JButton keys [],Buttons [],wButtons [];
    private KeypadHandler keypadHandler;
@@ -50,7 +53,6 @@ public class ATM
    public ATM()
    {
       userAuthenticated = false; // user is not authenticated to start
-      firstInitialize = true;
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad
@@ -61,10 +63,17 @@ public class ATM
       mainmenu = new MainMenu();
       welcome = new Welcome();
       viewbalance = new ViewBalance();
+      withdrawalmenu = new WithdrawalMenu();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
       loginHandler= new LoginHandler();
+      transferEnterAmountPanel = new InsertPagePanel("<html>please enter the account to transfer!<br/><br/>(It will ignore after two decimal point):</html>");
+      transferTargetAccPanel = new InsertPagePanel("Please enter the account number for transfer:");
+      customAmountPanel = new InsertPagePanel("Please input your custom amount:");
+      transferConfirm = new TransferConfirm();
+      takeCard = new TakeCard();
+      withdrawedCash = new WithdrawedCash();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -252,8 +261,9 @@ public class ATM
                currentAccountNumber, screen, bankDatabase, this, viewbalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
-            temp = new Withdrawal( currentAccountNumber, screen,
-               bankDatabase, keypad, cashDispenser, validation, withdrawalmenu);
+            temp = new Withdrawal( currentAccountNumber, screen, 
+               bankDatabase, keypad, cashDispenser, validation, withdrawalmenu, 
+               customAmountPanel, withdrawedCash, takeCard);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
@@ -315,9 +325,9 @@ public class ATM
       @Override
       public void actionPerformed(ActionEvent e){
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
-         authenticateUser(false);
          keypad.getKeypadDisplayTextField().setText("");
          loginCardNumberPanel.invalidMessage(false);
+         authenticateUser(false);
       }
    }
 
@@ -330,21 +340,6 @@ public class ATM
             case "4. Exit": menuChioce = 4; break;
          }
          performTransactions();
-
-         /***
-         if (e.getSource() == balanceButton){
-            menuChioce = 1;
-         }
-         else if (e.getSource() == WithdrawButton){
-            menuChioce = 2;
-         }
-         else if (e.getSource() == transferButton){
-            menuChioce = 3;
-         }
-         else if (e.getSource() == exitButton){
-            menuChioce = 4;
-         }
-         ***/
      }
    }
    private class WithdrawalMenuHandler implements ActionListener {
