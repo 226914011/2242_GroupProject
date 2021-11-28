@@ -61,6 +61,7 @@ public class TransferConfirm extends Screen {
 		btnCancel.setBounds(982, 836, 292, 84);
 		transferConfirmPanel.add(btnCancel);
 		
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}

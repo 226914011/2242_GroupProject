@@ -29,6 +29,7 @@ public class Welcome extends Screen{
 		touchLabel.setForeground(Color.LIGHT_GRAY);
 		welcomePanel.add(touchLabel);
 
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}

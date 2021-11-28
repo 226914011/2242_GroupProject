@@ -1,42 +1,28 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
 public class TakeCard extends Screen {
 
-	private JPanel contentPane;
+	private DisplayMessageJPanel takeCardPanel;
+	private JLabel takeCardLabel;
 
+	public void buildGUI() {
+		takeCardPanel = new DisplayMessageJPanel();	
+		super.getMainframe().getContentPane().add(takeCardPanel);
+		super.getScreenContentPane().add(takeCardPanel, BorderLayout.CENTER);
 
-	/**
-	 * Create the frame.
-	 */
-	public TakeCard() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
-        
+		takeCardLabel = new JLabel("Please take your card now.");
+		takeCardLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		takeCardLabel.setBounds(50, 471, 925, 58);
+		takeCardPanel.add(takeCardLabel);
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
-		
-		JLabel TakeCardLabel = new JLabel("Please take your card now.");
-		TakeCardLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-		TakeCardLabel.setBounds(50, 471, 925, 58);
-		panel.add(TakeCardLabel);
-
-		pack();
+		super.getMainframe().setVisible(true);
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
 	}
 
+	public JLabel getTakeCardLabel(){
+		return takeCardLabel;
+	}
 }
