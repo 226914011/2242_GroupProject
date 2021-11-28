@@ -33,6 +33,7 @@ public class ATM
    private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private ViewBalance viewbalance;
+   private CancelTransaction cancelTransaction;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -74,6 +75,7 @@ public class ATM
       transferConfirm = new TransferConfirm();
       takeCard = new TakeCard();
       withdrawedCash = new WithdrawedCash();
+      cancelTransaction = new CancelTransaction();
    } // end no-argument ATM constructor
 
    // start ATM

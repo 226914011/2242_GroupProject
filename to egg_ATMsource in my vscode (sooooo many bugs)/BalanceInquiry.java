@@ -1,11 +1,6 @@
 // BalanceInquiry.java
 // Represents a balance inquiry ATM transaction
-import java.awt.*;
 import java.awt.event.*;
-
-import javax.swing.*;
-import javax.swing.text.*;
-import javax.swing.JTextField;
 
 public class BalanceInquiry extends Transaction
 {  
