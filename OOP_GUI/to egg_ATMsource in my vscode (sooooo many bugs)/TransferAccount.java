@@ -29,7 +29,6 @@ public class TransferAccount extends Screen {
         super.getMainframe().getContentPane().add(insertPagePanel);
 
         super.getScreenContentPane().add(insertPagePanel, BorderLayout.CENTER);
-        insertPagePanel.setPreferredSize(new Dimension(890,1024));
 
         keypad = new Keypad();
         keypadPanel = keypad.new KeypadJPanel();
@@ -40,5 +39,10 @@ public class TransferAccount extends Screen {
         super.getMainframe().repaint();
         super.getMainframe().setVisible(true);
         
+    }
+
+    public static void main(String[] args) {
+        TransferAccount transferAccount = new TransferAccount();
+        transferAccount.buildGUI();
     }
 }
