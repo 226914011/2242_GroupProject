@@ -1,83 +1,62 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class WithdrawalConfirm extends JFrame {
+public class WithdrawalConfirm extends Screen {
 
-	private JPanel contentPane;
+	private DisplayMessageJPanel withConfirmPanel;
 	private JTextField withAmountTextField;
+	private JLabel amountWLabel;
+	private JLabel confirmationLabel;
+	private JButton confirmButton;
+	private JButton reEnterButton;
+	private JButton cancelButton;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WithdrawalConfirm frame = new WithdrawalConfirm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public WithdrawalConfirm() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
-        
+		withConfirmPanel = new DisplayMessageJPanel();	// initialize withConfirmPanel
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
+		// inherits from superclass Screen to get mainframe and panel, and adding the current panel
+        super.getMainframe().getContentPane().add(withConfirmPanel);	
+		super.getScreenContentPane().add(withConfirmPanel, BorderLayout.CENTER);
 		
-		JLabel amountWLabel = new JLabel("The amount for withdrawal");
+		amountWLabel = new JLabel("The amount for withdrawal");
 		amountWLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		amountWLabel.setBounds(50, 313, 932, 82);
-		panel.add(amountWLabel);
-		
+		withConfirmPanel.add(amountWLabel);
+
+		confirmationLabel = new JLabel("Withdrawal Confirmation");
+		confirmationLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 40));
+		confirmationLabel.setBounds(506, 53, 500, 82);
+		withConfirmPanel.add(confirmationLabel);
+
 		withAmountTextField = new JTextField();
 		withAmountTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		withAmountTextField.setEditable(false);
 		withAmountTextField.setBounds(730, 313, 524, 85);
-		panel.add(withAmountTextField);
 		withAmountTextField.setColumns(10);
+		withConfirmPanel.add(withAmountTextField);
 		
-		JButton confirmButton = new JButton("Confirm");
+		confirmButton = new JButton("Confirm");
 		confirmButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		confirmButton.setBounds(166, 836, 292, 84);
-		panel.add(confirmButton);
+		withConfirmPanel.add(confirmButton);
 		
-		JButton reEnterButton = new JButton("Re-enter");
+		reEnterButton = new JButton("Re-enter");
 		reEnterButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		reEnterButton.setBounds(574, 836, 292, 84);
-		panel.add(reEnterButton);
+		withConfirmPanel.add(reEnterButton);
 		
-		JButton cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancel");
 		cancelButton.setFont(new Font("Arial Black", Font.PLAIN, 40));
 		cancelButton.setBounds(982, 836, 292, 84);
-		panel.add(cancelButton);
+		withConfirmPanel.add(cancelButton);
 		
-		JLabel confirmationLabel = new JLabel("Withdrawal Confirmation");
-		confirmationLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 40));
-		confirmationLabel.setBounds(506, 53, 500, 82);
-		panel.add(confirmationLabel);
+		super.getMainframe().setVisible(true);		// set the panel to visible
+		super.getMainframe().pack();				// set the frame to fit the preferred size
+		super.getMainframe().repaint();				// refresh the frame
 
-		pack();
 	}
 }
