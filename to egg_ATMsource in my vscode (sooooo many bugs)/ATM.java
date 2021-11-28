@@ -6,7 +6,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class ATM 
+public class ATM
 {
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
@@ -23,11 +23,14 @@ public class ATM
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
+   private static int withdrawalmenuChioce;
    private boolean firstInitialize;
    private int accountNumber;
    private JButton keys [];
    private JButton Buttons [];
+   private JButton wButtons [];
    private KeypadHandler keypadHandler;
+   private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private int pin;
    private ViewBalance viewBalance;
@@ -40,13 +43,13 @@ public class ATM
    private static final int INVALID = -1;
 
    // no-argument ATM constructor initializes instance variables
-   public ATM() 
+   public ATM()
    {
       userAuthenticated = false; // user is not authenticated to start
       firstInitialize = true;
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
-      keypad = new Keypad(); // create keypad 
+      keypad = new Keypad(); // create keypad
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
@@ -61,7 +64,7 @@ public class ATM
       viewBalance = new ViewBalance();
    } // end no-argument ATM constructor
 
-   // start ATM 
+   // start ATM
    public void run()
    {
       keys = keypad.getKeys();
@@ -70,6 +73,7 @@ public class ATM
       welcome.buildGUI();
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
+
       welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
@@ -78,20 +82,20 @@ public class ATM
       });
       /**
       // loop while user is not yet authenticated
-      while ( !userAuthenticated ) 
+      while ( !userAuthenticated )
       {
-         screen.displayMessageLine( "\nWelcome!" );       
+         screen.displayMessageLine( "\nWelcome!" );
          authenticateUser(); // authenticate user
-      } // end while  
+      } // end while
       **/
-      //displayMainMenu(); // user is now authenticated 
+      //displayMainMenu(); // user is now authenticated
    } // end method run
 
    private void loginGUI(){
       screen.getMainframe().getContentPane().removeAll();
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
-      
+
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
@@ -103,11 +107,11 @@ public class ATM
    }
 
    // attempts to authenticate user against database
-   private void authenticateUser() 
+   private void authenticateUser()
    {
-      userAuthenticated = 
+      userAuthenticated =
          bankDatabase.authenticateUser( accountNumber, pin );
-      
+
       // check whether authentication succeeded
       if ( userAuthenticated )
       {
@@ -130,13 +134,13 @@ public class ATM
    } // end method authenticateUser
 
    // display the main menu and perform transactions
-   private void performTransactions() 
+   private void performTransactions()
    {
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
-      
+
       boolean userExited = false; // user has not chosen to exit
-  
+
       // show main menu and get user selection
       int mainMenuSelection = menuChioce;
 
@@ -144,33 +148,33 @@ public class ATM
       switch ( mainMenuSelection )
       {
          // user chose to perform one of three transaction types
-         case BALANCE_INQUIRY: 
-         case WITHDRAWAL: 
+         case BALANCE_INQUIRY:
+         case WITHDRAWAL:
          case TRANSFER:
             // initialize as new object of chosen type
-            currentTransaction = 
+            currentTransaction =
                createTransaction( mainMenuSelection );
-            currentTransaction.execute(); // execute transaction    
-            break; 
+            currentTransaction.execute(); // execute transaction
+            break;
          case EXIT: // user chose to terminate session
             screen.displayMessageLine( "\nExiting the system..." );
             userExited = true; // this ATM session should end
             userAuthenticated = false; // reset before next ATM session
-            currentAccountNumber = 0; // reset before next ATM session 
-            screen.displayMessageLine( "\nThank you! Goodbye!" );      
+            currentAccountNumber = 0; // reset before next ATM session
+            screen.displayMessageLine( "\nThank you! Goodbye!" );
             System.exit(1); //exit programme
          default: // user did not enter an integer from 1-4
-            screen.displayMessageLine( 
+            screen.displayMessageLine(
                "\nYou did not enter a valid selection. Try again." );
             break;
       } // end switch
    } // end method performTransactions
-   
+
    // display the main menu and return an input selection
    private void mainmenuGUI()
    {
       Buttons = mainmenu.getButtons();
-      MainmenuHandler mainmenuHandler = new MainmenuHandler(); 
+      MainmenuHandler mainmenuHandler = new MainmenuHandler();
       for (var temp : Buttons){
          temp.addActionListener(mainmenuHandler);
       }
@@ -182,25 +186,32 @@ public class ATM
       screen.exitButton.addActionListener(mainmenuHandler);*/
 
    } // end method displayMainMenu
-         
+   private void withdrawalmainmenuGUI()
+   {
+      wButtons = withdrawalmenu.getwButtons();
+      WithdrawalMenuHandler withdrawalHandler = new WithdrawalMenuHandler();
+      for (var temp : wButtons){
+         temp.addActionListener(withdrawalHandler);
+      }
+   }
    // return object of specified Transaction subclass
    private Transaction createTransaction( int type )
    {
       Transaction temp = null; // temporary Transaction variable
-      
-      // determine which type of Transaction to create     
+
+      // determine which type of Transaction to create
       switch ( type )
       {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
-            temp = new BalanceInquiry( 
+            temp = new BalanceInquiry(
                currentAccountNumber, screen, bankDatabase, viewBalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
-            temp = new Withdrawal( currentAccountNumber, screen, 
+            temp = new Withdrawal( currentAccountNumber, screen,
                bankDatabase, keypad, cashDispenser, validation);
             break;
          case TRANSFER:
-            temp = new Transfer(currentAccountNumber, screen, 
+            temp = new Transfer(currentAccountNumber, screen,
                bankDatabase, keypad, validation);
             break;
       } // end switch
@@ -223,7 +234,7 @@ public class ATM
             case "6":
             case "7":
             case "8":
-            case "9": 
+            case "9":
                keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                break;
             case ".":
@@ -280,7 +291,8 @@ public class ATM
             case "4. Exit": menuChioce = 4; break;
          }
          performTransactions();
-         /*** 
+
+         /***
          if (e.getSource() == balanceButton){
             menuChioce = 1;
          }
@@ -295,6 +307,18 @@ public class ATM
          }
          ***/
      }
+   }
+   private class WithdrawalMenuHandler implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+         switch (e.getActionCommand()) {
+            case "1 - $100":withdrawalmenuChioce = 1;break;
+            case "2 - $200":withdrawalmenuChioce =2;break;
+            case "3 - $500":withdrawalmenuChioce =3;break;
+            case "4 - $1000":withdrawalmenuChioce =4;break;
+            case "5 - Custom Amount":withdrawalmenuChioce =5;break;
+            case "6 - Cancel transaction":withdrawalmenuChioce =6;break;
+         }
+      }
    }
 } // end class ATM
 

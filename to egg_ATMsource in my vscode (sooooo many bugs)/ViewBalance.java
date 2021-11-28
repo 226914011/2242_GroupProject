@@ -1,7 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -39,16 +39,19 @@ public class ViewBalance extends Screen {
 		BalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		BalanceLabel.setFont(new Font("Arial", Font.BOLD, 64));
 		BalanceLabel.setBounds(458, 104, 524, 84);
+		BalanceLabel.setForeground(Color.LIGHT_GRAY);
 		viewbalancePanel.add(BalanceLabel);
 		
 		JLabel ABalanceLabel = new JLabel("Available Balance");
 		ABalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		ABalanceLabel.setBounds(50, 314, 544, 85);
+		ABalanceLabel.setForeground(Color.LIGHT_GRAY);
 		viewbalancePanel.add(ABalanceLabel);
 		
 		JLabel TBalanceLabel = new JLabel("Total Balance");
 		TBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		TBalanceLabel.setBounds(50, 524, 544, 85);
+		TBalanceLabel.setForeground(Color.LIGHT_GRAY);
 		viewbalancePanel.add(TBalanceLabel);
 		
 		ABalanceTextField = new JTextField();
