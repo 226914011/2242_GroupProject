@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-// Welcome class inherits Screen
+// GUI Welcome inherits Screen
 public class Welcome extends Screen{
 
 	//private instance variables
@@ -15,16 +15,17 @@ public class Welcome extends Screen{
 	private DisplayMessageJPanel welcomePanel;	// DisplayMessageJPanel class for creating welcomepanel with size and bg color 
 	private JLabel touchLabel;					// Label displaying touch the screen message
 
-	//method for building GUI Components
+	// method for building GUI Components
 	public void buildGUI() {
 		welcomePanel = new DisplayMessageJPanel();	// initialize welcomePanel
 
-        super.getMainframe().getContentPane().add(welcomePanel);	// inherits from superclass Screen to get mainframe and panel
+		// inherits from superclass Screen to get mainframe and panel, and adding the current panel
+        super.getMainframe().getContentPane().add(welcomePanel);	
 		super.getScreenContentPane().add(welcomePanel, BorderLayout.CENTER);	
 
 		welcomeLabel = new JLabel("Welcome to the ATM System!");		// initializing label with text
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 45));		// set font properties of label
-		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);		// set alignment of label
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);		// set alignment of label to centre
 		welcomeLabel.setBounds(0, 0, 1440, 1024);						// set boundaries of label
 		welcomeLabel.setForeground(Color.LIGHT_GRAY);					// set color of label
 		welcomePanel.add(welcomeLabel);									// adding label to the panel
