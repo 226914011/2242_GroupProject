@@ -1,7 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,65 +13,76 @@ import javax.swing.JButton;
 
 public class ViewBalance extends Screen {
 
-	private JPanel contentPane;
+	private DisplayMessageJPanel viewbalancePanel;
 	private JTextField ABalanceTextField;
 	private JTextField TBalanceTextField;
+	private JLabel BalanceLabel;
+	private JButton ReturnButton;
 
 
 	/**
 	 * Create the frame.
-	 */
 	public ViewBalance() {
 		super();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
-        
+		setContentPane(contentPane);*/
+	public void buildGUI()
+	{
+		viewbalancePanel = new DisplayMessageJPanel();
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
+		super.getMainframe().getContentPane().add(viewbalancePanel);
+		super.getScreenContentPane().add(viewbalancePanel, BorderLayout.CENTER);
 		
 		JLabel BalanceLabel = new JLabel("Balance");
 		BalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		BalanceLabel.setFont(new Font("Arial", Font.BOLD, 64));
 		BalanceLabel.setBounds(458, 104, 524, 84);
-		panel.add(BalanceLabel);
+		BalanceLabel.setForeground(Color.LIGHT_GRAY);
+		viewbalancePanel.add(BalanceLabel);
 		
 		JLabel ABalanceLabel = new JLabel("Available Balance");
 		ABalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		ABalanceLabel.setBounds(50, 314, 544, 85);
-		panel.add(ABalanceLabel);
+		ABalanceLabel.setForeground(Color.LIGHT_GRAY);
+		viewbalancePanel.add(ABalanceLabel);
 		
 		JLabel TBalanceLabel = new JLabel("Total Balance");
 		TBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		TBalanceLabel.setBounds(50, 524, 544, 85);
-		panel.add(TBalanceLabel);
+		TBalanceLabel.setForeground(Color.LIGHT_GRAY);
+		viewbalancePanel.add(TBalanceLabel);
 		
 		ABalanceTextField = new JTextField();
 		ABalanceTextField.setEditable(false);
 		ABalanceTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		ABalanceTextField.setBounds(730, 313, 524, 85);
-		panel.add(ABalanceTextField);
 		ABalanceTextField.setColumns(10);
+		viewbalancePanel.add(ABalanceTextField);
 		
 		TBalanceTextField = new JTextField();
 		TBalanceTextField.setEditable(false);
 		TBalanceTextField.setFont(new Font("Arial", Font.PLAIN, 40));
 		TBalanceTextField.setColumns(10);
 		TBalanceTextField.setBounds(730, 524, 524, 85);
-		panel.add(TBalanceTextField);
+		viewbalancePanel.add(TBalanceTextField);
 		
 		JButton ReturnButton = new JButton("Return to main menu");
 		ReturnButton.setFont(new Font("Arial", Font.PLAIN, 40));
 		ReturnButton.setBounds(458, 837, 524, 85);
-		panel.add(ReturnButton);
+		viewbalancePanel.add(ReturnButton);
 
-		pack();
+		super.getMainframe().setVisible(true);
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
+
 	}
+	public JTextField getABalanceTextField(){
+		return ABalanceTextField;
+	}
+	public JTextField getTBalanceTextField(){
+		return TBalanceTextField;
+	}
+
 }

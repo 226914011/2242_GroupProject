@@ -26,6 +26,7 @@ public class Transfer extends Transaction{
     }
 
     public void execute() {
+        /**
         //ask user input the transfer information
         do
         {
@@ -69,6 +70,7 @@ public class Transfer extends Transaction{
             screen.displayMessageLine( "\nCanceling transaction..." );
             return; // return to main menu because user canceled
         }
+        **/
     }
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
@@ -108,6 +110,7 @@ public class Transfer extends Transaction{
 
     //boolean method - confirm the information
     private boolean confirmUserInput(){
+        /** 
         do{
             //display confrim message
             screen.displayMessageLine("\nThe account number for transfer: " + tarAccNum);
@@ -141,5 +144,8 @@ public class Transfer extends Transaction{
                     break;
             } 
         } while(true);
+                    **/
+                    return true;
     }
+
 }
