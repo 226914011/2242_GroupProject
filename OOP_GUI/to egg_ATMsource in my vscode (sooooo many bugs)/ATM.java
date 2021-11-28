@@ -55,7 +55,7 @@ public class ATM
       viewbalance = new ViewBalance();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
-      keypadHandler = new KeypadHandler();
+      keypadHandler = new KeypadHandler();//implement actionListener to control the GUI interface
       loginHandler= new LoginHandler();
    } // end no-argument ATM constructor
 
