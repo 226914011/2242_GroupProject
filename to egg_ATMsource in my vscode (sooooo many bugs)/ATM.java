@@ -97,15 +97,24 @@ public class ATM
 
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
-
-      if (firstInitialize){
-         for (int i = 0; i <= 13; i++ ){
+      for(ActionListener oldListener : keys[12].getActionListeners())
+         keys[12].removeActionListener(oldListener);
+      for (int i = 0; i <= 13; i++ ){
+         if(keys[i].getActionListeners().length == 0){
             keys[i].addActionListener(keypadHandler);
          }
       }
-      for(ActionListener oldListener : keys[12].getActionListeners()){
-         if 
-      }
+   }
+
+   //
+   private void pinGUI(){
+      screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
+      screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
+      for(ActionListener oldListener : keys[12].getActionListeners())
+         keys[12].removeActionListener(oldListener);
+      keys[12].addActionListener(loginHandler);
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
    }
 
    // attempts to authenticate user against database
@@ -131,7 +140,6 @@ public class ATM
          keys[12].removeActionListener(loginHandler);
          keys[12].addActionListener(keypadHandler);
          if(Cancel){
-            firstInitialize = false;
             run();
          }else
             loginGUI();
@@ -285,30 +293,11 @@ public class ATM
                keypad.getKeypadDisplayTextField().setText("");
                break;
             case "Enter":
-               accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
-                             
+               accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
                keypad.getKeypadDisplayTextField().setText("");
                loginCardNumberPanel.cancelInvalidMessage();
-               firstInitialize = false;
                keypad.closeWarning();
-               for(ActionListener oldListener : keys[12].getActionListeners())
-                  keys[12].removeActionListener(oldListener);
-               switch (ScreenNum) {
-                  case 1:
-                     screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
-                     screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
-                     keys[12].addActionListener(loginHandler);
-                     break;
-                  case 2:
-                     screen.getMainframe().getContentPane().remove(loginPinPanel);
-                     screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
-                     keys[12].addActionListener(loginHandler);
-                     break;
-                  default:
-                     break;
-               }
-               screen.getMainframe().revalidate();
-               screen.getMainframe().repaint();
+               pinGUI();
                break;
             default:
                break;
