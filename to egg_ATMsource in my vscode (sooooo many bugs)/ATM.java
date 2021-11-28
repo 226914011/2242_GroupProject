@@ -238,7 +238,7 @@ public class ATM
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen,
-               bankDatabase, keypad, cashDispenser, validation);
+               bankDatabase, keypad, cashDispenser, validation, withdrawalmenu);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
