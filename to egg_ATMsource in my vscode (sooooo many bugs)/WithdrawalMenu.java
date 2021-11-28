@@ -1,72 +1,94 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
 public class WithdrawalMenu extends Screen {
 
-	private JPanel contentPane;
+	private DisplayMessageJPanel withdrawalPanel;
+	private JLabel withMenuLabel;
+	private JButton w100Button;
+	private JButton w200Button;
+	private JButton w500Button;
+	private JButton w1000Button;
+	private JButton wCustomButton;
+	private JButton wCancelButton;
 
 
-	/**
-	 * Create the frame.
-	 */
-	public WithdrawalMenu() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		//need to change when copy to vscode
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
-        
+	public void buildGUI()
+	{
+		withdrawalPanel = new DisplayMessageJPanel();
 
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
+		super.getMainframe().getContentPane().add(withdrawalPanel);
+		super.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
 		
-		JLabel WithMenuLabel = new JLabel("Withdrawal Menu");
-		WithMenuLabel.setFont(new Font("Arial", Font.PLAIN, 64));
-		WithMenuLabel.setBounds(438, 104, 532, 85);
-		panel.add(WithMenuLabel);
 		
-		JButton W100Button = new JButton("1. $100");
-		W100Button.setFont(new Font("Arial", Font.PLAIN, 40));
-		W100Button.setBounds(180, 305, 404, 100);
-		panel.add(W100Button);
 		
-		JButton W200Button = new JButton("2. $200");
-		W200Button.setFont(new Font("Arial", Font.PLAIN, 40));
-		W200Button.setBounds(180, 513, 404, 100);
-		panel.add(W200Button);
+		withMenuLabel = new JLabel("Withdrawal Menu");
+		withMenuLabel.setFont(new Font("Arial", Font.PLAIN, 64));
+		withMenuLabel.setBounds(438, 104, 532, 85);
+		withdrawalPanel.add(withMenuLabel);
 		
-		JButton W500Button = new JButton("3. $500");
-		W500Button.setFont(new Font("Arial", Font.PLAIN, 40));
-		W500Button.setBounds(180, 720, 404, 100);
-		panel.add(W500Button);
+		w100Button = new JButton("1. $100");
+		w100Button.setFont(new Font("Arial", Font.PLAIN, 40));
+		w100Button.setBounds(180, 305, 404, 100);
+		withdrawalPanel.add(w100Button);
 		
-		JButton W1000Button = new JButton("4. $1000");
-		W1000Button.setFont(new Font("Arial", Font.PLAIN, 40));
-		W1000Button.setBounds(850, 305, 404, 100);
-		panel.add(W1000Button);
+		w200Button = new JButton("2. $200");
+		w200Button.setFont(new Font("Arial", Font.PLAIN, 40));
+		w200Button.setBounds(180, 513, 404, 100);
+		withdrawalPanel.add(w200Button);
 		
-		JButton WCustomButton = new JButton("5. Custom Amount");
-		WCustomButton.setFont(new Font("Arial", Font.PLAIN, 40));
-		WCustomButton.setBounds(850, 512, 404, 100);
-		panel.add(WCustomButton);
+		w500Button = new JButton("3. $500");
+		w500Button.setFont(new Font("Arial", Font.PLAIN, 40));
+		w500Button.setBounds(180, 720, 404, 100);
+		withdrawalPanel.add(w500Button);
 		
-		JButton WCancelButton = new JButton("6.Cancel transaction");
-		WCancelButton.setFont(new Font("Arial", Font.PLAIN, 40));
-		WCancelButton.setBounds(850, 719, 404, 100);
-		panel.add(WCancelButton);
+		w1000Button = new JButton("4. $1000");
+		w1000Button.setFont(new Font("Arial", Font.PLAIN, 40));
+		w1000Button.setBounds(850, 305, 404, 100);
+		withdrawalPanel.add(w1000Button);
 		
-		pack();
+		wCustomButton = new JButton("5. Custom Amount");
+		wCustomButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		wCustomButton.setBounds(850, 512, 404, 100);
+		withdrawalPanel.add(wCustomButton);
+		
+		wCancelButton = new JButton("6.Cancel transaction");
+		wCancelButton.setFont(new Font("Arial", Font.PLAIN, 40));
+		wCancelButton.setBounds(850, 719, 404, 100);
+		withdrawalPanel.add(wCancelButton);
+		
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
+	}
+
+	public JLabel getWithMenuLabel(){
+		return withMenuLabel;
+	}
+
+	public JButton getw100Button(){
+		return w100Button;
+	}
+
+	public JButton getw200Button(){
+		return w200Button;
+	}
+
+	public JButton getw500Button(){
+		return w500Button;
+	}
+
+	public JButton getw1000Button(){
+		return w1000Button;
+	}
+
+	public JButton getwCustomButton(){
+		return wCustomButton;
+	}
+
+	public JButton getwCancelButton(){
+		return wCancelButton;
 	}
 }
+
