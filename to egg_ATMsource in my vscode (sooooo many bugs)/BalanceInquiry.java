@@ -41,15 +41,6 @@ public class BalanceInquiry extends Transaction
       viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
-      /*
-      // display the balance information on the screen
-      screen.displayMessageLine( "\nBalance Information:" );
-      screen.displayMessage( " - Available balance: " ); 
-      screen.displayDollarAmount( availableBalance );
-      screen.displayMessage( "\n - Total balance:     " );
-      screen.displayDollarAmount( totalBalance );
-      screen.displayMessageLine( "" );
-      */
    } // end method execute
 } // end class BalanceInquiry
 
