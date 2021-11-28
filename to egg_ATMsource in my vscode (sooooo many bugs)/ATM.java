@@ -239,9 +239,6 @@ public class ATM
             case "Enter":
                accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
                screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
-               screen.getMainframe().revalidate();
-               screen.getMainframe().repaint();
-
                screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
