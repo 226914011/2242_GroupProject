@@ -1,5 +1,7 @@
 import java.awt.event.*;
 import java.awt.*;
+import java.util.*;
+import java.util.Timer;
 
 // ATM.java
 // Represents an automated teller machine
@@ -53,7 +55,7 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      //exitSystem = new ExitSystem();
+      exitSystem = new ExitSystem();
       mainmenu = new MainMenu();
       welcome = new Welcome();
       viewbalance = new ViewBalance();
@@ -70,16 +72,7 @@ public class ATM
       keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
-      welcome.buildGUI();
-      screen.getMainframe().repaint();
-      screen.getMainframe().revalidate();
-
-      welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
-         @Override
-         public void mouseClicked(MouseEvent e) {
-            loginGUI();
-         }
-      });
+      welcomeGUI();
       /**
       // loop while user is not yet authenticated
       while ( !userAuthenticated )
@@ -90,6 +83,19 @@ public class ATM
       **/
       //displayMainMenu(); // user is now authenticated
    } // end method run
+
+   private void welcomeGUI(){
+      welcome.buildGUI();
+      screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
+
+      welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+            loginGUI();
+         }
+      });
+   }
 
    private void loginGUI(){
       screen.getMainframe().getContentPane().removeAll();
@@ -139,7 +145,7 @@ public class ATM
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
 
-      boolean userExited = false; // user has not chosen to exit
+      //boolean userExited = false; // user has not chosen to exit
 
       // show main menu and get user selection
       int mainMenuSelection = menuChioce;
@@ -157,12 +163,8 @@ public class ATM
             currentTransaction.execute(); // execute transaction
             break;
          case EXIT: // user chose to terminate session
-            screen.displayMessageLine( "\nExiting the system..." );
-            userExited = true; // this ATM session should end
-            userAuthenticated = false; // reset before next ATM session
-            currentAccountNumber = 0; // reset before next ATM session
-            screen.displayMessageLine( "\nThank you! Goodbye!" );
-            System.exit(1); //exit programme
+            exitGUI();
+            break;
          default: // user did not enter an integer from 1-4
             screen.displayMessageLine(
                "\nYou did not enter a valid selection. Try again." );
@@ -186,6 +188,7 @@ public class ATM
       screen.exitButton.addActionListener(mainmenuHandler);*/
 
    } // end method displayMainMenu
+   
    private void withdrawalmainmenuGUI()
    {
       wButtons = withdrawalmenu.getwButtons();
@@ -194,6 +197,33 @@ public class ATM
          temp.addActionListener(withdrawalHandler);
       }
    }
+
+   private void exitGUI(){
+      screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+      exitSystem.buildGUI();
+      //userExited = true; // this ATM session should end
+      userAuthenticated = false; // reset before next ATM session
+      currentAccountNumber = 0; // reset before next ATM session
+      TimerTask openwelcomeTask = new TimerTask() {
+         public void run() {
+            accountNumber = 0;
+            currentAccountNumber = 0;
+            pin = 0;
+            screen.getMainframe().getContentPane().removeAll();
+            screen.getMainframe().revalidate();
+            screen.getMainframe().repaint();
+
+            welcomeGUI();
+         }
+      };
+      Timer timer = new Timer("Timer");
+      
+      long delay = 2000L;
+      timer.schedule(openwelcomeTask, delay);
+   }
+
    // return object of specified Transaction subclass
    private Transaction createTransaction( int type )
    {
@@ -279,6 +309,9 @@ public class ATM
       public void actionPerformed(ActionEvent e){
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
          authenticateUser();
+         keypad.getKeypadDisplayTextField().setText("");
+         keys[12].removeActionListener(loginHandler);
+         keys[12].addActionListener(keypadHandler);
       }
    }
 

@@ -117,6 +117,7 @@ public class Withdrawal extends Transaction
       // array of amounts to correspond to menu numbers
       int amounts[] = { 0, 100, 200, 500, 1000 };
 
+      /** 
       // loop while no valid choice has been made
       while ( userChoice == 0 )
       {
@@ -155,6 +156,7 @@ public class Withdrawal extends Transaction
                screen.displayMessageLine( "\nInvalid selection. Try again." );
          } // end switch
       } // end while
+      ***/
 
       return userChoice; // return withdrawal amount or CANCELED
    } // end method displayMenuOfAmounts
