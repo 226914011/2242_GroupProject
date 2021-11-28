@@ -91,6 +91,7 @@ public class ATM
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
       welcome.getWelcomeLabel().addMouseListener(ml);
+      loginCardNumberPanel.invalidMessage(false);
    }
 
    private void loginGUI(){
@@ -145,8 +146,8 @@ public class ATM
          if(Cancel){
             run();
          }else{
-            loginCardNumberPanel.invalidMessage(true);
             loginGUI();
+            loginCardNumberPanel.invalidMessage(true);
          }
       }
 
@@ -291,7 +292,6 @@ public class ATM
                keypad.getKeypadDisplayTextField().setText("");
                loginCardNumberPanel.invalidMessage(false);
                keypad.closeWarning();
-
                authenticateUser(true);
                break;
             case "Clear":
@@ -315,7 +315,6 @@ public class ATM
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
          authenticateUser(false);
          keypad.getKeypadDisplayTextField().setText("");
-         loginCardNumberPanel.invalidMessage(false);
       }
    }
 
