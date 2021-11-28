@@ -4,6 +4,7 @@
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
@@ -19,6 +20,7 @@ public class Withdrawal extends Transaction {
    private InsertPagePanel customAmountPanel;
    private WithdrawedCash withdrawedCash;
    private TakeCard takeCard;
+   private CancelTransaction cancelTransaction;
    private ATM atm;
 
 
@@ -31,7 +33,7 @@ public class Withdrawal extends Transaction {
          BankDatabase atmBankDatabase, Keypad atmKeypad,
          CashDispenser atmCashDispenser, Validation atmValidation, 
          ATM theATM, WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel, 
-         WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard) {
+         WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard, CancelTransaction atmCancelTransaction) {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
       
@@ -43,6 +45,7 @@ public class Withdrawal extends Transaction {
       withdrawalmenu = atmWithdrawalMenu;
       customAmountPanel = atmCustomAmountPanel;
       takeCard = atmTakeCard;
+      cancelTransaction = atmCancelTransaction;
       atm = theATM;
    } // end Withdrawal constructor
 
@@ -59,6 +62,8 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().repaint();
       withdrawalmenu.buildGUI();
       withdrawalmainmenuGUI();
+
+      System.out.println("88 world");
 
       /***
       // loop until cash is dispensed or the user cancels
@@ -200,10 +205,21 @@ public class Withdrawal extends Transaction {
                amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))];
                break;
             case "5 - Custom Amount":
-               //display cancel GUI page and go to main menu
+               insertAmountGUI();
                break;
             case "6 - Cancel transaction":
-               insertAmountGUI();
+               //display cancel GUI page and go to main menu
+               screen.getMainframe().getContentPane().removeAll();
+               screen.getMainframe().revalidate();
+               screen.getMainframe().repaint();
+               cancelTransaction.buildGUI();
+               screen.getMainframe().revalidate();
+               try {
+                  TimeUnit.SECONDS.sleep(1);
+               } catch (InterruptedException e1) {
+                  // TODO Auto-generated catch block
+                  e1.printStackTrace();
+               }
                break;
          }
       }
@@ -212,6 +228,10 @@ public class Withdrawal extends Transaction {
 
    public void insertAmountGUI(){
       screen.getMainframe().getContentPane().removeAll();
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+
+      cancelTransaction.buildGUI();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
    }

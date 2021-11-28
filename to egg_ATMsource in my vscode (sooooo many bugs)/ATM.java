@@ -30,9 +30,10 @@ public class ATM
    private int accountNumber,pin,ScreenNum;
    private JButton keys [],Buttons [],wButtons [];
    private KeypadHandler keypadHandler;
-   private WithdrawalMenuHandler withdrawalMenuHandler;
    private LoginHandler loginHandler;
    private ViewBalance viewbalance;
+   private CancelTransaction cancelTransaction;
+
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -74,6 +75,7 @@ public class ATM
       transferConfirm = new TransferConfirm();
       takeCard = new TakeCard();
       withdrawedCash = new WithdrawedCash();
+      cancelTransaction = new CancelTransaction();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -213,15 +215,6 @@ public class ATM
       screen.exitButton.addActionListener(mainmenuHandler);*/
 
    } // end method displayMainMenu
-   
-   private void withdrawalmainmenuGUI()
-   {
-      wButtons = withdrawalmenu.getwButtons();
-      WithdrawalMenuHandler withdrawalHandler = new WithdrawalMenuHandler();
-      for (var temp : wButtons){
-         temp.addActionListener(withdrawalHandler);
-      }
-   }
 
    private void exitGUI(){
       screen.getMainframe().getContentPane().removeAll();
@@ -264,7 +257,7 @@ public class ATM
          case WITHDRAWAL: // create new Withdrawal transaction
             temp = new Withdrawal( currentAccountNumber, screen, 
                bankDatabase, keypad, cashDispenser, validation, this, withdrawalmenu, 
-               customAmountPanel, withdrawedCash, takeCard);
+               customAmountPanel, withdrawedCash, takeCard, cancelTransaction);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
@@ -341,18 +334,6 @@ public class ATM
          }
          performTransactions();
      }
-   }
-   private class WithdrawalMenuHandler implements ActionListener {
-      public void actionPerformed(ActionEvent e) {
-         switch (e.getActionCommand()) {
-            case "1 - $100":withdrawalmenuChioce = 1;break;
-            case "2 - $200":withdrawalmenuChioce =2;break;
-            case "3 - $500":withdrawalmenuChioce =3;break;
-            case "4 - $1000":withdrawalmenuChioce =4;break;
-            case "5 - Custom Amount":withdrawalmenuChioce =5;break;
-            case "6 - Cancel transaction":withdrawalmenuChioce =6;break;
-         }
-      }
    }
 } // end class ATM
 

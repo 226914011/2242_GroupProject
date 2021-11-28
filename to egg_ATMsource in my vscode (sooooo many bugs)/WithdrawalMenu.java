@@ -78,6 +78,7 @@ public class WithdrawalMenu extends Screen {
 		withdrawalPanel.add(wCancelButton);
 		*/
 		
+		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}
