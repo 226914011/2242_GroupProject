@@ -16,7 +16,7 @@ import java.awt.GridLayout;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
 
-public class mainmenu extends JFrame {
+public class Mainmenu extends JFrame {
 
 	private JPanel contentPane;
 
@@ -27,7 +27,7 @@ public class mainmenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainmenu frame = new mainmenu();
+					Mainmenu frame = new Mainmenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class mainmenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public mainmenu() {
+	public Mainmenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,7 +91,7 @@ public class mainmenu extends JFrame {
 	
 	public class DisplayMessageJPanel extends JPanel{
 	    public DisplayMessageJPanel(){
-	        setSize(new Dimension(1440, 1024));
+	        setPreferredSize(new Dimension(1440, 1024));
 	        //Absolute layout
 	        setLayout(null);
 
