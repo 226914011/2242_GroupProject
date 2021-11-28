@@ -1,60 +1,38 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
+// CancelTransaction.java
+// Display message for indicating cancell transaction
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class CancelTransaction extends JFrame {
+public class CancelTransaction extends Screen {
 
-	private JPanel contentPane;
+	private DisplayMessageJPanel canTransactionPanel;
+	private JLabel canTransLabel;
+	private JLabel returnMenuLabel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CancelTransaction frame = new CancelTransaction();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CancelTransaction() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		JPanel panel = new JPanel();
-        getContentPane().add(panel);
+	public void buildGUI() {
+		canTransactionPanel = new DisplayMessageJPanel();
         
-
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setPreferredSize(new Dimension(1440, 1024));
-		panel.setLayout(null);
-		
-		JLabel canTransLabel = new JLabel("Cancelling transaction...");
+		canTransLabel = new JLabel("Cancelling transaction...");
 		canTransLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		canTransLabel.setBounds(50, 471, 925, 58);
-		panel.add(canTransLabel);
+		canTransactionPanel.add(canTransLabel);
 		
-		JLabel ReturnMenuLabel = new JLabel("Returning to the main menu...");
-		ReturnMenuLabel.setFont(new Font("Arial", Font.PLAIN, 40));
-		ReturnMenuLabel.setBounds(50, 615, 925, 58);
-		panel.add(ReturnMenuLabel);
+		returnMenuLabel = new JLabel("Returning to the main menu...");
+		returnMenuLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		returnMenuLabel.setBounds(50, 615, 925, 58);
+		canTransactionPanel.add(returnMenuLabel);
 
-		pack();
+		super.getMainframe().setVisible(true);
+		super.getMainframe().pack();
+		super.getMainframe().repaint();
+	}
+
+	public JLabel getCanTransLabel(){
+		return canTransLabel;
+	}
+
+	public JLabel getReturnLabel(){
+		return returnMenuLabel;
 	}
 }
