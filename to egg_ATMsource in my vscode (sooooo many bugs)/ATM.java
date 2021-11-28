@@ -38,6 +38,14 @@ public class ATM
    private static final int EXIT = 4;
    private static final int INVALID = -1;
 
+   //
+   private MouseListener ml = new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+         loginGUI();
+      }
+   };
+
    // no-argument ATM constructor initializes instance variables
    public ATM()
    {
@@ -78,19 +86,15 @@ public class ATM
    } // end method run
 
    private void welcomeGUI(){
+      screen.getMainframe().getContentPane().removeAll();
       welcome.buildGUI();
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
-
-      welcome.getWelcomeLabel().addMouseListener(new MouseAdapter() {
-         @Override
-         public void mouseClicked(MouseEvent e) {
-            loginGUI();
-         }
-      });
+      welcome.getWelcomeLabel().addMouseListener(ml);
    }
 
    private void loginGUI(){
+      welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
@@ -132,14 +136,15 @@ public class ATM
       } // end if
       else{
          //need change
-         loginCardNumberPanel.invalidMessage();
          keypad.getKeypadDisplayTextField().setText("");
          keys[12].removeActionListener(loginHandler);
          keys[12].addActionListener(keypadHandler);
          if(Cancel){
             run();
-         }else
+         }else{
+            loginCardNumberPanel.invalidMessage(true);
             loginGUI();
+         }
       }
 
    } // end method authenticateUser
@@ -286,7 +291,7 @@ public class ATM
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
                keypad.getKeypadDisplayTextField().setText("");
-               loginCardNumberPanel.cancelInvalidMessage();
+               loginCardNumberPanel.invalidMessage(false);
                keypad.closeWarning();
 
                authenticateUser(true);
@@ -297,7 +302,6 @@ public class ATM
             case "Enter":
                accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
                keypad.getKeypadDisplayTextField().setText("");
-               loginCardNumberPanel.cancelInvalidMessage();
                keypad.closeWarning();
                pinGUI();
                break;
@@ -312,6 +316,8 @@ public class ATM
       public void actionPerformed(ActionEvent e){
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
          authenticateUser(false);
+         keypad.getKeypadDisplayTextField().setText("");
+         loginCardNumberPanel.invalidMessage(false);
       }
    }
 
