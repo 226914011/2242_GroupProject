@@ -110,6 +110,11 @@ public class Keypad
          // "."
          actualKeypadPanel.add(keys[ 13 ]);
 
+         //Cancel focus border for all button
+         for (var temp : keys){
+            temp.setFocusPainted(false);
+         }
+
          // initialize all button font size and button color
          for (int i = 0; i <= 13; i++) {
             if (i<=9 || i ==13)
