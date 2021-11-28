@@ -103,6 +103,9 @@ public class ATM
             keys[i].addActionListener(keypadHandler);
          }
       }
+      for(ActionListener oldListener : keys[12].getActionListeners()){
+         if 
+      }
    }
 
    // attempts to authenticate user against database
@@ -293,6 +296,11 @@ public class ATM
                switch (ScreenNum) {
                   case 1:
                      screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
+                     screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
+                     keys[12].addActionListener(loginHandler);
+                     break;
+                  case 2:
+                     screen.getMainframe().getContentPane().remove(loginPinPanel);
                      screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
                      keys[12].addActionListener(loginHandler);
                      break;
