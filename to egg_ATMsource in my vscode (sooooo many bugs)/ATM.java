@@ -6,8 +6,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class ATM
-{
+public class ATM {
    private boolean userAuthenticated; // whether user is authenticated
    private int currentAccountNumber; // current user's account number
    private Screen screen; // ATM's screen
@@ -17,23 +16,22 @@ public class ATM
    private Validation validation;
    private ExitSystem exitSystem;
    private MainMenu mainmenu;
-   private WithdrawalMenu withdrawalmenu;
-   private ViewBalance viewbalance;
+
    private Welcome welcome;
    private LoginDisplayPanel loginCardNumberPanel;
    private LoginDisplayPanel loginPinPanel;
    private static int menuChioce;
-   private static int withdrawalmenuChioce;
    private boolean firstInitialize;
    private int accountNumber;
-   private JButton keys [];
-   private JButton Buttons [];
-   private JButton wButtons [];
+   private JButton keys[];
+   private JButton Buttons[];
+
    private KeypadHandler keypadHandler;
-   private WithdrawalMenuHandler withdrawalMenuHandler;
+
    private LoginHandler loginHandler;
    private int pin;
    private ViewBalance viewBalance;
+   private WithdrawalMenu withdrawalMenu;
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -43,8 +41,7 @@ public class ATM
    private static final int INVALID = -1;
 
    // no-argument ATM constructor initializes instance variables
-   public ATM()
-   {
+   public ATM() {
       userAuthenticated = false; // user is not authenticated to start
       firstInitialize = true;
       currentAccountNumber = 0; // no current account number to start
@@ -53,20 +50,19 @@ public class ATM
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // create acct info database
       validation = new Validation(screen); // create validation
-      //exitSystem = new ExitSystem();
+      // exitSystem = new ExitSystem();
       mainmenu = new MainMenu();
       welcome = new Welcome();
-      viewbalance = new ViewBalance();
+      viewBalance = new ViewBalance();
       loginCardNumberPanel = new LoginDisplayPanel("Please Enter the Card Number:", "Group_7.png");
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");
       keypadHandler = new KeypadHandler();
-      loginHandler= new LoginHandler();
+      loginHandler = new LoginHandler();
       viewBalance = new ViewBalance();
    } // end no-argument ATM constructor
 
    // start ATM
-   public void run()
-   {
+   public void run() {
       keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
@@ -81,17 +77,17 @@ public class ATM
          }
       });
       /**
-      // loop while user is not yet authenticated
-      while ( !userAuthenticated )
-      {
-         screen.displayMessageLine( "\nWelcome!" );
-         authenticateUser(); // authenticate user
-      } // end while
-      **/
-      //displayMainMenu(); // user is now authenticated
+       * // loop while user is not yet authenticated
+       * while ( !userAuthenticated )
+       * {
+       * screen.displayMessageLine( "\nWelcome!" );
+       * authenticateUser(); // authenticate user
+       * } // end while
+       **/
+      // displayMainMenu(); // user is now authenticated
    } // end method run
 
-   private void loginGUI(){
+   private void loginGUI() {
       screen.getMainframe().getContentPane().removeAll();
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
@@ -99,22 +95,19 @@ public class ATM
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
-      if (firstInitialize){
-         for (int i = 0; i <= 13; i++ ){
+      if (firstInitialize) {
+         for (int i = 0; i <= 13; i++) {
             keys[i].addActionListener(keypadHandler);
          }
       }
    }
 
    // attempts to authenticate user against database
-   private void authenticateUser()
-   {
-      userAuthenticated =
-         bankDatabase.authenticateUser( accountNumber, pin );
+   private void authenticateUser() {
+      userAuthenticated = bankDatabase.authenticateUser(accountNumber, pin);
 
       // check whether authentication succeeded
-      if ( userAuthenticated )
-      {
+      if (userAuthenticated) {
          currentAccountNumber = accountNumber; // save user's account #
          screen.getMainframe().getContentPane().removeAll();
          mainmenu.buildGUI();
@@ -122,8 +115,8 @@ public class ATM
          screen.getMainframe().repaint();
          mainmenuGUI();
       } // end if
-      else{
-         //need change
+      else {
+         // need change
          loginCardNumberPanel.invalidMessage();
          keypad.getKeypadDisplayTextField().setText("");
          keys[12].removeActionListener(loginHandler);
@@ -134,8 +127,7 @@ public class ATM
    } // end method authenticateUser
 
    // display the main menu and perform transactions
-   private void performTransactions()
-   {
+   private void performTransactions() {
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
 
@@ -145,85 +137,72 @@ public class ATM
       int mainMenuSelection = menuChioce;
 
       // decide how to proceed based on user's menu selection
-      switch ( mainMenuSelection )
-      {
+      switch (mainMenuSelection) {
          // user chose to perform one of three transaction types
          case BALANCE_INQUIRY:
          case WITHDRAWAL:
          case TRANSFER:
             // initialize as new object of chosen type
-            currentTransaction =
-               createTransaction( mainMenuSelection );
+            currentTransaction = createTransaction(mainMenuSelection);
             currentTransaction.execute(); // execute transaction
             break;
          case EXIT: // user chose to terminate session
-            screen.displayMessageLine( "\nExiting the system..." );
+            screen.displayMessageLine("\nExiting the system...");
             userExited = true; // this ATM session should end
             userAuthenticated = false; // reset before next ATM session
             currentAccountNumber = 0; // reset before next ATM session
-            screen.displayMessageLine( "\nThank you! Goodbye!" );
-            System.exit(1); //exit programme
+            screen.displayMessageLine("\nThank you! Goodbye!");
+            System.exit(1); // exit programme
          default: // user did not enter an integer from 1-4
             screen.displayMessageLine(
-               "\nYou did not enter a valid selection. Try again." );
+                  "\nYou did not enter a valid selection. Try again.");
             break;
       } // end switch
    } // end method performTransactions
 
    // display the main menu and return an input selection
-   private void mainmenuGUI()
-   {
+   private void mainmenuGUI() {
       Buttons = mainmenu.getButtons();
       MainmenuHandler mainmenuHandler = new MainmenuHandler();
-      for (var temp : Buttons){
+      for (var temp : Buttons) {
          temp.addActionListener(mainmenuHandler);
       }
 
       /*
-      screen.balanceButton.addActionListener(mainmenuHandler);
-      screen.withdrawButton.addActionListener(mainmenuHandler);
-      screen.transferButton.addActionListener(mainmenuHandler);
-      screen.exitButton.addActionListener(mainmenuHandler);*/
+       * screen.balanceButton.addActionListener(mainmenuHandler);
+       * screen.withdrawButton.addActionListener(mainmenuHandler);
+       * screen.transferButton.addActionListener(mainmenuHandler);
+       * screen.exitButton.addActionListener(mainmenuHandler);
+       */
 
    } // end method displayMainMenu
-   private void withdrawalmainmenuGUI()
-   {
-      wButtons = withdrawalmenu.getwButtons();
-      WithdrawalMenuHandler withdrawalHandler = new WithdrawalMenuHandler();
-      for (var temp : wButtons){
-         temp.addActionListener(withdrawalHandler);
-      }
-   }
+
    // return object of specified Transaction subclass
-   private Transaction createTransaction( int type )
-   {
+   private Transaction createTransaction(int type) {
       Transaction temp = null; // temporary Transaction variable
 
       // determine which type of Transaction to create
-      switch ( type )
-      {
+      switch (type) {
          case BALANCE_INQUIRY: // create new BalanceInquiry transaction
             temp = new BalanceInquiry(
-               currentAccountNumber, screen, bankDatabase, viewBalance);
+                  currentAccountNumber, screen, bankDatabase, viewBalance);
             break;
          case WITHDRAWAL: // create new Withdrawal transaction
-            temp = new Withdrawal( currentAccountNumber, screen,
-               bankDatabase, keypad, cashDispenser, validation);
+            temp = new Withdrawal(currentAccountNumber, screen,
+                  bankDatabase, keypad, cashDispenser, validation, withdrawalMenu);
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation);
+                  bankDatabase, keypad, validation);
             break;
       } // end switch
 
       return temp; // return the newly created object
    } // end method createTransaction
 
-
-
-   private class KeypadHandler implements ActionListener{
+   private class KeypadHandler implements ActionListener {
       @Override
-      public void actionPerformed(ActionEvent e){
+      public void actionPerformed(ActionEvent e) {
          switch (e.getActionCommand()) {
             case "0":
             case "1":
@@ -235,10 +214,11 @@ public class ATM
             case "7":
             case "8":
             case "9":
-               keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+               keypad.getKeypadDisplayTextField()
+                     .setText(keypad.getKeypadDisplayTextField().getText() + e.getActionCommand());
                break;
             case ".":
-               //need popup some remind message
+               // need popup some remind message
                keypad.warning();
                break;
             case "Cancel":
@@ -274,67 +254,62 @@ public class ATM
       }
    }
 
-   private class LoginHandler implements ActionListener{
+   private class LoginHandler implements ActionListener {
       @Override
-      public void actionPerformed(ActionEvent e){
+      public void actionPerformed(ActionEvent e) {
          pin = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
          authenticateUser();
       }
    }
 
-   private class MainmenuHandler implements ActionListener{
+   private class MainmenuHandler implements ActionListener {
       public void actionPerformed(ActionEvent e) {
-         switch(e.getActionCommand()){
-            case "1. View my balance": menuChioce = 1; break;
-            case "2. Withdraw": menuChioce = 2; break;
-            case "3. Transfer": menuChioce = 3; break;
-            case "4. Exit": menuChioce = 4; break;
+         switch (e.getActionCommand()) {
+            case "1. View my balance":
+               menuChioce = 1;
+               break;
+            case "2. Withdraw":
+               menuChioce = 2;
+               break;
+            case "3. Transfer":
+               menuChioce = 3;
+               break;
+            case "4. Exit":
+               menuChioce = 4;
+               break;
          }
          performTransactions();
 
          /***
-         if (e.getSource() == balanceButton){
-            menuChioce = 1;
-         }
-         else if (e.getSource() == WithdrawButton){
-            menuChioce = 2;
-         }
-         else if (e.getSource() == transferButton){
-            menuChioce = 3;
-         }
-         else if (e.getSource() == exitButton){
-            menuChioce = 4;
-         }
-         ***/
-     }
-   }
-   private class WithdrawalMenuHandler implements ActionListener {
-      public void actionPerformed(ActionEvent e) {
-         switch (e.getActionCommand()) {
-            case "1 - $100":withdrawalmenuChioce = 1;break;
-            case "2 - $200":withdrawalmenuChioce =2;break;
-            case "3 - $500":withdrawalmenuChioce =3;break;
-            case "4 - $1000":withdrawalmenuChioce =4;break;
-            case "5 - Custom Amount":withdrawalmenuChioce =5;break;
-            case "6 - Cancel transaction":withdrawalmenuChioce =6;break;
-         }
+          * if (e.getSource() == balanceButton){
+          * menuChioce = 1;
+          * }
+          * else if (e.getSource() == WithdrawButton){
+          * menuChioce = 2;
+          * }
+          * else if (e.getSource() == transferButton){
+          * menuChioce = 3;
+          * }
+          * else if (e.getSource() == exitButton){
+          * menuChioce = 4;
+          * }
+          ***/
       }
    }
+
 } // end class ATM
 
-
-
 /**************************************************************************
- * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
+ * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and *
+ * Pearson Education, Inc. All Rights Reserved. *
+ * *
+ * DISCLAIMER: The authors and publisher of this book have used their *
+ * best efforts in preparing the book. These efforts include the *
+ * development, research, and testing of the theories and programs *
+ * to determine their effectiveness. The authors and publisher make *
+ * no warranty of any kind, expressed or implied, with regard to these *
  * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
+ * and publisher shall not be liable in any event for incidental or *
+ * consequential damages in connection with, or arising out of, the *
+ * furnishing, performance, or use of these programs. *
  *************************************************************************/

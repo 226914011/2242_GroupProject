@@ -1,25 +1,33 @@
+
 // Withdrawal.java
 // Represents a withdrawal ATM transaction
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
 
-public class Withdrawal extends Transaction
-{
+public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private Validation validation;
    private CashDispenser cashDispenser; // reference to cash dispenser
+   private WithdrawalMenuHandler withdrawalMenuHandler;
+   private static int withdrawalmenuChioce;
+   private JButton wButtons[];
+   private WithdrawalMenu withdrawalmenu;
+   private Screen screen;
+   private DisplayMessageJPanel withdrawalPanel;
 
    // constant corresponding to menu option to cancel
    private final static int CANCELED = 6;
    private final static int INVAILD = -1;
 
    // Withdrawal constructor
-   public Withdrawal( int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase, Keypad atmKeypad, 
-      CashDispenser atmCashDispenser, Validation atmValidation)
-   {
+   public Withdrawal(int userAccountNumber, Screen atmScreen,
+         BankDatabase atmBankDatabase, Keypad atmKeypad,
+         CashDispenser atmCashDispenser, Validation atmValidation, WithdrawalMenu withdrawalMenu) {
       // initialize superclass variables
-      super( userAccountNumber, atmScreen, atmBankDatabase );
-      
+      super(userAccountNumber, atmScreen, atmBankDatabase);
+      withdrawalmenu = withdrawalMenu;
       // initialize references to keypad and cash dispenser
       keypad = atmKeypad;
       validation = atmValidation;
@@ -27,152 +35,187 @@ public class Withdrawal extends Transaction
    } // end Withdrawal constructor
 
    // perform transaction
-   public void execute()
-   {
+   public void execute() {
+
       boolean cashDispensed = false; // cash was not dispensed yet
       double availableBalance; // amount available for withdrawal
 
       // get references to bank database and screen
-      BankDatabase bankDatabase = getBankDatabase(); 
+      BankDatabase bankDatabase = getBankDatabase();
       Screen screen = getScreen();
-
+      System.out.println("hihih");
+      screen.getMainframe().getContentPane().removeAll();
+      withdrawalmenu.buildGUI();
+      screen.getScreenContentPane().add(withdrawalPanel, BorderLayout.CENTER);
+      screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+      screen.getMainframe().revalidate();
+      screen.getMainframe().repaint();
+      withdrawalmainmenuGUI();
+      System.out.println("hihi");
       // loop until cash is dispensed or the user cancels
-      do
-      {
-         // obtain a chosen withdrawal amount from the user 
+      do {
+         // obtain a chosen withdrawal amount from the user
          amount = displayMenuOfAmounts();
-         
+
          // check whether user chose a withdrawal amount or canceled
-         if ( amount != CANCELED )
-         {
+         if (amount != CANCELED) {
             // get available balance of account involved
-            availableBalance = 
-               bankDatabase.getAvailableBalance( getAccountNumber() );
-      
-            // check whether the user has enough money in the account 
-            if ( amount <= availableBalance )
-            {   
+            availableBalance = bankDatabase.getAvailableBalance(getAccountNumber());
+
+            // check whether the user has enough money in the account
+            if (amount <= availableBalance) {
                // check whether the cash dispenser has enough money
-               switch (cashDispenser.isSufficientCashAvailable( amount )) {
-                  //case -  user not input amount that is the multiple of 100
+               switch (cashDispenser.isSufficientCashAvailable(amount)) {
+                  // case - user not input amount that is the multiple of 100
                   case 1:
-                     screen.displayMessageLine( 
-                     "\nWrong cash type input in the ATM." +
-                     "\n\nPlease input desired amount which is multiple of 100" );
+                     screen.displayMessageLine(
+                           "\nWrong cash type input in the ATM." +
+                                 "\n\nPlease input desired amount which is multiple of 100");
                      break;
-                  //case -  user input amount larger than the ATM available cash
+                  // case - user input amount larger than the ATM available cash
                   case 2:
-                     screen.displayMessageLine( 
-                     "\nInsufficient cash available in the ATM." +
-                     "\n\nPlease choose a smaller amount." );
+                     screen.displayMessageLine(
+                           "\nInsufficient cash available in the ATM." +
+                                 "\n\nPlease choose a smaller amount.");
                      break;
-                  //case -  ATM not enough $100 dollar note or $500 dollar note
+                  // case - ATM not enough $100 dollar note or $500 dollar note
                   case 3:
-                     screen.displayMessageLine( 
-                     "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 and HK$500 dollar notes." +
-                     "\n\nPlease choose another amount which is smaller or larger" );
+                     screen.displayMessageLine(
+                           "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 and HK$500 dollar notes."
+                                 +
+                                 "\n\nPlease choose another amount which is smaller or larger");
                      break;
-                  //case -  ATM not enough 100$ dollar note
+                  // case - ATM not enough 100$ dollar note
                   case 4:
-                     screen.displayMessageLine( 
-                     "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 dollar notes." +
-                     "\n\nPlease choose another amount which is smaller or larger" );
+                     screen.displayMessageLine(
+                           "\nInsufficient cash available in the ATM.\nThe ATM do not have enough HK$100 dollar notes."
+                                 +
+                                 "\n\nPlease choose another amount which is smaller or larger");
                      break;
-                  //case - user input amount that can withdraw
+                  // case - user input amount that can withdraw
                   case 5:
                      // update the account involved to reflect withdrawal
-                     bankDatabase.debit( getAccountNumber(), amount );
+                     bankDatabase.debit(getAccountNumber(), amount);
                      cashDispensed = true; // cash was dispensed
                      // instruct user to take cash
-                     screen.displayMessageLine( 
-                     "\nPlease take your cash now." );
+                     screen.displayMessageLine(
+                           "\nPlease take your cash now.");
                      break;
                   default:
                      break;
                }
-            } else{
-               screen.displayMessageLine( 
-                     "\nInsufficient balance in your bank account."+
-                     "\n\nPlease choose a smaller amount." );
+            } else {
+               screen.displayMessageLine(
+                     "\nInsufficient balance in your bank account." +
+                           "\n\nPlease choose a smaller amount.");
             }
-         }
-         else // user chose cancel menu option 
+         } else // user chose cancel menu option
          {
-            screen.displayMessageLine( "\nCanceling transaction..." );
+            screen.displayMessageLine("\nCanceling transaction...");
             return; // return to main menu because user canceled
          } // end else
-      } while ( !cashDispensed );
-
+      } while (!cashDispensed);
 
    } // end method execute
 
+   private void withdrawalmainmenuGUI() {
+      wButtons = withdrawalmenu.getwButtons();
+      WithdrawalMenuHandler withdrawalHandler = new WithdrawalMenuHandler();
+      for (var temp : wButtons) {
+         temp.addActionListener(withdrawalHandler);
+      }
+   }
+
    // display a menu of withdrawal amounts and the option to cancel;
    // return the chosen amount or 0 if the user chooses to cancel
-   private int displayMenuOfAmounts()
-   {
+   private int displayMenuOfAmounts() {
       int userChoice = 0; // local variable to store return value
 
       Screen screen = getScreen(); // get screen reference
-      
+
       // array of amounts to correspond to menu numbers
       int amounts[] = { 0, 100, 200, 500, 1000 };
 
       // loop while no valid choice has been made
-      while ( userChoice == 0 )
-      {
+      while (userChoice == 0) {
          // display the menu
-         screen.displayMessageLine( "\nWithdrawal Menu:" );
-         screen.displayMessageLine( "1 - $100" );
-         screen.displayMessageLine( "2 - $200" );
-         screen.displayMessageLine( "3 - $500" );
-         screen.displayMessageLine( "4 - $1000" );
-         screen.displayMessageLine( "5 - Custom Amount" );
-         screen.displayMessageLine( "6 - Cancel transaction" );
-         screen.displayMessage( "\nChoose a withdrawal option: " );
+         screen.displayMessageLine("\nWithdrawal Menu:");
+         screen.displayMessageLine("1 - $100");
+         screen.displayMessageLine("2 - $200");
+         screen.displayMessageLine("3 - $500");
+         screen.displayMessageLine("4 - $1000");
+         screen.displayMessageLine("5 - Custom Amount");
+         screen.displayMessageLine("6 - Cancel transaction");
+         screen.displayMessage("\nChoose a withdrawal option: ");
 
          int input = validation.checkInt(keypad.getInput()); // get user input through keypad and do validation check
-         if (input == INVAILD)  continue; //continue when user not enter a valid integer input
+         if (input == INVAILD)
+            continue; // continue when user not enter a valid integer input
 
          // determine how to proceed based on the input value
-         switch ( input )
-         {
-            case 1: // if the user chose a withdrawal amount 
+         switch (input) {
+            case 1: // if the user chose a withdrawal amount
             case 2: // (i.e., chose option 1, 2, 3, 4 or 5), return the
             case 3: // corresponding amount from amounts array
             case 4:
-               userChoice = amounts[ input ]; // save user's choice
-               break;       
+               userChoice = amounts[input]; // save user's choice
+               break;
             case 5:
-               screen.displayMessage( "\nPlease input your custom amount: " );
-               int userinput = validation.checkInt(keypad.getInput()) ; // get user input through keypad and do validation check
-               if (userinput == INVAILD)  continue; //continue when user not enter a valid integer input
-               userChoice = userinput ; // save user's choice
-               break;       
+               screen.displayMessage("\nPlease input your custom amount: ");
+               int userinput = validation.checkInt(keypad.getInput()); // get user input through keypad and do
+                                                                       // validation check
+               if (userinput == INVAILD)
+                  continue; // continue when user not enter a valid integer input
+               userChoice = userinput; // save user's choice
+               break;
             case CANCELED: // the user chose to cancel
                userChoice = CANCELED; // save user's choice
                break;
             default: // the user did not enter a value from 1-6
-               screen.displayMessageLine( "\nInvalid selection. Try again." );
+               screen.displayMessageLine("\nInvalid selection. Try again.");
          } // end switch
       } // end while
 
       return userChoice; // return withdrawal amount or CANCELED
    } // end method displayMenuOfAmounts
+
+   private class WithdrawalMenuHandler implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+         switch (e.getActionCommand()) {
+            case "1 - $100":
+               withdrawalmenuChioce = 1;
+               break;
+            case "2 - $200":
+               withdrawalmenuChioce = 2;
+               break;
+            case "3 - $500":
+               withdrawalmenuChioce = 3;
+               break;
+            case "4 - $1000":
+               withdrawalmenuChioce = 4;
+               break;
+            case "5 - Custom Amount":
+               withdrawalmenuChioce = 5;
+               break;
+            case "6 - Cancel transaction":
+               withdrawalmenuChioce = 6;
+               break;
+         }
+      }
+   }
 } // end class Withdrawal
 
-
-
 /**************************************************************************
- * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
+ * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and *
+ * Pearson Education, Inc. All Rights Reserved. *
+ * *
+ * DISCLAIMER: The authors and publisher of this book have used their *
+ * best efforts in preparing the book. These efforts include the *
+ * development, research, and testing of the theories and programs *
+ * to determine their effectiveness. The authors and publisher make *
+ * no warranty of any kind, expressed or implied, with regard to these *
  * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
+ * and publisher shall not be liable in any event for incidental or *
+ * consequential damages in connection with, or arising out of, the *
+ * furnishing, performance, or use of these programs. *
  *************************************************************************/
