@@ -24,9 +24,6 @@ public class Transfer extends Transaction {
     private TransferConfirmListener tconfirmlistener;
     private TransferUpdate transferupdate;
 
-    // declare a int value for invalid input
-    private static final int INVALID = -1;
-
     // Transfer constructor
     public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad,
             Validation atmValidation, ATM theATM, TransferConfirm atmtransferConfirm,

@@ -1,8 +1,6 @@
 // Keypad.java
 // Represents the keypad of the ATM
 import java.awt.*;
-import java.util.Scanner; // program uses Scanner to obtain user input
-
 import javax.swing.*;
 
 
@@ -13,13 +11,11 @@ public class Keypad
 	private JButton[] keys;
    private KeypadJPanel keypadJPanel;
    private JLabel warningLabel;
-   private Scanner input; // reads data from the command line
    private String userInput = "";
    
    // no-argument constructor initializes the Scanner
    public Keypad()
    {
-      input = new Scanner( System.in );    
       keypadJPanel = new KeypadJPanel();
    } // end no-argument Keypad constructor
 

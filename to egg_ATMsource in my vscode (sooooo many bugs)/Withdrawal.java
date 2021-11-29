@@ -6,19 +6,15 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 public class Withdrawal extends Transaction {
    private int amount; // amount to withdraw
    private Keypad keypad; // reference to keypad
    private Validation validation;
    private CashDispenser cashDispenser; // reference to cash dispenser
-   private WithdrawalMenuHandler withdrawalMenuHandler;
-   private static int withdrawalmenuChioce;
    private JButton wButtons[];
    private WithdrawalMenu withdrawalmenu;
    private Screen screen;
-   private DisplayMessageJPanel withdrawalPanel;
    private InsertPagePanel customAmountPanel;
    private WithdrawedCash withdrawedCash;
    private TakeCard takeCard;

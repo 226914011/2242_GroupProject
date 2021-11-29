@@ -22,14 +22,14 @@ public class ATM
    private WithdrawalMenu withdrawalmenu; // Wuthdrawal Menu GUI
    private Welcome welcome;     // Welcome message GUI
    private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;  // Login System GUI
-   private InsertPagePanel transferTargetAccPanel, transferEnterAmountPanel, customAmountPanel;    // GUI for inserting page
+   private InsertPagePanel customAmountPanel;    // GUI for inserting page
    private TransferConfirm transferConfirm;  // Transfer confirmation page GUI
    private TransferUpdate transferUpdate;
    private TakeCard takeCard;  // Take Card reminder GUI
    private WithdrawedCash withdrawedCash; // Displaying "Please take your cash now" GUI
-   private static int menuChioce,withdrawalmenuChioce;
-   private int accountNumber,pin,ScreenNum;
-   private JButton keys [],Buttons [],wButtons []; // ATM's virtual keypad button
+   private static int menuChioce;
+   private int accountNumber,pin;
+   private JButton keys [],Buttons []; // ATM's virtual keypad button
    private KeypadHandler keypadHandler;         // Event handler for keypad
    private LoginHandler loginHandler;  // Event Handler for login page
    private ViewBalance viewbalance; // Balance Inquiry GUI
@@ -41,7 +41,6 @@ public class ATM
    private static final int WITHDRAWAL = 2;
    private static final int TRANSFER = 3;
    private static final int EXIT = 4;
-   private static final int INVALID = -1;
 
    //
    private MouseListener ml = new MouseAdapter() {
@@ -59,8 +58,7 @@ public class ATM
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad
       cashDispenser = new CashDispenser(); // create cash dispenser
-      bankDatabase = new BankDatabase(); // create acct info database
-      validation = new Validation(screen); // create validation
+      bankDatabase = new BankDatabase(); // c reate acct info database
       exitSystem = new ExitSystem();   // create exit system GUI
       mainmenu = new MainMenu();       // create main menu GUI
       welcome = new Welcome();         // create welcome page GUI
@@ -70,8 +68,6 @@ public class ATM
       loginPinPanel = new LoginDisplayPanel("Please Enter the password:", "Group_71.png");   // create login page GUI - password
       keypadHandler = new KeypadHandler();   // create keypad event handler
       loginHandler= new LoginHandler();   // create login page event handler
-      transferEnterAmountPanel = new InsertPagePanel("<html>please enter the account to transfer!<br/><br/>(It will ignore after two decimal point):</html>");       // create new text for transfer page
-      transferTargetAccPanel = new InsertPagePanel("Please enter the account number for transfer:");
       customAmountPanel = new InsertPagePanel("Please input your custom amount:");
       transferConfirm = new TransferConfirm();  // create confirm transfer page GUI
       transferUpdate = new TransferUpdate();
@@ -203,8 +199,6 @@ public class ATM
             exitGUI();
             break;
          default: // user did not enter an integer from 1-4
-            screen.displayMessageLine(
-               "\nYou did not enter a valid selection. Try again." );
             break;
       } // end switch
    } // end method performTransactions
