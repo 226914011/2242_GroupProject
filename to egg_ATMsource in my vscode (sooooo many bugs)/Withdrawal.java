@@ -255,6 +255,7 @@ public class Withdrawal extends Transaction {
                break;
             case "Cancel":
                keypad.getKeypadDisplayTextField().setText(null);
+               keypad.warning(false);
                withdrawalmainmenuGUI();
                break;
             case "Clear":
