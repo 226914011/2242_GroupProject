@@ -3,9 +3,9 @@
 
 public class CashDispenser {
    // the default initial number in the cash dispenser
-   private final static int INITIAL_COUNT_HUNDRED = 1;
-   private final static int INITIAL_COUNT_FIVEHUNDRED = 2;
-   private final static int INITIAL_COUNT_THOUSAND = 2;
+   private final static int INITIAL_COUNT_HUNDRED = 500;
+   private final static int INITIAL_COUNT_FIVEHUNDRED = 100;
+   private final static int INITIAL_COUNT_THOUSAND = 100;
    private int count_hundred; // number of $100 remaining
    private int count_fivehundred; // number of $500 remaining
    private int count_thousand; // number of $1000 remaining
