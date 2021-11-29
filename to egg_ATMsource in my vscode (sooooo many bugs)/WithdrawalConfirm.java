@@ -12,8 +12,6 @@ public class WithdrawalConfirm extends Screen {
 	private JLabel amountWLabel;
 	private JLabel confirmationLabel;
 	private JButton[] confirmGUIButtons;
-	private JButton reEnterButton;
-	private JButton cancelButton;
 
 
 	public WithdrawalConfirm(){

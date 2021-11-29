@@ -35,6 +35,8 @@ public class ATM
    private CancelTransaction cancelTransaction; // Cancel Transaction GUI
    private WithdrawalConfirm withdrawalConfirm; // withdrawal confirmation GUI
    private TransferAccount transferAccount;
+   private TransferAmount transferAmount;
+
 
 
    // constants corresponding to main menu options
@@ -83,6 +85,7 @@ public class ATM
       transferConfirm = new TransferConfirm();
       withdrawalConfirm = new WithdrawalConfirm();
       withdrawedCash = new WithdrawedCash();
+      transferAmount = new TransferAmount();
    } // end no-argument ATM constructor
 
    // start ATM
@@ -232,7 +235,6 @@ public class ATM
    } // end method displayMainMenu
 
    public void exitGUI(){
-      long delay = 2000L;
       Timer timer = new Timer("Timer");         // timer for counting 
 
       screen.getMainframe().getContentPane().removeAll();
@@ -290,7 +292,7 @@ public class ATM
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation, transferAccount);
+               bankDatabase, keypad, validation, transferAccount, transferAmount);
             break;
       } // end switch
 
@@ -307,7 +309,7 @@ public class ATM
             case "1":
             case "2":
             case "3":
-            case "4":
+            case "4": 
             case "5":
             case "6":
             case "7":
