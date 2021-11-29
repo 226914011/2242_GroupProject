@@ -14,65 +14,71 @@ public class TransferUpdate extends Screen {
 	private JLabel availableBalanceLabel;
 	private JLabel totalBalanceLabel;
 	private JButton backButton;
-	
-	public void buildGUI(){
+
+	public void buildGUI() {
 		transferUpdatePanel = new DisplayMessageJPanel();
-        
+
 		super.getMainframe().getContentPane().add(transferUpdatePanel);
 		super.getScreenContentPane().add(transferUpdatePanel, BorderLayout.CENTER);
 
+		// display the transfer is successful. Updated balance:
 		transferSuccessLabel = new JLabel("The transfer is successful. Updated balance:");
 		transferSuccessLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		transferSuccessLabel.setForeground(Color.LIGHT_GRAY);
 		transferSuccessLabel.setBounds(50, 104, 1204, 85);
 		transferUpdatePanel.add(transferSuccessLabel);
-		
+
+		// display available Balance
 		availableBalanceLabel = new JLabel("available balance:");
 		availableBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		availableBalanceLabel.setForeground(Color.LIGHT_GRAY);
 		availableBalanceLabel.setBounds(50, 308, 532, 85);
 		transferUpdatePanel.add(availableBalanceLabel);
-		
+
+		// display total Balance Label
 		totalBalanceLabel = new JLabel("total balance:");
 		totalBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		totalBalanceLabel.setForeground(Color.LIGHT_GRAY);
 		totalBalanceLabel.setBounds(50, 517, 532, 85);
 		transferUpdatePanel.add(totalBalanceLabel);
-		
+
+		// display available Balance textField
 		availableBtxtfield = new JTextField();
 		availableBtxtfield.setFont(new Font("Arial", Font.PLAIN, 40));
 		availableBtxtfield.setBounds(730, 313, 524, 85);
 		availableBtxtfield.setColumns(10);
 		availableBtxtfield.setEditable(false);
 		transferUpdatePanel.add(availableBtxtfield);
-		
+
+		// display total balance textField
 		totalBtxtfield = new JTextField();
 		totalBtxtfield.setFont(new Font("Arial", Font.PLAIN, 40));
 		totalBtxtfield.setColumns(10);
 		totalBtxtfield.setBounds(730, 523, 524, 85);
 		totalBtxtfield.setEditable(false);
 		transferUpdatePanel.add(totalBtxtfield);
-		
+
+		// create the Back botton
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Arial Black", Font.PLAIN, 35));
 		backButton.setBounds(574, 835, 292, 85);
 		transferUpdatePanel.add(backButton);
-		
+
 		super.getMainframe().setVisible(true);
 		super.getMainframe().pack();
 		super.getMainframe().repaint();
 	}
 
-	public JTextField getAvailableTextField(){
+	public JTextField getAvailableTextField() {
 		return availableBtxtfield;
 	}
-	
-	public JTextField getTotalBalanceTextField(){
+
+	public JTextField getTotalBalanceTextField() {
 		return totalBtxtfield;
 	}
-	
-	public JButton getBackButton(){
+
+	public JButton getBackButton() {
 		return backButton;
 	}
-	
+
 }

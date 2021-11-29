@@ -8,12 +8,13 @@ public class WithdrawedCash extends Screen {
 	private DisplayMessageJPanel withCashPanel;
 	private JLabel takeCashLabel;
 
-	public void buildGUI(){
+	public void buildGUI() {
 		withCashPanel = new DisplayMessageJPanel();
 
-        super.getMainframe().getContentPane().add(withCashPanel);
+		super.getMainframe().getContentPane().add(withCashPanel);
 		super.getScreenContentPane().add(withCashPanel, BorderLayout.CENTER);
-		
+
+		// display take cash label
 		takeCashLabel = new JLabel("Please take your cash now.");
 		takeCashLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		takeCashLabel.setForeground(Color.DARK_GRAY);
@@ -25,7 +26,7 @@ public class WithdrawedCash extends Screen {
 		super.getMainframe().repaint();
 	}
 
-	public JLabel getTakeCashLabel(){
+	public JLabel getTakeCashLabel() {
 		return takeCashLabel;
 	}
 

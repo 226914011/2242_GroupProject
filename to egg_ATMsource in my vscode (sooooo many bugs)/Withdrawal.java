@@ -36,12 +36,13 @@ public class Withdrawal extends Transaction {
    // Withdrawal constructor
    public Withdrawal(int userAccountNumber, Screen atmScreen,
          BankDatabase atmBankDatabase, Keypad atmKeypad,
-         CashDispenser atmCashDispenser, Validation atmValidation, 
-         ATM theATM, WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel, 
-         WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard, CancelTransaction atmCancelTransaction, WithdrawalConfirm atmWithdrawalConfirm) {
+         CashDispenser atmCashDispenser, Validation atmValidation,
+         ATM theATM, WithdrawalMenu atmWithdrawalMenu, InsertPagePanel atmCustomAmountPanel,
+         WithdrawedCash atmWithdrawedCash, TakeCard atmTakeCard, CancelTransaction atmCancelTransaction,
+         WithdrawalConfirm atmWithdrawalConfirm) {
       // initialize superclass variables
       super(userAccountNumber, atmScreen, atmBankDatabase);
-      
+
       // initialize references to keypad and cash dispenser
       keypad = atmKeypad;
       screen = super.getScreen();
@@ -76,52 +77,51 @@ public class Withdrawal extends Transaction {
       }
    }
 
-   private void checkAmount(){
+   private void checkAmount() {
       System.out.println("in");
       // get available balance of account involved
-      availableBalance = 
-         bankDatabase.getAvailableBalance( getAccountNumber() );
+      availableBalance = bankDatabase.getAvailableBalance(getAccountNumber());
 
-      // check whether the user has enough money in the account 
-      if ( amount <= availableBalance )
-      {   
+      // check whether the user has enough money in the account
+      if (amount <= availableBalance) {
          // check whether the cash dispenser has enough money
-         switch (cashDispenser.isSufficientCashAvailable( amount )) {
+         switch (cashDispenser.isSufficientCashAvailable(amount)) {
             case 1:
-               withdrawalmenu.setInvalidMessage( 
-               "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>" );
+               withdrawalmenu.setInvalidMessage( // display invaild message
+                     "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
                customAmountPanel.setInvalidMessage(
-               "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
+                     "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
                break;
             case 2:
-               withdrawalmenu.setInvalidMessage( 
-               "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>" );
+               withdrawalmenu.setInvalidMessage( // display invaild message
+                     "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>");
                customAmountPanel.setInvalidMessage(
-               "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>" );
+                     "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>");
                break;
             case 3:
-               withdrawalmenu.setInvalidMessage( 
-               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );
-               customAmountPanel.setInvalidMessage( 
-               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );   
+               withdrawalmenu.setInvalidMessage( // display invaild message
+                     "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
+               customAmountPanel.setInvalidMessage(
+                     "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
                break;
             case 4:
-               withdrawalmenu.setInvalidMessage( 
-               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );
-               customAmountPanel.setInvalidMessage( 
-               "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>" );   
+               withdrawalmenu.setInvalidMessage( // display invaild message
+                     "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
+               customAmountPanel.setInvalidMessage(
+                     "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
                break;
             case 5:
                transferConfirmGUI();
                break;
             default:
-            break;
+               break;
          }
-      } else{
+      } else {
          System.out.println("this case");
-         withdrawalmenu.setInvalidMessage( 
-            "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>" );
-         customAmountPanel.setInvalidMessage("<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>" );
+         withdrawalmenu.setInvalidMessage( // display invaild message
+               "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>");
+         customAmountPanel.setInvalidMessage(
+               "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>");
       }
    }
 
@@ -131,7 +131,7 @@ public class Withdrawal extends Transaction {
          switch (e.getActionCommand()) {
             case "Confirm":
                // update the account involved to reflect withdrawal
-               bankDatabase.debit( getAccountNumber(), amount );
+               bankDatabase.debit(getAccountNumber(), amount);
                cashDispenser.takeCash();
                takeCashGUI();
                break;
@@ -148,13 +148,13 @@ public class Withdrawal extends Transaction {
    private class WithdrawalMenuHandler implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
-         int userChoice[] = {100, 200, 500, 1000}; 
+         int userChoice[] = { 100, 200, 500, 1000 };
          switch (e.getActionCommand()) {
             case "1. $100":
             case "2. $200":
             case "3. $500":
             case "4. $1000":
-               amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0))-1];
+               amount = userChoice[Character.getNumericValue(e.getActionCommand().charAt(0)) - 1];
                checkAmount();
                break;
             case "5. Custom Amount":
@@ -163,7 +163,7 @@ public class Withdrawal extends Transaction {
                insertAmountGUI();
                break;
             case "6.Cancel transaction":
-               //display cancel GUI page and go to main menu
+               // display cancel GUI page and go to main menu
                screen.getMainframe().getContentPane().removeAll();
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
@@ -179,17 +179,18 @@ public class Withdrawal extends Transaction {
                   }
                };
                Timer timer = new Timer("Timer");
-               
+
                long delay = 3000L;
                timer.schedule(returnToMainMenuTask, delay);
                break;
-            default: break;
+            default:
+               break;
          }
       }
    }
 
-   private void takeCashGUI(){
-      Timer timer = new Timer("Timer");         // timer for counting 
+   private void takeCashGUI() {
+      Timer timer = new Timer("Timer"); // timer for counting
 
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
@@ -197,7 +198,7 @@ public class Withdrawal extends Transaction {
       takeCard.buildGUI();
 
       TimerTask openTakeCardGUI = new TimerTask() {
-         public void run(){
+         public void run() {
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
             screen.getMainframe().repaint();
@@ -219,22 +220,22 @@ public class Withdrawal extends Transaction {
       timer.schedule(openTakeCashTask, 4000L);
    }
 
-   private void transferConfirmGUI(){
-      JButton [] Buttons = withdrawalConfirm.getConfirmGUIButtons();
+   private void transferConfirmGUI() {
+      JButton[] Buttons = withdrawalConfirm.getConfirmGUIButtons();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
       withdrawalConfirm.buildGUI();
       withdrawalConfirm.setDisplayWithdrawalAmount(amount);
-      
+
       WithdrawalConfirmHandler withdrawalHandler = new WithdrawalConfirmHandler();
-      for(var temp : Buttons){
+      for (var temp : Buttons) {
          temp.addActionListener(withdrawalHandler);
       }
 
    }
 
-   private void insertAmountGUI(){
+   private void insertAmountGUI() {
       JButton[] keys = keypad.getKeys();
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
@@ -247,9 +248,10 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().repaint();
 
       AmountListener amountListener = new AmountListener();
-      //delete ".", "cancel", "enter" actionlistener, and add new actionlistener for withdrawal class
-      for (int i = 10; i <=12 ; i+= 2){
-         for (var temp: keys[i].getActionListeners()){
+      // delete ".", "cancel", "enter" actionlistener, and add new actionlistener for
+      // withdrawal class
+      for (int i = 10; i <= 12; i += 2) {
+         for (var temp : keys[i].getActionListeners()) {
             keys[i].removeActionListener(temp);
          }
          keys[i].addActionListener(amountListener);
@@ -259,7 +261,7 @@ public class Withdrawal extends Transaction {
    private class AmountListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
-         switch (e.getActionCommand()){
+         switch (e.getActionCommand()) {
             case "Cancel":
                withdrawalmainmenuGUI();
                break;

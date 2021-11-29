@@ -10,8 +10,7 @@ public class ExitSystem extends Screen {
 	private JLabel thankByeLabel;
 	private JLabel exitsystemLablel;
 
-	public void buildGUI()
-	{
+	public void buildGUI() {
 		exitsystemPanel = new DisplayMessageJPanel();
 
 		super.getMainframe().getContentPane().add(exitsystemPanel);
@@ -20,12 +19,14 @@ public class ExitSystem extends Screen {
 		exitsystemPanel.setPreferredSize(new Dimension(1440, 1024));
 		exitsystemPanel.setLayout(null);
 
+		// display Exiting the system...
 		exitsystemLablel = new JLabel("Exiting the system...");
 		exitsystemLablel.setFont(new Font("Arial", Font.PLAIN, 40));
 		exitsystemLablel.setBounds(50, 427, 925, 58);
 		exitsystemLablel.setForeground(Color.LIGHT_GRAY);
 		exitsystemPanel.add(exitsystemLablel);
 
+		// display Thank you! Goodbye!
 		thankByeLabel = new JLabel("Thank you! Goodbye!");
 		thankByeLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 		thankByeLabel.setBounds(50, 535, 925, 58);
