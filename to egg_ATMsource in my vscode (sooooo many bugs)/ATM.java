@@ -178,8 +178,6 @@ public class ATM
       // local variable to store transaction currently being processed
       Transaction currentTransaction = null;
 
-      //boolean userExited = false; // user has not chosen to exit
-
       // show main menu and get user selection
       int mainMenuSelection = menuChioce;
 
