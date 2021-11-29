@@ -1,3 +1,6 @@
+// WithdrawedCash.java
+// Display finished withdrawal cash
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 
