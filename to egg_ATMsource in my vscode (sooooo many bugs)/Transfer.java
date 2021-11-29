@@ -14,14 +14,14 @@ public class Transfer extends Transaction{
     private BankDatabase bankDatabase;
     private int tarAccNum;
     private double amount;
-    private boolean CANCELED,accValidate;
+    private boolean accValidate;
     private Validation validation;
     private TransferAccount transferAccount;
     private TransferAmount transferAmount;
     private TransferListener transferlistener;
     private ATM atm;
     private InsertPagePanel insertPagePanel;
-    private Boolean NumValidity;
+    private TransferConfirm transferconfirm;
 
     //declare a int value for invalid input
     private static final int INVALID = -1;
@@ -39,7 +39,6 @@ public class Transfer extends Transaction{
         transferAccount = atmTransferAccount;
         transferAmount = atmTransferAmount;
         transferlistener = new TransferListener();
-
     }
 
     
@@ -49,7 +48,7 @@ public class Transfer extends Transaction{
         System.out.println("execute");
         BankDatabase bankDatabase = getBankDatabase();
         screen.getMainframe().getContentPane().removeAll();
-        NumValidity = false;
+        accValidate = false;
         transferGUI("Please enter the account number for transfer:");
         System.out.println("transferAccountGUI");
         screen.getMainframe().repaint();
@@ -121,7 +120,13 @@ public class Transfer extends Transaction{
         }
     }
 
-
+    private void confirmGUI(){
+        screen.getMainframe().getContentPane().removeAll();
+        transferconfirm.buildGUI();
+        
+        screen.getMainframe().repaint();
+        screen.getMainframe().revalidate();
+    }
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
@@ -216,7 +221,7 @@ public class Transfer extends Transaction{
                     keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                     break;
                 case ".":
-                    if(NumValidity)
+                    if(accValidate)
                         keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand()); 
                     else 
                         keypad.warning();
@@ -238,7 +243,7 @@ public class Transfer extends Transaction{
                     keypad.closeWarning();
                     System.out.println("Enter");
                     System.out.println(input);
-                    if(NumValidity)
+                    if(accValidate)
                         amount = Integer.valueOf(input);
                         if(amountValidity()){
                             confirmGUI();
@@ -246,7 +251,7 @@ public class Transfer extends Transaction{
                     else{
                         tarAccNum = validation.checkInt(input);
                         if(accNumValidity()){
-                            NumValidity = true;
+                            accValidate = true;
                             transferGUI("<html>Please enter the amount to transfer:<br/><br/>(It will ignore after two decimal point)</html>");
                         }
                     }
