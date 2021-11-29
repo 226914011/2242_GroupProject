@@ -9,6 +9,7 @@ import javax.swing.*;
 public class Keypad
 {
    private JTextField keypadDisplayTextField;
+   private JPasswordField keypadPasswordField;
 	private JButton[] keys;
    private KeypadJPanel keypadJPanel;
    private JLabel warningLabel;
@@ -50,7 +51,14 @@ public class Keypad
          add(keypadDisplayTextField);
          keypadDisplayTextField.setColumns(10);
          keypadDisplayTextField.setText(userInput);
-          
+
+         keypadPasswordField = new JPasswordField();
+         keypadPasswordField.setEditable(false);
+         keypadPasswordField.setFont(new Font("Arial", Font.PLAIN, 40));
+         keypadPasswordField.setBounds(100, 339, 400, 56);
+         add(keypadDisplayTextField);
+         keypadPasswordField.setColumns(10);
+         keypadPasswordField.setText(userInput);
 
          warningLabel = new JLabel("* Please do not use \".\" as input");
          warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -135,22 +143,31 @@ public class Keypad
      return keypadJPanel;
   }
 
-  public JButton[] getKeys(){
-     return keys;
-  }
-  public String getUserInput(){
-     return userInput;
-  }
-  public JTextField getKeypadDisplayTextField(){
-     return keypadDisplayTextField;
-  }
-  public void warning(){
-     warningLabel.setVisible(true);
-  }
+   public JButton[] getKeys(){
+      return keys;
+   }
+   public String getUserInput(){
+      return userInput;
+   }
+   public JTextField getKeypadDisplayTextField(){
+      return keypadDisplayTextField;
+   }
+   public void warning(){
+      warningLabel.setVisible(true);
+   }
 
-  public void closeWarning(){
-   warningLabel.setVisible(false);
-  }
+   public void closeWarning(){
+      warningLabel.setVisible(false);
+   }
+
+   public JPasswordField getKeypadPasswordField(){
+      return keypadPasswordField;
+   }
+
+   public void pin(boolean password){
+      keypadDisplayTextField.setVisible(!password);
+      keypadPasswordField.setVisible(password);
+   }
 
   public void setKeypadColor(boolean color){
       //background with color

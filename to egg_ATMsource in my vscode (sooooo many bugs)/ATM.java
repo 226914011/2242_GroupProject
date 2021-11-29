@@ -122,7 +122,7 @@ public class ATM
       keypad.setKeypadColor(false);
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
-
+      keypad.pin(false);
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();     
 
@@ -141,6 +141,7 @@ public class ATM
    private void pinGUI(){
       screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
       screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
+      keypad.pin(true);
       for(ActionListener oldListener : keys[12].getActionListeners())
          keys[12].removeActionListener(oldListener);
       keys[12].addActionListener(loginHandler);
@@ -314,6 +315,7 @@ public class ATM
             case "8":
             case "9":
                keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+               keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                break;
             case ".":
                //need popup some remind message
@@ -324,16 +326,19 @@ public class ATM
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
                keypad.getKeypadDisplayTextField().setText("");
+               keypad.getKeypadPasswordField().setText("");
                loginCardNumberPanel.invalidMessage(false);
                keypad.closeWarning();
                authenticateUser(true);
                break;
             case "Clear":
                keypad.getKeypadDisplayTextField().setText("");
+               keypad.getKeypadPasswordField().setText("");
                break;
             case "Enter":
                accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
                keypad.getKeypadDisplayTextField().setText("");
+               keypad.getKeypadPasswordField().setText("");
                keypad.closeWarning();
                pinGUI();
                break;
