@@ -116,12 +116,12 @@ public class Transfer extends Transaction{
     private boolean accNumValidity(){
         //return false when account number does not exist
         if(!bankDatabase.checkAccountExist(tarAccNum)){
-            insertPagePanel.setInvalidMessage( "\tThe account " + tarAccNum + " is an invalid user account.\n\tPlease re-enter the user account.\n");
+            insertPagePanel.setInvalidMessage( "<html>The account " + tarAccNum + " is an invalid user account.<br>Please re-enter the user account.</html>");
             return false;
         }
         //return false when transfer account number equal to own account
         if(getAccountNumber() == tarAccNum){
-            insertPagePanel.setInvalidMessage( "\tThe account " + tarAccNum + " is your own account.\n\tPlease input an valid account number.\n");
+            insertPagePanel.setInvalidMessage( "<html>The account " + tarAccNum + " is your own account.<br>Please input an valid account number.</html>");
             return false;
         }
         return true;
@@ -132,14 +132,12 @@ public class Transfer extends Transaction{
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
         //return false when input amount equal to 0
         if (amount == 0){
-            insertPagePanel.setInvalidMessage("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
-            insertPagePanel.setInvalidMessage("\tAmount should larger than $0.\n");
+            insertPagePanel.setInvalidMessage("<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should larger than $0.</hmtl>");
             return false;
         }
         //return false when input amount larger than Available Balance
         if (amount > availablebalance){
-            insertPagePanel.setInvalidMessage("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
-            insertPagePanel.setInvalidMessage("\tAmount should smaller or equal to $" + availablebalance + ".\n");
+            insertPagePanel.setInvalidMessage("<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should smaller or equal to $" + availablebalance + "</hmtl>");
             return false;
         }
         
