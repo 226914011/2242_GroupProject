@@ -60,7 +60,7 @@ public class Keypad
          add(keypadPasswordField);
          keypadPasswordField.setColumns(10);
          keypadPasswordField.setText(userInput);
-         keypadDisplayTextField.setVisible(true);
+         keypadDisplayTextField.setVisible(false);
 
          warningLabel = new JLabel("* Please do not use \".\" as input");
          warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -154,7 +154,7 @@ public class Keypad
    public JTextField getKeypadDisplayTextField(){
       return keypadDisplayTextField;
    }
-   
+
 
    public void warning(){
       warningLabel.setVisible(true);
