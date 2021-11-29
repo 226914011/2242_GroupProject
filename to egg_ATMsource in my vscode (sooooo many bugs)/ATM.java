@@ -57,6 +57,7 @@ public class ATM
       currentAccountNumber = 0; // no current account number to start
       screen = new Screen(); // create screen
       keypad = new Keypad(); // create keypad
+      validation = new Validation();
       cashDispenser = new CashDispenser(); // create cash dispenser
       bankDatabase = new BankDatabase(); // c reate acct info database
       exitSystem = new ExitSystem();   // create exit system GUI
