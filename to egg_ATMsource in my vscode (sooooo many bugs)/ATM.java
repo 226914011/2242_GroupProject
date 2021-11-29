@@ -223,13 +223,6 @@ public class ATM
       for (var temp : Buttons){
          temp.addActionListener(mainmenuHandler);
       }
-
-      /*
-      screen.balanceButton.addActionListener(mainmenuHandler);
-      screen.withdrawButton.addActionListener(mainmenuHandler);
-      screen.transferButton.addActionListener(mainmenuHandler);
-      screen.exitButton.addActionListener(mainmenuHandler);*/
-
    } // end method displayMainMenu
 
    public void exitGUI(){
@@ -313,12 +306,14 @@ public class ATM
             case "7":
             case "8":
             case "9":
+               System.out.println("testing number");
                keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText());
                break;
             case ".":
+               System.out.println("test \".\"");
                //need popup some remind message
-               keypad.warning();
+               keypad.warning(true);
                break;
             case "Cancel":
                screen.getMainframe().getContentPane().removeAll();
@@ -327,7 +322,7 @@ public class ATM
                keypad.getKeypadDisplayTextField().setText("");
                keypad.getKeypadPasswordField().setText("");
                loginCardNumberPanel.invalidMessage(false);
-               keypad.closeWarning();
+               keypad.warning(false);
                authenticateUser(true);
                break;
             case "Clear":
@@ -338,7 +333,7 @@ public class ATM
                accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
                keypad.getKeypadDisplayTextField().setText("");
                keypad.getKeypadPasswordField().setText("");
-               keypad.closeWarning();
+               keypad.warning(false);
                pinGUI();
                break;
             default:

@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class TakeCard extends Screen {
-
 	private DisplayMessageJPanel takeCardPanel;
 	private JLabel takeCardLabel;
 

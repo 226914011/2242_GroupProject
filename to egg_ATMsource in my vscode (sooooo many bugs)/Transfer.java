@@ -67,7 +67,7 @@ public class Transfer extends Transaction{
             for (var temp: keys[i].getActionListeners()){
                 keys[i].removeActionListener(temp);
             }
-        keys[i].addActionListener(transferlistener);
+            keys[i].addActionListener(transferlistener);
         }
     }
 
@@ -149,7 +149,7 @@ public class Transfer extends Transaction{
         screen.getMainframe().revalidate();
         screen.getMainframe().repaint();
         keypad.getKeypadDisplayTextField().setText("");
-        keypad.closeWarning();
+        keypad.warning(false);
         atm.mainmenuGUI();
     }
 
@@ -175,7 +175,7 @@ public class Transfer extends Transaction{
                     if(accValidate)
                         keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand()); 
                     else 
-                        keypad.warning();
+                        keypad.warning(true);
                     break;
                 case "Cancel":
                     mainmenu();
@@ -186,7 +186,7 @@ public class Transfer extends Transaction{
                 case "Enter":
                     String input = keypad.getKeypadDisplayTextField().getText();
                     keypad.getKeypadDisplayTextField().setText("");
-                    keypad.closeWarning();
+                    keypad.warning(false);
                     System.out.println("Enter");
                     System.out.println(input);
                     if(accValidate){

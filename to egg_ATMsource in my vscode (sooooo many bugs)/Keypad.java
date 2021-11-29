@@ -23,18 +23,6 @@ public class Keypad
       keypadJPanel = new KeypadJPanel();
    } // end no-argument Keypad constructor
 
-   // return a string value entered by user 
-   public String getInput()
-   {
-      return userInput; // change user input to string type for validation 
-   } // end method getInput
-
-   // return a double value enter by user
-   public double getDoubleInput(){
-      return input.nextDouble();
-   }
-
-   
 	public class KeypadJPanel extends JPanel{
       public KeypadJPanel(){
          setPreferredSize(new Dimension(550, 1024));
@@ -148,21 +136,16 @@ public class Keypad
    public JButton[] getKeys(){
       return keys;
    }
-   public String getUserInput(){
-      return userInput;
-   }
+
    public JTextField getKeypadDisplayTextField(){
       return keypadDisplayTextField;
    }
 
 
-   public void warning(){
-      warningLabel.setVisible(true);
+   public void warning(boolean visible){
+      warningLabel.setVisible(visible);
    }
 
-   public void closeWarning(){
-      warningLabel.setVisible(false);
-   }
 
    public JPasswordField getKeypadPasswordField(){
       return keypadPasswordField;
@@ -171,16 +154,11 @@ public class Keypad
    public void pin(boolean password){
       keypadDisplayTextField.setVisible(!password);
       keypadPasswordField.setVisible(password);
-      System.out.println(password);
    }
 
   public void setKeypadColor(boolean color){
       //background with color
-      if(color){
-         keypadJPanel.setOpaque(true);
-      }
-      else
-         keypadJPanel.setOpaque(false);
+         keypadJPanel.setOpaque(color);
   }
 } // end class Keypad  
 
