@@ -1,5 +1,5 @@
 // Keypad.java
-// Represents the keypad of the ATM
+// Represents the virtual keypad of the ATM
 import java.awt.*;
 import javax.swing.*;
 
@@ -19,6 +19,7 @@ public class Keypad
       keypadJPanel = new KeypadJPanel();
    } // end no-argument Keypad constructor
 
+   // setting properties of the virtual keypad
 	public class KeypadJPanel extends JPanel{
       public KeypadJPanel(){
          setPreferredSize(new Dimension(550, 1024));
@@ -37,6 +38,7 @@ public class Keypad
          keypadDisplayTextField.setText(userInput);
          keypadDisplayTextField.setVisible(true);
 
+         //keypad textfield for masking password
          keypadPasswordField = new JPasswordField();
          keypadPasswordField.setEditable(false);
          keypadPasswordField.setFont(new Font("Arial", Font.PLAIN, 40));
@@ -45,7 +47,8 @@ public class Keypad
          keypadPasswordField.setColumns(10);
          keypadPasswordField.setText(userInput);
          keypadDisplayTextField.setVisible(false);
-
+         
+         // warning label for invalid user input
          warningLabel = new JLabel("* Please do not use \".\" as input");
          warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
          warningLabel.setBounds(100, 267, 400, 32);
