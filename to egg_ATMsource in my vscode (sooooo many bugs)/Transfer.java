@@ -18,7 +18,7 @@ public class Transfer extends Transaction{
     private Validation validation;
     private TransferAccount transferAccount;
     private TransferAmount transferAmount;
-    private TransferAmountListener transferamountlistener;
+    private TransferListener transferlistener;
     private ATM atm;
     private InsertPagePanel insertPagePanel;
 
@@ -37,7 +37,7 @@ public class Transfer extends Transaction{
         atm = theATM;
         transferAccount = atmTransferAccount;
         transferAmount = atmTransferAmount;
-        transferamountlistener = new TransferAmountListener();
+        transferlistener = new TransferListener();
 
     }
 
@@ -111,14 +111,13 @@ public class Transfer extends Transaction{
         screen.getMainframe().revalidate();
         screen.getMainframe().repaint();
   
-        TransferAmountListener  transferamountlistener = new TransferAmountListener();
         //delete ".", "cancel", "enter" actionlistener, and add new actionlistener for withdrawal class
         for (int i = 0; i <= 13 ; i++){
             for (var temp: keys[i].getActionListeners()){
                 keys[i].removeActionListener(temp);
             }
-        keys[i].addActionListener(transferamountlistener);
-        System.out.println("transferamountlistener");
+        keys[i].addActionListener(transferlistener);
+        System.out.println("transferlistener");
         }
      }
 
@@ -197,7 +196,7 @@ public class Transfer extends Transaction{
                     return true;
     }
     // private inner class for keypad event handling
-    private class TransferAmountListener implements ActionListener{
+    private class TransferListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             System.out.println("actionPerformed");
