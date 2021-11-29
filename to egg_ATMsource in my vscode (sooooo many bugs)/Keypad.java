@@ -51,14 +51,16 @@ public class Keypad
          add(keypadDisplayTextField);
          keypadDisplayTextField.setColumns(10);
          keypadDisplayTextField.setText(userInput);
+         keypadDisplayTextField.setVisible(true);
 
          keypadPasswordField = new JPasswordField();
          keypadPasswordField.setEditable(false);
          keypadPasswordField.setFont(new Font("Arial", Font.PLAIN, 40));
          keypadPasswordField.setBounds(100, 339, 400, 56);
-         add(keypadDisplayTextField);
+         add(keypadPasswordField);
          keypadPasswordField.setColumns(10);
          keypadPasswordField.setText(userInput);
+         keypadDisplayTextField.setVisible(true);
 
          warningLabel = new JLabel("* Please do not use \".\" as input");
          warningLabel.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -167,6 +169,7 @@ public class Keypad
    public void pin(boolean password){
       keypadDisplayTextField.setVisible(!password);
       keypadPasswordField.setVisible(password);
+      System.out.println(password);
    }
 
   public void setKeypadColor(boolean color){

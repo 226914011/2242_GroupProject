@@ -118,13 +118,12 @@ public class ATM
       pin = 0;
       welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
-
+      keypad.pin(false);
       keypad.setKeypadColor(false);
       screen.getScreenContentPane().add(loginCardNumberPanel, BorderLayout.CENTER);
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
-      keypad.pin(false);
       screen.getMainframe().revalidate();
-      screen.getMainframe().repaint();     
+      screen.getMainframe().repaint();
 
       for (int i = 10; i <=12 ; i+= 2){
          for(ActionListener oldListener : keys[i].getActionListeners())
@@ -139,9 +138,9 @@ public class ATM
 
    // method - show pin GUI
    private void pinGUI(){
+      keypad.pin(true);
       screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
       screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
-      keypad.pin(true);
       for(ActionListener oldListener : keys[12].getActionListeners())
          keys[12].removeActionListener(oldListener);
       keys[12].addActionListener(loginHandler);
