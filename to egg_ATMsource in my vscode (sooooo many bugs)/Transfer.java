@@ -21,6 +21,7 @@ public class Transfer extends Transaction{
     private TransferListener transferlistener;
     private ATM atm;
     private InsertPagePanel insertPagePanel;
+    private Boolean NumValidity;
 
     //declare a int value for invalid input
     private static final int INVALID = -1;
@@ -48,11 +49,11 @@ public class Transfer extends Transaction{
         System.out.println("execute");
         BankDatabase bankDatabase = getBankDatabase();
         screen.getMainframe().getContentPane().removeAll();
+        NumValidity = false;
         transferGUI("Please enter the account number for transfer:");
         System.out.println("transferAccountGUI");
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
-        
         /**
         //ask user input the transfer information
         do
@@ -117,20 +118,21 @@ public class Transfer extends Transaction{
                 keys[i].removeActionListener(temp);
             }
         keys[i].addActionListener(transferlistener);
-        System.out.println("transferlistener");
         }
-     }
+    }
+
+
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
         //return false when account number does not exist
         if(!bankDatabase.checkAccountExist(tarAccNum)){
-            screen.displayMessageLine("\tThe account " + tarAccNum + " is an invalid user account.\n\tPlease re-enter the user account.\n");
+            insertPagePanel.setInvalidMessage( "\tThe account " + tarAccNum + " is an invalid user account.\n\tPlease re-enter the user account.\n");
             return false;
         }
         //return false when transfer account number equal to own account
         if(getAccountNumber() == tarAccNum){
-            screen.displayMessageLine("\tThe account " + tarAccNum + " is your own account.\n\tPlease input an valid account number.\n");
+            insertPagePanel.setInvalidMessage( "\tThe account " + tarAccNum + " is your own account.\n\tPlease input an valid account number.\n");
             return false;
         }
         return true;
@@ -141,14 +143,14 @@ public class Transfer extends Transaction{
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
         //return false when input amount equal to 0
         if (amount == 0){
-            screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
-            screen.displayMessageLine("\tAmount should larger than $0.\n");
+            insertPagePanel.setInvalidMessage("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
+            insertPagePanel.setInvalidMessage("\tAmount should larger than $0.\n");
             return false;
         }
         //return false when input amount larger than Available Balance
         if (amount > availablebalance){
-            screen.displayMessageLine("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
-            screen.displayMessageLine("\tAmount should smaller or equal to $" + availablebalance + ".\n");
+            insertPagePanel.setInvalidMessage("\tYou have inputted an invalid amount.\n\tPlease re-enter the amount.");
+            insertPagePanel.setInvalidMessage("\tAmount should smaller or equal to $" + availablebalance + ".\n");
             return false;
         }
         
@@ -211,9 +213,13 @@ public class Transfer extends Transaction{
                 case "7":
                 case "8":
                 case "9":
-                case ".":
-                    System.out.println("switch");
                     keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+                    break;
+                case ".":
+                    if(NumValidity)
+                        keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand()); 
+                    else 
+                        keypad.warning();
                     break;
                 case "Cancel":
                     screen.getMainframe().getContentPane().removeAll();
@@ -227,10 +233,23 @@ public class Transfer extends Transaction{
                     keypad.getKeypadDisplayTextField().setText("");
                     break;
                 case "Enter":
-                    amount = Double.valueOf(keypad.getKeypadDisplayTextField().getText());
+                    String input = keypad.getKeypadDisplayTextField().getText();
                     keypad.getKeypadDisplayTextField().setText("");
                     keypad.closeWarning();
-                    amountValidity();
+                    System.out.println("Enter");
+                    System.out.println(input);
+                    if(NumValidity)
+                        amount = Integer.valueOf(input);
+                        if(amountValidity()){
+                            confirmGUI();
+                        }
+                    else{
+                        tarAccNum = validation.checkInt(input);
+                        if(accNumValidity()){
+                            NumValidity = true;
+                            transferGUI("<html>Please enter the amount to transfer:<br/><br/>(It will ignore after two decimal point)</html>");
+                        }
+                    }
                     break;
                 default:
                     break;
