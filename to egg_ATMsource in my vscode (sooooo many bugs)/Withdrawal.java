@@ -270,11 +270,13 @@ public class Withdrawal extends Transaction {
                break;
             case "Enter":
                amount = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
-               System.out.println(keypad.getKeypadDisplayTextField().getText());
-               System.out.println(keypad.getKeypadDisplayTextField().getText().length());
-               System.out.println(amount);
-               checkAmount();
-               keypad.getKeypadDisplayTextField().setText(null);
+               if (amount != -1){
+                  System.out.println(keypad.getKeypadDisplayTextField().getText());
+                  System.out.println(keypad.getKeypadDisplayTextField().getText().length());
+                  System.out.println(amount);
+                  checkAmount();
+                  keypad.getKeypadDisplayTextField().setText(null);
+               }
                break;
          }
       }

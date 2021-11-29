@@ -109,6 +109,7 @@ public class ATM
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
       welcome.getWelcomeLabel().addMouseListener(ml);
+      keypad.warning(false);
       loginCardNumberPanel.invalidMessage(false);
    }
 
