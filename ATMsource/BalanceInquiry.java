@@ -1,13 +1,21 @@
 // BalanceInquiry.java
 // Represents a balance inquiry ATM transaction
+import java.awt.event.*;
 
 public class BalanceInquiry extends Transaction
 {  
+   private ATM atm;
+   private Screen screen;
+   private ViewBalance viewBalance;
+
    // BalanceInquiry constructor
    public BalanceInquiry( int userAccountNumber, Screen atmScreen, 
-      BankDatabase atmBankDatabase )
+      BankDatabase atmBankDatabase, ATM theATM , ViewBalance atmViewBalance)
    {
       super( userAccountNumber, atmScreen, atmBankDatabase );
+      screen = super.getScreen();
+      atm = theATM;
+      viewBalance = atmViewBalance;
    } // end BalanceInquiry constructor
 
    // performs the transaction
@@ -15,7 +23,6 @@ public class BalanceInquiry extends Transaction
    {
       // get references to bank database and screen
       BankDatabase bankDatabase = getBankDatabase();
-      Screen screen = getScreen();
 
       // get the available balance for the account involved
       double availableBalance = 
@@ -24,15 +31,28 @@ public class BalanceInquiry extends Transaction
       // get the total balance for the account involved
       double totalBalance = 
          bankDatabase.getTotalBalance( getAccountNumber() );
-      
-      // display the balance information on the screen
-      screen.displayMessageLine( "\nBalance Information:" );
-      screen.displayMessage( " - Available balance: " ); 
-      screen.displayDollarAmount( availableBalance );
-      screen.displayMessage( "\n - Total balance:     " );
-      screen.displayDollarAmount( totalBalance );
-      screen.displayMessageLine( "" );
+
+      // remove all the components in the current content panel of the main frame
+      screen.getMainframe().getContentPane().removeAll();
+      viewBalance.buildGUI();  // method for building GUI of viewing account balance
+      viewBalance.getABalanceTextField().setText(String.format("$%,.2f", Double.valueOf(availableBalance)));    // get method to receive account available balance and changed to String type
+      viewBalance.getTBalanceTextField().setText(String.format("$%,.2f", Double.valueOf(totalBalance)));        // get method to receive account total balance and changed to String type
+      screen.getMainframe().repaint();
+      screen.getMainframe().revalidate();
+
+      ViewBalanceHandler viewBalanceHandler = new ViewBalanceHandler();   // create event handler for viewing balance
+      viewBalance.getButton().addActionListener(viewBalanceHandler);      // register button for event handler
    } // end method execute
+
+   // private inner class ViewBalanceHandler for event handling
+   private class ViewBalanceHandler implements ActionListener{
+      public void actionPerformed(ActionEvent e) {
+         screen.getMainframe().getContentPane().removeAll();   // remove all the components in the content panel
+         screen.getMainframe().repaint();                      // refresh the frame
+         screen.getMainframe().revalidate();                   // validate the frame
+         atm.mainmenuGUI();                                    // return to main menu
+      }
+   }
 } // end class BalanceInquiry
 
 
