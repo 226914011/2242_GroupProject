@@ -88,15 +88,6 @@ public class ATM
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
       welcomeGUI();
-      /**
-      // loop while user is not yet authenticated
-      while ( !userAuthenticated )
-      {
-         screen.displayMessageLine( "\nWelcome!" );
-         authenticateUser(); // authenticate user
-      } // end while
-      **/
-      //displayMainMenu(); // user is now authenticated
    } // end method run
 
    // method - show welcome page GUI
