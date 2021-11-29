@@ -196,8 +196,6 @@ public class Transfer extends Transaction {
                     String input = keypad.getKeypadDisplayTextField().getText();
                     keypad.getKeypadDisplayTextField().setText("");
                     keypad.warning(false);
-                    System.out.println("Enter");
-                    System.out.println(input);
                     if (accValidate) {
                         amount = Double.valueOf((int) (Double.valueOf(input) * 100)) / 100;
                         if (amountValidity()) {
@@ -222,10 +220,8 @@ public class Transfer extends Transaction {
     private class TransferConfirmListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("actionPerformed");
             switch (e.getActionCommand()) {
                 case "Re-enter":
-                    System.out.println("reenter");
                     execute();
                     break;
                 case "Cancel":
@@ -233,7 +229,6 @@ public class Transfer extends Transaction {
                     mainmenu();
                     break;
                 case "Confirm":
-                    System.out.println("Confirm");
                     transfer();
                     transferupdateGUI();
                     break;

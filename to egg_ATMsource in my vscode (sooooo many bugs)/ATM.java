@@ -250,7 +250,6 @@ public class ATM
 
       TimerTask openwelcomeTask = new TimerTask() {
          public void run() {
-            System.out.println("shit");
             accountNumber = 0;
             currentAccountNumber = 0;
             pin = 0;
@@ -313,7 +312,6 @@ public class ATM
                }
                break;
             case ".":
-               System.out.println("test \".\"");
                //need popup some remind message
                keypad.warning(true);
                break;

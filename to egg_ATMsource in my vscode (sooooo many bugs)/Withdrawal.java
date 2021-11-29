@@ -74,7 +74,6 @@ public class Withdrawal extends Transaction {
    }
 
    private void checkAmount() {
-      System.out.println("in");
       // get available balance of account involved
       availableBalance = bankDatabase.getAvailableBalance(getAccountNumber());
 
@@ -113,7 +112,6 @@ public class Withdrawal extends Transaction {
                break;
          }
       } else {
-         System.out.println("this case");
          withdrawalmenu.setInvalidMessage( // display invaild message
                "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>");
          customAmountPanel.setInvalidMessage(
@@ -271,9 +269,6 @@ public class Withdrawal extends Transaction {
             case "Enter":
                amount = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
                if (amount != -1){
-                  System.out.println(keypad.getKeypadDisplayTextField().getText());
-                  System.out.println(keypad.getKeypadDisplayTextField().getText().length());
-                  System.out.println(amount);
                   checkAmount();
                   keypad.getKeypadDisplayTextField().setText(null);
                }
