@@ -29,10 +29,6 @@ public class Withdrawal extends Transaction {
    private BankDatabase bankDatabase;
    private WithdrawalConfirm withdrawalConfirm;
 
-   // constant corresponding to menu option to cancel
-   private final static int CANCELED = 6;
-   private final static int INVAILD = -1;
-
    // Withdrawal constructor
    public Withdrawal(int userAccountNumber, Screen atmScreen,
          BankDatabase atmBankDatabase, Keypad atmKeypad,

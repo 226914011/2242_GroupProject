@@ -4,9 +4,7 @@
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
-import java.util.*;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
+
 
 public class Transfer extends Transaction {
     // declare instance variable for transfer class
@@ -79,7 +77,7 @@ public class Transfer extends Transaction {
         tCButton = transferconfirm.getTransferConfirmButton();
         tCTextField = transferconfirm.getTransferConfirmJTextField();
         tCTextField[0].setText(String.valueOf(tarAccNum));
-        tCTextField[1].setText(String.valueOf(amount));
+        tCTextField[1].setText(String.format("$%,.2f", Double.valueOf(amount)));
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
 

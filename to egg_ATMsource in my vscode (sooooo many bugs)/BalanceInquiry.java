@@ -35,8 +35,8 @@ public class BalanceInquiry extends Transaction
       // remove all the components in the current content panel of the main frame
       screen.getMainframe().getContentPane().removeAll();
       viewBalance.buildGUI();  // method for building GUI of viewing account balance
-      viewBalance.getABalanceTextField().setText(String.valueOf(availableBalance));    // get method to receive account available balance and changed to String type
-      viewBalance.getTBalanceTextField().setText(String.valueOf(totalBalance));        // get method to receive account total balance and changed to String type
+      viewBalance.getABalanceTextField().setText(String.format("$%,.2f", Double.valueOf(availableBalance)));    // get method to receive account available balance and changed to String type
+      viewBalance.getTBalanceTextField().setText(String.format("$%,.2f", Double.valueOf(totalBalance)));        // get method to receive account total balance and changed to String type
       screen.getMainframe().repaint();
       screen.getMainframe().revalidate();
 

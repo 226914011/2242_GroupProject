@@ -306,9 +306,10 @@ public class ATM
             case "7":
             case "8":
             case "9":
-               System.out.println("testing number");
-               keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
-               keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText());
+               if (keypad.getKeypadDisplayTextField().getText().length() < 9){
+                  keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+                  keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText());
+               }
                break;
             case ".":
                System.out.println("test \".\"");
