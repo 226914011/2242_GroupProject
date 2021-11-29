@@ -113,7 +113,11 @@ public class Transfer extends Transaction {
     // boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity() {
         // return false when account number does not exist
-        if (!bankDatabase.checkAccountExist(tarAccNum)) {
+        if (tarAccNum ==-1){
+            insertPagePanel.setInvalidMessage("Please enter a Account number. ");
+            return false;
+        }
+        else if (!bankDatabase.checkAccountExist(tarAccNum)) {
             insertPagePanel.setInvalidMessage("<html>The account " + tarAccNum
                     + " is an invalid user account.<br>Please re-enter the user account.</html>");
             return false;
@@ -132,7 +136,11 @@ public class Transfer extends Transaction {
     private boolean amountValidity() {
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
         // return false when input amount equal to 0
-        if (amount == 0) {
+        if (amount == -1){
+            insertPagePanel.setInvalidMessage("Please enter a amount");
+            return false;
+        }
+        else if (amount == 0) {
             insertPagePanel.setInvalidMessage(
                     "<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should larger than $0.</hmtl>");
             return false;
@@ -193,7 +201,10 @@ public class Transfer extends Transaction {
                     keypad.getKeypadDisplayTextField().setText("");
                     keypad.warning(false);
                     if (accValidate) {
-                        amount = Double.valueOf((int) (Double.valueOf(input) * 100)) / 100;
+                        if (input.length() == 0) 
+                            amount = -1;
+                        else
+                            amount = Double.valueOf((int) (Double.valueOf(input) * 100)) / 100;
                         if (amountValidity()) {
                             confirmGUI();
                         }
