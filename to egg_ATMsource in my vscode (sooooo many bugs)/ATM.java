@@ -86,8 +86,7 @@ public class ATM
 
    // start ATM
    public void run()
-   {  accountNumber = 0;
-      pin = 0;
+   {
       keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
@@ -115,6 +114,8 @@ public class ATM
 
    // method - show login page GUI
    private void loginGUI(){
+      accountNumber = 0;
+      pin = 0;
       welcome.getWelcomeLabel().removeMouseListener(ml);
       screen.getMainframe().getContentPane().removeAll();
 
