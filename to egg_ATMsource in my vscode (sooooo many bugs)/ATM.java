@@ -314,7 +314,7 @@ public class ATM
             case "8":
             case "9":
                keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
-               keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+               keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText());
                break;
             case ".":
                //need popup some remind message

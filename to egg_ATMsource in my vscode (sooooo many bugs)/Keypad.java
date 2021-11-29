@@ -154,6 +154,8 @@ public class Keypad
    public JTextField getKeypadDisplayTextField(){
       return keypadDisplayTextField;
    }
+   
+
    public void warning(){
       warningLabel.setVisible(true);
    }
