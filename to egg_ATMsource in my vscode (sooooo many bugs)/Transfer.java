@@ -102,9 +102,9 @@ public class Transfer extends Transaction {
         screen.getMainframe().getContentPane().removeAll();
         transferupdate.buildGUI();
         transferupdate.getAvailableTextField()
-                .setText(String.valueOf(bankDatabase.getAvailableBalance(getAccountNumber())));
+                .setText(String.format("$%,.2f", Double.valueOf(bankDatabase.getAvailableBalance(getAccountNumber()))));
         transferupdate.getTotalBalanceTextField()
-                .setText(String.valueOf(bankDatabase.getTotalBalance(getAccountNumber())));
+                .setText(String.format("$%,.2f", Double.valueOf(bankDatabase.getTotalBalance(getAccountNumber()))));
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
         JButton backButton = transferupdate.getBackButton();
