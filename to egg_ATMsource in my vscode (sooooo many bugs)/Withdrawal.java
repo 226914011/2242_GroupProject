@@ -1,4 +1,3 @@
-
 // Withdrawal.java
 // Represents a withdrawal ATM transaction
 import java.awt.event.*;

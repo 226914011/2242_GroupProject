@@ -1,4 +1,3 @@
-
 //  Transfer.java
 //  This class represents the transfer function of an ATM
 import java.awt.event.*;
