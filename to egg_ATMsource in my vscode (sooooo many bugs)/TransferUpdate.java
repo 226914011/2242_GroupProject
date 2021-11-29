@@ -8,7 +8,7 @@ public class TransferUpdate extends Screen {
 
 	private DisplayMessageJPanel transferUpdatePanel;
 	private JTextField availableBtxtfield;
-	private JTextField totalbaltxtfield;
+	private JTextField totalBtxtfield;
 	private JLabel transferSuccessLabel;
 	private JLabel availableBalanceLabel;
 	private JLabel totalBalanceLabel;
@@ -41,11 +41,11 @@ public class TransferUpdate extends Screen {
 		availableBtxtfield.setEditable(false);
 		transferUpdatePanel.add(availableBtxtfield);
 		
-		totalbaltxtfield = new JTextField();
-		totalbaltxtfield.setColumns(10);
-		totalbaltxtfield.setBounds(730, 523, 524, 85);
-		totalbaltxtfield.setEditable(false);
-		transferUpdatePanel.add(totalbaltxtfield);
+		totalBtxtfield = new JTextField();
+		totalBtxtfield.setColumns(10);
+		totalBtxtfield.setBounds(730, 523, 524, 85);
+		totalBtxtfield.setEditable(false);
+		transferUpdatePanel.add(totalBtxtfield);
 		
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Arial Black", Font.PLAIN, 35));
@@ -57,12 +57,12 @@ public class TransferUpdate extends Screen {
 		super.getMainframe().repaint();
 	}
 
-	public JLabel getAvailableBalanceLabel(){
-		return availableBalanceLabel;
+	public JTextField getAvailableTextField(){
+		return availableBtxtfield;
 	}
 	
-	public JLabel getTotalBalanceLabel(){
-		return totalBalanceLabel;
+	public JTextField getTotalBalanceTextField(){
+		return totalBtxtfield;
 	}
 	
 	public JButton getBackButton(){
