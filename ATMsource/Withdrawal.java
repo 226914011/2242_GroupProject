@@ -63,6 +63,7 @@ public class Withdrawal extends Transaction {
 
       wButtons = withdrawalmenu.getwButtons();
       withdrawalHandler = new WithdrawalMenuHandler();
+      //add withdrawal menu Handler
       for (var temp : wButtons) {
          temp.addActionListener(withdrawalHandler);
       }
@@ -77,25 +78,29 @@ public class Withdrawal extends Transaction {
          // check whether the cash dispenser has enough money
          switch (cashDispenser.isSufficientCashAvailable(amount)) {
             case 1:
-               withdrawalmenu.setInvalidMessage( // display invaild message
+               // display invaild message
+               withdrawalmenu.setInvalidMessage(
                      "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
                customAmountPanel.setInvalidMessage(
                      "<html>Wrong cash type input in the ATM. <br/>Please input desired amount which is multiple of 100</html>");
                break;
             case 2:
-               withdrawalmenu.setInvalidMessage( // display invaild message
+               // display invaild message
+               withdrawalmenu.setInvalidMessage(
                      "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>");
                customAmountPanel.setInvalidMessage(
                      "<html>Insufficient cash available in the ATM. <br/>Please choose a smaller amount.</html>");
                break;
             case 3:
-               withdrawalmenu.setInvalidMessage( // display invaild message
+               // display invaild message
+               withdrawalmenu.setInvalidMessage( 
                      "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
                customAmountPanel.setInvalidMessage(
                      "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 and HK$500 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
                break;
             case 4:
-               withdrawalmenu.setInvalidMessage( // display invaild message
+               // display invaild message
+               withdrawalmenu.setInvalidMessage( 
                      "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
                customAmountPanel.setInvalidMessage(
                      "<html>Insufficient cash available in the ATM. The ATM do not have enough HK$100 dollar notes. <br/>Please choose another amount which is smaller or larger</html>");
@@ -107,13 +112,15 @@ public class Withdrawal extends Transaction {
                break;
          }
       } else {
-         withdrawalmenu.setInvalidMessage( // display invaild message
+         // display invaild message
+         withdrawalmenu.setInvalidMessage( 
                "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>");
          customAmountPanel.setInvalidMessage(
                "<html>Insufficient balance in your bank account. <br/>Please choose a smaller amount.<html/>");
       }
    }
 
+   //ActionListener for WithdrawalConfirmGUI
    private class WithdrawalConfirmHandler implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -134,6 +141,7 @@ public class Withdrawal extends Transaction {
       }
    }
 
+   //ActionListener for WithdrawalMenuGUI
    private class WithdrawalMenuHandler implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -178,6 +186,7 @@ public class Withdrawal extends Transaction {
       }
    }
 
+   //take Card and take Cash GUI
    private void takeCashGUI() {
       Timer timer = new Timer("Timer"); // timer for counting
 
@@ -195,6 +204,7 @@ public class Withdrawal extends Transaction {
          }
       };
 
+      //open take card GUI after 2 second
       timer.schedule(openTakeCardGUI, 2000L);
 
       TimerTask openTakeCashTask = new TimerTask() {
@@ -206,9 +216,11 @@ public class Withdrawal extends Transaction {
             atm.welcomeGUI();
          }
       };
+      //return welcomeGUI after 4 second
       timer.schedule(openTakeCashTask, 4000L);
    }
 
+   //transfer Confirm GUI
    private void transferConfirmGUI() {
       JButton[] Buttons = withdrawalConfirm.getConfirmGUIButtons();
       screen.getMainframe().getContentPane().removeAll();
@@ -224,6 +236,7 @@ public class Withdrawal extends Transaction {
 
    }
 
+   //insert custiom amount GUI
    private void insertAmountGUI() {
       JButton[] keys = keypad.getKeys();
       screen.getMainframe().getContentPane().removeAll();
@@ -246,6 +259,7 @@ public class Withdrawal extends Transaction {
       }
    }
 
+   //ActionListener for insert custiom amount
    private class AmountListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
