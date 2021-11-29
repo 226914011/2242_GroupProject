@@ -249,8 +249,7 @@ public class Withdrawal extends Transaction {
 
       AmountListener amountListener = new AmountListener();
       // delete ".", "cancel", "enter" actionlistener, and add new actionlistener for
-      // withdrawal class
-      for (int i = 10; i <= 12; i += 2) {
+      for (int i = 10; i <= 13; i ++) {
          for (var temp : keys[i].getActionListeners()) {
             keys[i].removeActionListener(temp);
          }
@@ -262,8 +261,16 @@ public class Withdrawal extends Transaction {
       @Override
       public void actionPerformed(ActionEvent e) {
          switch (e.getActionCommand()) {
+            case ".":
+               keypad.warning(true);
+               break;
             case "Cancel":
+               keypad.getKeypadDisplayTextField().setText(null);
                withdrawalmainmenuGUI();
+               break;
+            case "Clear":
+               keypad.getKeypadDisplayTextField().setText("");
+               keypad.getKeypadPasswordField().setText("");
                break;
             case "Enter":
                amount = validation.checkInt(keypad.getKeypadDisplayTextField().getText());
@@ -271,9 +278,9 @@ public class Withdrawal extends Transaction {
                System.out.println(keypad.getKeypadDisplayTextField().getText().length());
                System.out.println(amount);
                checkAmount();
+               keypad.getKeypadDisplayTextField().setText(null);
                break;
          }
-         keypad.getKeypadDisplayTextField().setText(null);
       }
    }
 

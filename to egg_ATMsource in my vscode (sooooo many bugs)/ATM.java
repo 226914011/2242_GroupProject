@@ -125,7 +125,7 @@ public class ATM
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
-      for (int i = 10; i <=12 ; i+= 2){
+      for (int i = 0; i <=13 ; i++){
          for(ActionListener oldListener : keys[i].getActionListeners())
             keys[i].removeActionListener(oldListener);
       }
