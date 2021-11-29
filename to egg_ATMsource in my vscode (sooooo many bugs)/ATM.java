@@ -74,15 +74,14 @@ public class ATM
       transferTargetAccPanel = new InsertPagePanel("Please enter the account number for transfer:");
       customAmountPanel = new InsertPagePanel("Please input your custom amount:");
       transferConfirm = new TransferConfirm();  // create confirm transfer page GUI
+      transferUpdate = new TransferUpdate();
       takeCard = new TakeCard(); // create "Please take your card" GUI
       withdrawedCash = new WithdrawedCash(); // create "Please take your cash" GUI
       cancelTransaction = new CancelTransaction(); // create "Cancelling Transaction" GUI
       withdrawalConfirm = new WithdrawalConfirm(); // create withdrawal confirmation GUI
-      transferAccount = new TransferAccount();
       transferConfirm = new TransferConfirm();
       withdrawalConfirm = new WithdrawalConfirm();
       withdrawedCash = new WithdrawedCash();
-      transferAmount = new TransferAmount();
    } // end no-argument ATM constructor
 
    // start ATM
