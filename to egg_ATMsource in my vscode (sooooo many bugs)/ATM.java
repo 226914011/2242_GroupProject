@@ -24,6 +24,7 @@ public class ATM
    private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;  // Login System GUI
    private InsertPagePanel transferTargetAccPanel, transferEnterAmountPanel, customAmountPanel;    // GUI for inserting page
    private TransferConfirm transferConfirm;  // Transfer confirmation page GUI
+   private TransferUpdate transferUpdate;
    private TakeCard takeCard;  // Take Card reminder GUI
    private WithdrawedCash withdrawedCash; // Displaying "Please take your cash now" GUI
    private static int menuChioce,withdrawalmenuChioce;
@@ -34,10 +35,6 @@ public class ATM
    private ViewBalance viewbalance; // Balance Inquiry GUI
    private CancelTransaction cancelTransaction; // Cancel Transaction GUI
    private WithdrawalConfirm withdrawalConfirm; // withdrawal confirmation GUI
-   private TransferAccount transferAccount;
-   private TransferAmount transferAmount;
-
-
 
    // constants corresponding to main menu options
    private static final int BALANCE_INQUIRY = 1;
@@ -292,7 +289,7 @@ public class ATM
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation, this, transferConfirm);
+               bankDatabase, keypad, validation, this, transferConfirm, transferUpdate);
             break;
       } // end switch
 

@@ -30,7 +30,7 @@ public class Transfer extends Transaction{
 
 
     //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation,ATM theATM, TransferConfirm atmtransferConfirm) {
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation,ATM theATM, TransferConfirm atmtransferConfirm, TransferUpdate atmtransferupdate) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         keypad = atmKeypad; // get reference
         validation = atmValidation; // get reference
@@ -38,6 +38,7 @@ public class Transfer extends Transaction{
         screen = super.getScreen();   // get reference
         atm = theATM;
         transferconfirm = atmtransferConfirm;
+        transferupdate = atmtransferupdate;
         transferlistener = new TransferListener();
         tconfirmlistener = new TransferConfirmListener();
     }
@@ -224,6 +225,7 @@ public class Transfer extends Transaction{
                     break;
                 case "Confirm":
                     System.out.println("Confirm");
+                    transfer();
                     transferupdateGUI();
                     break;
                 default:
