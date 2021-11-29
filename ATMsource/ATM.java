@@ -123,17 +123,9 @@ public class ATM
    // display the main menu and return an input selection
    private int displayMainMenu()
    {
-      int buffer = 0;
-      do{
-         screen.displayMessageLine( "\nMain menu:" );
-         screen.displayMessageLine( "1 - View my balance" );
-         screen.displayMessageLine( "2 - Withdraw cash" );
-         screen.displayMessageLine( "3 - Transfer");
-         screen.displayMessageLine( "4 - Exit\n" );
-         screen.displayMessage( "Enter a choice: " );
-         buffer = validation.checkInt(keypad.getInput()) ; // return user's selection
-      } while (buffer == INVALID);
-
+      int buffer;
+      screen.menuGUI();
+      buffer = 0;
       return buffer;
    } // end method displayMainMenu
          
