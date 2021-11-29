@@ -1,3 +1,4 @@
+
 //  Transfer.java
 //  This class represents the transfer function of an ATM
 import java.awt.event.*;
@@ -7,8 +8,8 @@ import java.util.*;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
-public class Transfer extends Transaction{
-    //declare instance variable for transfer class
+public class Transfer extends Transaction {
+    // declare instance variable for transfer class
     private Keypad keypad;
     private Screen screen;
     private BankDatabase bankDatabase;
@@ -25,17 +26,18 @@ public class Transfer extends Transaction{
     private TransferConfirmListener tconfirmlistener;
     private TransferUpdate transferupdate;
 
-    //declare a int value for invalid input
+    // declare a int value for invalid input
     private static final int INVALID = -1;
 
-
-    //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation,ATM theATM, TransferConfirm atmtransferConfirm, TransferUpdate atmtransferupdate) {
+    // Transfer constructor
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad,
+            Validation atmValidation, ATM theATM, TransferConfirm atmtransferConfirm,
+            TransferUpdate atmtransferupdate) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         keypad = atmKeypad; // get reference
         validation = atmValidation; // get reference
-        bankDatabase = getBankDatabase();   // get reference
-        screen = super.getScreen();   // get reference
+        bankDatabase = getBankDatabase(); // get reference
+        screen = super.getScreen(); // get reference
         atm = theATM;
         transferconfirm = atmtransferConfirm;
         transferupdate = atmtransferupdate;
@@ -51,27 +53,27 @@ public class Transfer extends Transaction{
         screen.getMainframe().revalidate();
     }
 
-    private void transferGUI(String Display){
+    private void transferGUI(String Display) {
         insertPagePanel = new InsertPagePanel(Display);
         JButton[] keys = keypad.getKeys();
         screen.getMainframe().getContentPane().removeAll();
         screen.getScreenContentPane().add(insertPagePanel, BorderLayout.CENTER);
         screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
-        
+
         keypad.setKeypadColor(true);
         screen.getMainframe().revalidate();
         screen.getMainframe().repaint();
-  
-        //delete ".", "cancel", "enter" actionlistener, and add new actionlistener
-        for (int i = 0; i <= 13 ; i++){
-            for (var temp: keys[i].getActionListeners()){
+
+        // delete ".", "cancel", "enter" actionlistener, and add new actionlistener
+        for (int i = 0; i <= 13; i++) {
+            for (var temp : keys[i].getActionListeners()) {
                 keys[i].removeActionListener(temp);
             }
-        keys[i].addActionListener(transferlistener);
+            keys[i].addActionListener(transferlistener);
         }
     }
 
-    private void confirmGUI(){
+    private void confirmGUI() {
         screen.getMainframe().getContentPane().removeAll();
         transferconfirm.buildGUI();
         tCButton = transferconfirm.getTransferConfirmButton();
@@ -81,70 +83,78 @@ public class Transfer extends Transaction{
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
 
-        //delete ".", "cancel", "enter" actionlistener, and add new actionlistener
-        for (int i = 0; i < 3 ; i++){
-            for (var temp: tCButton[i].getActionListeners()){
+        // delete ".", "cancel", "enter" actionlistener, and add new actionlistener
+        for (int i = 0; i < 3; i++) {
+            for (var temp : tCButton[i].getActionListeners()) {
                 tCButton[i].removeActionListener(temp);
             }
-        tCButton[i].addActionListener(tconfirmlistener);
+            tCButton[i].addActionListener(tconfirmlistener);
         }
     }
 
-    private void transfer(){
-        //debit the money from owner account number
+    private void transfer() {
+        // debit the money from owner account number
         bankDatabase.debit(getAccountNumber(), amount);
-        //credit the money from transfer target account number
+        // credit the money from transfer target account number
         bankDatabase.credit(tarAccNum, amount);
 
     }
 
-    private void transferupdateGUI(){
+    private void transferupdateGUI() {
         screen.getMainframe().getContentPane().removeAll();
         transferupdate.buildGUI();
-        transferupdate.getAvailableTextField().setText(String.valueOf(bankDatabase.getAvailableBalance(getAccountNumber())));
-        transferupdate.getTotalBalanceTextField().setText(String.valueOf(bankDatabase.getTotalBalance(getAccountNumber())));
+        transferupdate.getAvailableTextField()
+                .setText(String.valueOf(bankDatabase.getAvailableBalance(getAccountNumber())));
+        transferupdate.getTotalBalanceTextField()
+                .setText(String.valueOf(bankDatabase.getTotalBalance(getAccountNumber())));
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
         JButton backButton = transferupdate.getBackButton();
-        for (var temp: backButton.getActionListeners()){
+        for (var temp : backButton.getActionListeners()) {
             backButton.removeActionListener(temp);
         }
         backButton.addActionListener(tconfirmlistener);
     }
 
-    //boolean method - checkUserAccExistAndNotUserOwnAcc
-    private boolean accNumValidity(){
-        //return false when account number does not exist
-        if(!bankDatabase.checkAccountExist(tarAccNum)){
-            insertPagePanel.setInvalidMessage( "<html>The account " + tarAccNum + " is an invalid user account.<br>Please re-enter the user account.</html>");
+    // boolean method - checkUserAccExistAndNotUserOwnAcc
+    private boolean accNumValidity() {
+        // return false when account number does not exist
+        if (!bankDatabase.checkAccountExist(tarAccNum)) {
+            insertPagePanel.setInvalidMessage("<html>The account " + tarAccNum
+                    + " is an invalid user account.<br>Please re-enter the user account.</html>");
             return false;
         }
-        //return false when transfer account number equal to own account
-        if(getAccountNumber() == tarAccNum){
-            insertPagePanel.setInvalidMessage( "<html>The account " + tarAccNum + " is your own account.<br>Please input an valid account number.</html>");
+        // return false when transfer account number equal to own account
+        if (getAccountNumber() == tarAccNum) {
+            insertPagePanel.setInvalidMessage("<html>The account " + tarAccNum
+                    + " is your own account.<br>Please input an valid account number.</html>");
             return false;
         }
         return true;
     }
 
-    //boolean method - check the account have enough money to transfer and amount is positive double number
-    private boolean amountValidity(){
+    // boolean method - check the account have enough money to transfer and amount
+    // is positive double number
+    private boolean amountValidity() {
         double availablebalance = bankDatabase.getAvailableBalance(getAccountNumber());
-        //return false when input amount equal to 0
-        if (amount == 0){
-            insertPagePanel.setInvalidMessage("<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should larger than $0.</hmtl>");
+        // return false when input amount equal to 0
+        if (amount == 0) {
+            insertPagePanel.setInvalidMessage(
+                    "<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should larger than $0.</hmtl>");
             return false;
         }
-        //return false when input amount larger than Available Balance
-        if (amount > availablebalance){
-            insertPagePanel.setInvalidMessage("<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should smaller or equal to $" + availablebalance + "</hmtl>");
+        // return false when input amount larger than Available Balance
+        if (amount > availablebalance) {
+            insertPagePanel.setInvalidMessage(
+                    "<html>You have inputted an invalid amount.<br>Please re-enter the amount.<br>Amount should smaller or equal to $"
+                            + availablebalance + "</hmtl>");
             return false;
         }
-        
+
         return true;
     }
 
-    private void mainmenu(){
+    private void mainmenu() {
         screen.getMainframe().getContentPane().removeAll();
         screen.getMainframe().revalidate();
         screen.getMainframe().repaint();
@@ -154,27 +164,29 @@ public class Transfer extends Transaction{
     }
 
     // private inner class for keypad event handling
-    private class TransferListener implements ActionListener{
+    private class TransferListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
                 case "0":
                 case "1":
                 case "2":
                 case "3":
-                case "4": 
+                case "4":
                 case "5":
                 case "6":
                 case "7":
                 case "8":
                 case "9":
-                    if(keypad.getKeypadDisplayTextField().getText().length() < 9)
-                        keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+                    if (keypad.getKeypadDisplayTextField().getText().length() < 9)
+                        keypad.getKeypadDisplayTextField()
+                                .setText(keypad.getKeypadDisplayTextField().getText() + e.getActionCommand());
                     break;
                 case ".":
-                    if(accValidate)
-                        keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand()); 
-                    else 
+                    if (accValidate)
+                        keypad.getKeypadDisplayTextField()
+                                .setText(keypad.getKeypadDisplayTextField().getText() + e.getActionCommand());
+                    else
                         keypad.warning();
                     break;
                 case "Cancel":
@@ -189,16 +201,17 @@ public class Transfer extends Transaction{
                     keypad.closeWarning();
                     System.out.println("Enter");
                     System.out.println(input);
-                    if(accValidate){
-                        amount = Double.valueOf((int) (Double.valueOf(input)*100))/100;
-                        if(amountValidity()){
+                    if (accValidate) {
+                        amount = Double.valueOf((int) (Double.valueOf(input) * 100)) / 100;
+                        if (amountValidity()) {
                             confirmGUI();
                         }
-                    }else{
+                    } else {
                         tarAccNum = validation.checkInt(input);
-                        if(accNumValidity()){
+                        if (accNumValidity()) {
                             accValidate = true;
-                            transferGUI("<html>Please enter the amount to transfer:<br/><br/>(It will ignore after two decimal point)</html>");
+                            transferGUI(
+                                    "<html>Please enter the amount to transfer:<br/><br/>(It will ignore after two decimal point)</html>");
                         }
                     }
                     break;
@@ -207,10 +220,11 @@ public class Transfer extends Transaction{
             }
         }
     }
+
     // private inner class for keypad event handling
-    private class TransferConfirmListener implements ActionListener{
+    private class TransferConfirmListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             System.out.println("actionPerformed");
             switch (e.getActionCommand()) {
                 case "Re-enter":

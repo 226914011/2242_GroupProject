@@ -14,19 +14,6 @@ public class DisplayMessageJPanel extends JPanel {
         setBackground(new Color(56, 60, 102));
     }
 
-    /***
-     * //for image background
-     * 
-     * @Override
-     *           public void paintComponent(Graphics g) {
-     *           super.paintComponent(g);
-     *           ImageIcon bgimage = new ImageIcon("withdraw_1-4.png");
-     *           g.drawImage(bgimage.getImage(), 0, 0, this.getWidth(),
-     *           this.getHeight(), null);
-     *           }
-     ***/
-
-    // this is for testing, pls don't copy it in screen
     public static void main(String[] args) {
         JFrame mainFrame = new JFrame();
         DisplayMessageJPanel panel = new DisplayMessageJPanel();
@@ -36,4 +23,5 @@ public class DisplayMessageJPanel extends JPanel {
         mainFrame.add(panel);
         mainFrame.pack();
     }
+
 }
