@@ -210,7 +210,7 @@ public class ATM
 
    // display the main menu and return an input selection
    public void mainmenuGUI()
-   {
+   {  keypad.pin(false);
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
