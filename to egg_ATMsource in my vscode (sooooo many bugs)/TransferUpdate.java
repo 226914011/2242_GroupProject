@@ -40,14 +40,14 @@ public class TransferUpdate extends Screen {
 		transferUpdatePanel.add(totalBalanceLabel);
 		
 		availableBtxtfield = new JTextField();
-		totalBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		availableBtxtfield.setFont(new Font("Arial", Font.PLAIN, 40));
 		availableBtxtfield.setBounds(730, 313, 524, 85);
 		availableBtxtfield.setColumns(10);
 		availableBtxtfield.setEditable(false);
 		transferUpdatePanel.add(availableBtxtfield);
 		
 		totalBtxtfield = new JTextField();
-		totalBalanceLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+		totalBtxtfield.setFont(new Font("Arial", Font.PLAIN, 40));
 		totalBtxtfield.setColumns(10);
 		totalBtxtfield.setBounds(730, 523, 524, 85);
 		totalBtxtfield.setEditable(false);
