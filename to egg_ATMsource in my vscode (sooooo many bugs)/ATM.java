@@ -292,7 +292,7 @@ public class ATM
             break;
          case TRANSFER:
             temp = new Transfer(currentAccountNumber, screen,
-               bankDatabase, keypad, validation, this, transferAccount, transferAmount);
+               bankDatabase, keypad, validation, this, transferConfirm);
             break;
       } // end switch
 

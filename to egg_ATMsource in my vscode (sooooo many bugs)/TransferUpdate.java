@@ -57,18 +57,6 @@ public class TransferUpdate extends Screen {
 		super.getMainframe().repaint();
 	}
 
-	public JTextField getAvailableBtxtfield(){
-		return availableBtxtfield;
-	}
-	 
-	public JTextField getTotalbaltxtfield(){
-		return totalbaltxtfield;
-	}
-	
-	public JLabel getTransferSuccessLabel(){
-		return transferSuccessLabel;
-	}
-
 	public JLabel getAvailableBalanceLabel(){
 		return availableBalanceLabel;
 	}

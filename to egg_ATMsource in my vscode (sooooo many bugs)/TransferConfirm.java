@@ -33,6 +33,7 @@ public class TransferConfirm extends Screen {
 		
 		// for loop setting up TextFields
 		for (int i = 0; i < 2; i++) {
+			tCTextField[i] = new JTextField();
 			tCTextField[i].setFont(new Font("Arial", Font.PLAIN, 40));
 			tCTextField[i].setBounds(730, (313 + 218 * i) , 524, 85);
 			tCTextField[i].setEditable(false);
