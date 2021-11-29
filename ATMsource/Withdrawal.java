@@ -237,7 +237,7 @@ public class Withdrawal extends Transaction {
       screen.getMainframe().repaint();
 
       AmountListener amountListener = new AmountListener();
-      // delete ".", "cancel", "enter" actionlistener, and add new actionlistener for
+      // delete ".", "cancel", "enter", "clear" actionlistener, and add new actionlistener
       for (int i = 10; i <= 13; i ++) {
          for (var temp : keys[i].getActionListeners()) {
             keys[i].removeActionListener(temp);
