@@ -47,6 +47,7 @@ public class Transfer extends Transaction {
         screen.getMainframe().revalidate();
     }
 
+    //insert transfer target account GUI
     private void transferGUI(String Display) {
         insertPagePanel = new InsertPagePanel(Display);
         JButton[] keys = keypad.getKeys();
@@ -67,6 +68,7 @@ public class Transfer extends Transaction {
         }
     }
 
+    // confirm page GUI
     private void confirmGUI() {
         screen.getMainframe().getContentPane().removeAll();
         transferconfirm.buildGUI();
@@ -86,6 +88,7 @@ public class Transfer extends Transaction {
         }
     }
 
+    //for execute ransfer
     private void transfer() {
         // debit the money from owner account number
         bankDatabase.debit(getAccountNumber(), amount);
@@ -94,6 +97,7 @@ public class Transfer extends Transaction {
 
     }
 
+    // show transfer updated information 
     private void transferupdateGUI() {
         screen.getMainframe().getContentPane().removeAll();
         transferupdate.buildGUI();
@@ -156,6 +160,7 @@ public class Transfer extends Transaction {
         return true;
     }
 
+    //return main menu GUI 
     private void mainmenu() {
         screen.getMainframe().getContentPane().removeAll();
         screen.getMainframe().revalidate();
@@ -170,6 +175,7 @@ public class Transfer extends Transaction {
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
+                //0-9 actionlistener
                 case "0":
                 case "1":
                 case "2":
@@ -184,18 +190,22 @@ public class Transfer extends Transaction {
                         keypad.getKeypadDisplayTextField()
                                 .setText(keypad.getKeypadDisplayTextField().getText() + e.getActionCommand());
                     break;
+                // "." actionlistener
                 case ".":
                     if(accValidate)
                         keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand()); 
                     else 
                         keypad.warning(true);
                     break;
+                //cancel actionlistener
                 case "Cancel":
                     mainmenu();
                     break;
+                //clear actionlistener
                 case "Clear":
                     keypad.getKeypadDisplayTextField().setText("");
                     break;
+                //enter actionlistener
                 case "Enter":
                     String input = keypad.getKeypadDisplayTextField().getText();
                     keypad.getKeypadDisplayTextField().setText("");
@@ -223,7 +233,7 @@ public class Transfer extends Transaction {
         }
     }
 
-    // private inner class for keypad event handling
+    // Transfer Confirm GUI ActionListener 
     private class TransferConfirmListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
