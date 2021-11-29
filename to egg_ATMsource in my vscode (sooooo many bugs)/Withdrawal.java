@@ -254,8 +254,6 @@ public class Withdrawal extends Transaction {
          }
          keys[i].addActionListener(amountListener);
       }
-      
-
    }
 
    private class AmountListener implements ActionListener {

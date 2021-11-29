@@ -1,6 +1,12 @@
 //  Transfer.java
 //  This class represents the transfer function of an ATM
 import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+import java.util.*;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+
 public class Transfer extends Transaction{
     //declare instance variable for transfer class
     private Keypad keypad;
@@ -12,33 +18,40 @@ public class Transfer extends Transaction{
     private Validation validation;
     private TransferAccount transferAccount;
     private TransferAmount transferAmount;
+    private TransferAmountListener transferamountlistener;
+    private ATM atm;
+    private InsertPagePanel insertPagePanel;
 
     //declare a int value for invalid input
     private static final int INVALID = -1;
 
 
     //Transfer constructor
-    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation, TransferAccount atmTransferAccount, TransferAmount atmTransferAmount) {
+    public Transfer(int userAccountNumber, Screen atmScreen, BankDatabase atmBankDatabase, Keypad atmKeypad, Validation atmValidation,ATM theATM, TransferAccount atmTransferAccount, TransferAmount atmTransferAmount) {
         super(userAccountNumber, atmScreen, atmBankDatabase);
         
         keypad = atmKeypad; // get reference
         validation = atmValidation; // get reference
         bankDatabase = getBankDatabase();   // get reference
         screen = super.getScreen();   // get reference
+        atm = theATM;
         transferAccount = atmTransferAccount;
         transferAmount = atmTransferAmount;
+        transferamountlistener = new TransferAmountListener();
+
     }
 
     
     
 
     public void execute() {
+        System.out.println("execute");
         BankDatabase bankDatabase = getBankDatabase();
         screen.getMainframe().getContentPane().removeAll();
-        transferAccount.buildGUI();
+        transferGUI("Please enter the account number for transfer:");
+        System.out.println("transferAccountGUI");
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
-        
         
         /**
         //ask user input the transfer information
@@ -86,6 +99,28 @@ public class Transfer extends Transaction{
         }
         **/
     }
+
+    private void transferGUI(String Display){
+        insertPagePanel = new InsertPagePanel(Display);
+        JButton[] keys = keypad.getKeys();
+        screen.getMainframe().getContentPane().removeAll();
+        screen.getScreenContentPane().add(insertPagePanel, BorderLayout.CENTER);
+        screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
+        
+        keypad.setKeypadColor(true);
+        screen.getMainframe().revalidate();
+        screen.getMainframe().repaint();
+  
+        TransferAmountListener  transferamountlistener = new TransferAmountListener();
+        //delete ".", "cancel", "enter" actionlistener, and add new actionlistener for withdrawal class
+        for (int i = 0; i <= 13 ; i++){
+            for (var temp: keys[i].getActionListeners()){
+                keys[i].removeActionListener(temp);
+            }
+        keys[i].addActionListener(transferamountlistener);
+        System.out.println("transferamountlistener");
+        }
+     }
 
     //boolean method - checkUserAccExistAndNotUserOwnAcc
     private boolean accNumValidity(){
@@ -161,5 +196,46 @@ public class Transfer extends Transaction{
                     **/
                     return true;
     }
-
+    // private inner class for keypad event handling
+    private class TransferAmountListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println("actionPerformed");
+            switch (e.getActionCommand()) {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4": 
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case ".":
+                    System.out.println("switch");
+                    keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
+                    break;
+                case "Cancel":
+                    screen.getMainframe().getContentPane().removeAll();
+                    screen.getMainframe().revalidate();
+                    screen.getMainframe().repaint();
+                    keypad.getKeypadDisplayTextField().setText("");
+                    keypad.closeWarning();
+                    atm.mainmenuGUI();
+                    break;
+                case "Clear":
+                    keypad.getKeypadDisplayTextField().setText("");
+                    break;
+                case "Enter":
+                    amount = Double.valueOf(keypad.getKeypadDisplayTextField().getText());
+                    keypad.getKeypadDisplayTextField().setText("");
+                    keypad.closeWarning();
+                    amountValidity();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
