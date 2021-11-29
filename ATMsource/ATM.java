@@ -42,7 +42,7 @@ public class ATM
    private static final int TRANSFER = 3;
    private static final int EXIT = 4;
 
-   // Event handling for the welcome screen
+   // Mouse Event handling for the welcome screen
    private MouseListener ml = new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -84,10 +84,10 @@ public class ATM
    // start ATM
    public void run()
    {
-      keys = keypad.getKeys();
-      screen.getMainframe().setVisible(true);
-      screen.getMainframe().setResizable(false);
-      welcomeGUI();
+      keys = keypad.getKeys(); //get key from keypad
+      screen.getMainframe().setVisible(true); // Visualize the Screen
+      screen.getMainframe().setResizable(false); //Lock the size of the window
+      welcomeGUI(); //go the welcomeGUI
    } // end method run
 
    // method - show welcome page GUI
@@ -103,6 +103,7 @@ public class ATM
 
    // method - show login page GUI
    private void loginGUI(){
+      //Initialize login page
       accountNumber = 0;
       pin = 0;
       welcome.getWelcomeLabel().removeMouseListener(ml);
@@ -113,7 +114,7 @@ public class ATM
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
-
+      //Initialize all keys of keypad
       for (int i = 0; i <=13 ; i++){
          for(ActionListener oldListener : keys[i].getActionListeners())
             keys[i].removeActionListener(oldListener);
@@ -127,7 +128,9 @@ public class ATM
 
    // method - show pin GUI
    private void pinGUI(){
+      //Enable Password Field
       keypad.pin(true);
+      //Initialize pinGUI
       screen.getMainframe().getContentPane().remove(loginCardNumberPanel);
       screen.getScreenContentPane().add(loginPinPanel, BorderLayout.CENTER);
       for(ActionListener oldListener : keys[12].getActionListeners())
@@ -150,6 +153,7 @@ public class ATM
          mainmenuGUI();
       } // end if
       else{
+         //Reset and return
          keypad.getKeypadDisplayTextField().setText("");
          keys[12].removeActionListener(loginHandler);
          keys[12].addActionListener(keypadHandler);
@@ -194,7 +198,9 @@ public class ATM
 
    // display the main menu and return an input selection
    public void mainmenuGUI()
-   {  keypad.pin(false);
+   {  //Disable Password Field
+      keypad.pin(false);
+      //Initialize mainmenuGUI
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
@@ -202,6 +208,7 @@ public class ATM
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
 
+      //Initialize Buttons in mainmenu with ActionListeners
       Buttons = mainmenu.getButtons();
       MainmenuHandler mainmenuHandler = new MainmenuHandler();
       for (var temp : Buttons){
@@ -211,7 +218,7 @@ public class ATM
 
    public void exitGUI(){
       Timer timer = new Timer("Timer");         // timer for counting 
-
+      //Initialize takecardGUI
       screen.getMainframe().getContentPane().removeAll();
       screen.getMainframe().revalidate();
       screen.getMainframe().repaint();
@@ -219,31 +226,32 @@ public class ATM
 
       TimerTask openExitGUI = new TimerTask() {
          public void run(){
+            //Initialize exitsystemGUI
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
             screen.getMainframe().repaint();
             exitSystem.buildGUI();
-            //userExited = true; // this ATM session should end
             userAuthenticated = false; // reset before next ATM session
             currentAccountNumber = 0; // reset before next ATM session
          }
       };
-
+      //2sec Delay
       timer.schedule(openExitGUI, 2000L);
 
       TimerTask openwelcomeTask = new TimerTask() {
          public void run() {
+            //Initialize before return to welcome
             accountNumber = 0;
             currentAccountNumber = 0;
             pin = 0;
             screen.getMainframe().getContentPane().removeAll();
             screen.getMainframe().revalidate();
             screen.getMainframe().repaint();
-
+            //goto welcomeGUI
             welcomeGUI();
          }
       };
-      
+      //4s Delay
       timer.schedule(openwelcomeTask, 4000L);
    }
 
@@ -278,6 +286,7 @@ public class ATM
    private class KeypadHandler implements ActionListener{
       @Override
       public void actionPerformed(ActionEvent e){
+         //Keypad cases handling
          switch (e.getActionCommand()) {
             case "0":
             case "1":
@@ -289,16 +298,18 @@ public class ATM
             case "7":
             case "8":
             case "9":
+               //Set Text Field & Password Field
                if (keypad.getKeypadDisplayTextField().getText().length() < 9){
                   keypad.getKeypadDisplayTextField().setText(keypad.getKeypadDisplayTextField().getText() +e.getActionCommand());
                   keypad.getKeypadPasswordField().setText(keypad.getKeypadDisplayTextField().getText());
                }
                break;
             case ".":
-               //need popup some remind message
+               //Enable warning message
                keypad.warning(true);
                break;
             case "Cancel":
+               //Reset Screen,keypad and warning message
                screen.getMainframe().getContentPane().removeAll();
                screen.getMainframe().revalidate();
                screen.getMainframe().repaint();
@@ -306,17 +317,22 @@ public class ATM
                keypad.getKeypadPasswordField().setText("");
                loginCardNumberPanel.invalidMessage(false);
                keypad.warning(false);
+               //Cancel
                authenticateUser(true);
                break;
             case "Clear":
+               //Reset Text & Password Field
                keypad.getKeypadDisplayTextField().setText("");
                keypad.getKeypadPasswordField().setText("");
                break;
             case "Enter":
+               //get accountNumber
                accountNumber = validation.checkInt(keypad.getKeypadDisplayTextField().getText());            
+               //Reset Text & Password Field
                keypad.getKeypadDisplayTextField().setText("");
                keypad.getKeypadPasswordField().setText("");
                keypad.warning(false);
+               //goto pinGUI
                pinGUI();
                break;
             default:
