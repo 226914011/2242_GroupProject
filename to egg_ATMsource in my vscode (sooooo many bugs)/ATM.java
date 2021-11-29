@@ -86,7 +86,8 @@ public class ATM
 
    // start ATM
    public void run()
-   {
+   {  accountNumber = 0;
+      pin = 0;
       keys = keypad.getKeys();
       screen.getMainframe().setVisible(true);
       screen.getMainframe().setResizable(false);
