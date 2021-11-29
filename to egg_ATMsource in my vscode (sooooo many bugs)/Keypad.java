@@ -111,7 +111,7 @@ public class Keypad
             if (i<=9 || i ==13)
                keys[i].setFont(new Font("Arial", Font.PLAIN, 40));
             else
-               keys[i].setFont(new Font("Arial", Font.PLAIN, 20));
+               keys[i].setFont(new Font("Arial", Font.PLAIN, 18));
             keys[i].setBackground(new Color(106,107,138));
             keys[i].setOpaque(true);
             keys[i].setBorderPainted(false);
