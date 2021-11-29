@@ -58,7 +58,7 @@ public class Transfer extends Transaction {
         screen.getMainframe().revalidate();
         screen.getMainframe().repaint();
 
-        // delete ".", "cancel", "enter" actionlistener, and add new actionlistener
+        // delete ".", "cancel", "enter", "clear" actionlistener, and add new actionlistener
         for (int i = 0; i <= 13; i++) {
             for (var temp : keys[i].getActionListeners()) {
                 keys[i].removeActionListener(temp);
@@ -77,7 +77,7 @@ public class Transfer extends Transaction {
         screen.getMainframe().repaint();
         screen.getMainframe().revalidate();
 
-        // delete ".", "cancel", "enter" actionlistener, and add new actionlistener
+        // delete  ".", "cancel", "enter", "clear" actionlistener, and add new actionlistener
         for (int i = 0; i < 3; i++) {
             for (var temp : tCButton[i].getActionListeners()) {
                 tCButton[i].removeActionListener(temp);
