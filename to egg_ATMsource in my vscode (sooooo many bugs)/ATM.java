@@ -19,7 +19,7 @@ public class ATM
    private Validation validation;   // validation for user input
    private ExitSystem exitSystem;   // Exit System GUI
    private MainMenu mainmenu;       // Main Menu GUI
-   private WithdrawalMenu withdrawalmenu; // Wuthdrawal Menu GUI
+   private WithdrawalMenu withdrawalmenu; // Withdrawal Menu GUI
    private Welcome welcome;     // Welcome message GUI
    private LoginDisplayPanel loginCardNumberPanel,loginPinPanel;  // Login System GUI
    private InsertPagePanel customAmountPanel;    // GUI for inserting page
@@ -42,7 +42,7 @@ public class ATM
    private static final int TRANSFER = 3;
    private static final int EXIT = 4;
 
-   //
+   // Event handling for the welcome screen
    private MouseListener ml = new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -159,7 +159,6 @@ public class ATM
          mainmenuGUI();
       } // end if
       else{
-         //need change
          keypad.getKeypadDisplayTextField().setText("");
          keys[12].removeActionListener(loginHandler);
          keys[12].addActionListener(keypadHandler);
@@ -362,19 +361,3 @@ public class ATM
    }
 } // end class ATM
 
-
-
-/**************************************************************************
- * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- *************************************************************************/
