@@ -123,9 +123,12 @@ public class ATM
       screen.getScreenContentPane().add(keypad.getKeypadJPanel(), BorderLayout.EAST);
 
       screen.getMainframe().revalidate();
-      screen.getMainframe().repaint();
-      for(ActionListener oldListener : keys[12].getActionListeners())
-         keys[12].removeActionListener(oldListener);
+      screen.getMainframe().repaint();     
+
+      for (int i = 10; i <=12 ; i+= 2){
+         for(ActionListener oldListener : keys[i].getActionListeners())
+            keys[i].removeActionListener(oldListener);
+      }
       for (int i = 0; i <= 13; i++ ){
          if(keys[i].getActionListeners().length == 0){
             keys[i].addActionListener(keypadHandler);
